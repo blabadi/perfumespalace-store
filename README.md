@@ -136,6 +136,31 @@ python download_images.py          # download what is missing, rewrite products.
 
 ## Deploying it
 
+Live on **GitHub Pages**: <https://blabadi.github.io/perfumespalace-store/> — and
+<https://catalog.perfumespalace.store/> once the DNS record below is in place. Every push to
+`main` redeploys automatically.
+
+### Custom domain (`catalog.perfumespalace.store`)
+
+The GitHub side is already configured — the custom domain is set in *Settings → Pages* and the
+repo carries the `CNAME` file GitHub wrote (`catalog.perfumespalace.store`). Only the DNS record
+is left, and it must be added at the DNS provider (Cloudflare for this domain):
+
+| Type | Name | Target | Proxy |
+| --- | --- | --- | --- |
+| `CNAME` | `catalog` | `blabadi.github.io` | **DNS only** (grey cloud) |
+
+⚠️ The `@` and `www` records **must not be touched** — `perfumespalace.store` itself points at
+the Cloudflare-proxied WooCommerce store; sending the apex to GitHub Pages would take the store
+offline. For an apex domain you would need `A` records to `185.199.108.153`, `185.199.109.153`,
+`185.199.110.153`, `185.199.111.153` and `AAAA` records to `2606:50c0:8000::153`,
+`2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153`, all DNS-only.
+
+After DNS propagates, tick **Enforce HTTPS** in *Settings → Pages*; GitHub issues a free
+Let's Encrypt certificate.
+
+### Other hosts
+
 The site is plain static files — host the whole folder anywhere:
 
 - **GitHub Pages** (free): repo → *Settings → Pages → Deploy from a branch → `main` / `/ (root)`.
