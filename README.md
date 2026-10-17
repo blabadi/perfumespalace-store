@@ -136,15 +136,15 @@ python download_images.py          # download what is missing, rewrite products.
 
 ## Deploying it
 
-Live on **GitHub Pages**: <https://blabadi.github.io/perfumespalace-store/> — and
-<https://catalog.perfumespalace.store/> once the DNS record below is in place. Every push to
+Live on **GitHub Pages**: <https://catalog.perfumespalace.store/> (custom domain, HTTPS enforced)
+and <https://blabadi.github.io/perfumespalace-store/> (which redirects to it). Every push to
 `main` redeploys automatically.
 
 ### Custom domain (`catalog.perfumespalace.store`)
 
-The GitHub side is already configured — the custom domain is set in *Settings → Pages* and the
-repo carries the `CNAME` file GitHub wrote (`catalog.perfumespalace.store`). Only the DNS record
-is left, and it must be added at the DNS provider (Cloudflare for this domain):
+Fully live and HTTPS-enforced: <https://catalog.perfumespalace.store/> (`http://` 301s to
+`https://`, `https_enforced: true`). The custom domain is set in *Settings → Pages*, the repo
+carries the `CNAME` file GitHub wrote, and the DNS record sits at Cloudflare:
 
 | Type | Name | Target | Proxy |
 | --- | --- | --- | --- |
@@ -156,8 +156,12 @@ offline. For an apex domain you would need `A` records to `185.199.108.153`, `18
 `185.199.110.153`, `185.199.111.153` and `AAAA` records to `2606:50c0:8000::153`,
 `2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153`, all DNS-only.
 
-After DNS propagates, tick **Enforce HTTPS** in *Settings → Pages*; GitHub issues a free
-Let's Encrypt certificate.
+**Troubleshooting: HTTPS stays on GitHub's `*.github.io` certificate** (the browser warns
+"wrong principal"/name mismatch) because the certificate was never issued. Saving the custom
+domain again — or clearing it and re-adding it — starts a fresh provisioning cycle; the
+certificate then shows as `approved` in `GET /repos/{owner}/{repo}/pages` (`https_certificate`)
+within minutes, after which **Enforce HTTPS** can be switched on. Keep the record DNS-only the
+whole time: proxying it through Cloudflare stops GitHub from issuing its certificate.
 
 ### Other hosts
 
