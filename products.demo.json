@@ -1,0 +1,703 @@
+{
+  "meta": {
+    "store": "نورثلاين للإمدادات",
+    "tagline": "أشياء مختارة بعناية للعمل والسفر والمنزل.",
+    "currency": "SAR",
+    "locale": "ar-EG-u-nu-latn",
+    "updated": "2026-10-13"
+  },
+  "products": [
+    {
+      "id": 101,
+      "sku": "ARC-AUR-101",
+      "name": "سماعات أورورا بعزل الضوضاء النشط",
+      "brand": "أركلايت",
+      "category": "صوتيات",
+      "price": 189.0,
+      "compare_at_price": 249.0,
+      "rating": 4.6,
+      "reviews": 214,
+      "stock": 18,
+      "added": "2026-08-02",
+      "images": [
+        "https://picsum.photos/seed/aurora-headphones-a/900/900",
+        "https://picsum.photos/seed/aurora-headphones-b/900/900"
+      ],
+      "attributes": {
+        "اللون": "فحمي",
+        "الخامة": "ألومنيوم",
+        "الاتصال": "بلوتوث 5.3",
+        "البطارية": "40 ساعة"
+      },
+      "tags": ["لاسلكية", "عزل الضوضاء", "داخل الأذن"],
+      "description": "سماعات رأس مغلقة بعزل ضوضاء تكيفي، وبطارية تدوم 40 ساعة، وحزام مغطى بالجلد النباتي مع وسادة ميموري فوم."
+    },
+    {
+      "id": 102,
+      "sku": "ARC-HAL-102",
+      "name": "زوج مكبِّرات هالو للاستوديو",
+      "brand": "أركلايت",
+      "category": "صوتيات",
+      "price": 420.0,
+      "compare_at_price": null,
+      "rating": 4.8,
+      "reviews": 63,
+      "stock": 6,
+      "added": "2026-05-19",
+      "images": [
+        "https://picsum.photos/seed/halo-monitors-a/900/900",
+        "https://picsum.photos/seed/halo-monitors-b/900/900"
+      ],
+      "attributes": {
+        "اللون": "جوزي",
+        "الخامة": "خشب MDF بواجهة جوز",
+        "الاتصال": "USB-C / XLR",
+        "القدرة": "60 واط لكل قناة"
+      },
+      "tags": ["استوديو", "مكبرات صوت"],
+      "description": "مكبرات نشطة قريبة المدى بمقاس 4 بوصة واستجابة صوتية متوازنة مصممة للمكساج على المكتب."
+    },
+    {
+      "id": 103,
+      "sku": "ARC-DRF-103",
+      "name": "سماعات دريفت برو اللاسلكية",
+      "brand": "أركلايت",
+      "category": "صوتيات",
+      "price": 129.0,
+      "compare_at_price": 159.0,
+      "rating": 4.3,
+      "reviews": 402,
+      "stock": 44,
+      "added": "2026-09-11",
+      "images": [
+        "https://picsum.photos/seed/drift-earbuds-a/900/900",
+        "https://picsum.photos/seed/drift-earbuds-b/900/900"
+      ],
+      "attributes": {
+        "اللون": "عاجي",
+        "الخامة": "بولي كربونات",
+        "الاتصال": "بلوتوث 5.2",
+        "البطارية": "24 ساعة مع العلبة",
+        "مقاومة الماء": "IPX5"
+      },
+      "tags": ["لاسلكية", "مدمجة"],
+      "description": "سماعات خفيفة الوزن بثلاثة مقاسات من رؤوس السيليكون، ووضع الشفافية، وعلبة شحن بحجم الجيب."
+    },
+    {
+      "id": 104,
+      "sku": "ARC-VLT-104",
+      "name": "مشغّل أسطوانات فيولت",
+      "brand": "أركلايت",
+      "category": "صوتيات",
+      "price": 699.0,
+      "compare_at_price": null,
+      "rating": 4.9,
+      "reviews": 41,
+      "stock": 0,
+      "added": "2026-03-04",
+      "images": [
+        "https://picsum.photos/seed/vault-turntable-a/900/900",
+        "https://picsum.photos/seed/vault-turntable-b/900/900"
+      ],
+      "attributes": {
+        "اللون": "جوزي",
+        "الخامة": "قاعدة خشب جوز صلب",
+        "نظام التشغيل": "سير",
+        "رأس القراءة": "MM قابل للاستبدال"
+      },
+      "tags": ["فينيل", "هاي فاي"],
+      "description": "مشغّل 33/45 بنظام سير مع ذراع كربون فايبر ورأس قراءة مركّب مسبقاً، وقاعدة جوز ممتصة للاهتزاز."
+    },
+    {
+      "id": 105,
+      "sku": "ARC-BCN-105",
+      "name": "لمبات بيكون الذكية (عبوة 4)",
+      "brand": "أركلايت",
+      "category": "إضاءة",
+      "price": 59.0,
+      "compare_at_price": 76.0,
+      "rating": 4.1,
+      "reviews": 517,
+      "stock": 120,
+      "added": "2026-07-27",
+      "images": [
+        "https://picsum.photos/seed/beacon-bulbs-a/900/900",
+        "https://picsum.photos/seed/beacon-bulbs-b/900/900"
+      ],
+      "attributes": {
+        "اللون": "أبيض",
+        "الاتصال": "واي فاي",
+        "القدرة": "9 واط",
+        "قابل للتعتيم": "نعم"
+      },
+      "tags": ["منزل ذكي"],
+      "description": "أضواء بيضاء قابلة للضبط من الدافئ إلى ضوء الشموع، مع 16 مليون لون ومواعيد تشغيل، ولا تحتاج إلى مركز تحكم."
+    },
+    {
+      "id": 201,
+      "sku": "NBD-TRL-201",
+      "name": "حذاء تريلهد المتوسط للجبال",
+      "brand": "نورثباوند",
+      "category": "أحذية",
+      "price": 210.0,
+      "compare_at_price": null,
+      "rating": 4.7,
+      "reviews": 158,
+      "stock": 9,
+      "added": "2026-04-16",
+      "images": [
+        "https://picsum.photos/seed/trailhead-boots-a/900/900",
+        "https://picsum.photos/seed/trailhead-boots-b/900/900"
+      ],
+      "attributes": {
+        "اللون": "رمادي",
+        "الخامة": "جلد طبيعي كامل الحبيبات",
+        "المقاس": "أوروبي 42",
+        "مقاوم للماء": "نعم"
+      },
+      "tags": ["أحذية", "تخييم"],
+      "description": "حذاء مشي قابل لإعادة النعل، بنعل فلين ولسان مبطّن ونعل فيبرام يثبّت على الصخر الرطب."
+    },
+    {
+      "id": 202,
+      "sku": "NBD-SMT-202",
+      "name": "حقيبة سفر سوميت 45 لتراً",
+      "brand": "نورثباوند",
+      "category": "حقائب",
+      "price": 179.0,
+      "compare_at_price": 220.0,
+      "rating": 4.5,
+      "reviews": 276,
+      "stock": 23,
+      "added": "2026-06-30",
+      "images": [
+        "https://picsum.photos/seed/summit-pack-a/900/900",
+        "https://picsum.photos/seed/summit-pack-b/900/900"
+      ],
+      "attributes": {
+        "اللون": "زيتي",
+        "الخامة": "نايلون معاد التصنيع 420D",
+        "السعة": "45 لتر",
+        "يتسع للحاسوب": "حتى 16 بوصة"
+      },
+      "tags": ["حقيبة يد", "سفر"],
+      "description": "حقيبة سفر بفتح كتابي، وجيب حاسوب معلّق، وأحزمة ضغط، وحزام ظهر يوزّع الحمل بعيداً عن الكتف."
+    },
+    {
+      "id": 203,
+      "sku": "NBD-FLD-203",
+      "name": "حقيبة فيلد ديفل 30 لتراً",
+      "brand": "نورثباوند",
+      "category": "حقائب",
+      "price": 132.0,
+      "compare_at_price": null,
+      "rating": 4.2,
+      "reviews": 94,
+      "stock": 31,
+      "added": "2026-02-08",
+      "images": [
+        "https://picsum.photos/seed/field-duffel-a/900/900",
+        "https://picsum.photos/seed/field-duffel-b/900/900"
+      ],
+      "attributes": {
+        "اللون": "رملي",
+        "الخامة": "كانفاس مشمّع",
+        "السعة": "30 لتر"
+      },
+      "tags": ["سفر قصير"],
+      "description": "حقيبة نهاية أسبوع من الكانفاس المشمّع بمقابض جلدية، وجيب للأحذية، وأحزمة تتحوّل إلى حقيبة ظهر."
+    },
+    {
+      "id": 204,
+      "sku": "NBD-ALP-204",
+      "name": "جاكيت ألباين المبطّن",
+      "brand": "نورثباوند",
+      "category": "ملابس",
+      "price": 289.0,
+      "compare_at_price": 340.0,
+      "rating": 4.4,
+      "reviews": 132,
+      "stock": 14,
+      "added": "2026-09-24",
+      "images": [
+        "https://picsum.photos/seed/alpine-jacket-a/900/900",
+        "https://picsum.photos/seed/alpine-jacket-b/900/900"
+      ],
+      "attributes": {
+        "اللون": "كحلي",
+        "الخامة": "قشرة ريبستوب معاد التصنيع",
+        "الحشوة": "ريش 700",
+        "المقاس": "M"
+      },
+      "tags": ["مبطّن", "ملابس خارجية"],
+      "description": "طبقة وسطى قابلة للطي بتقسيم مربعات، وغطاء رأس مقاوم للعاصفة، وجيوب تتحول إلى كيس التخزين."
+    },
+    {
+      "id": 205,
+      "sku": "NBD-RIV-205",
+      "name": "صنادل ريفر بالفلين",
+      "brand": "نورثباوند",
+      "category": "أحذية",
+      "price": 78.0,
+      "compare_at_price": null,
+      "rating": 4.0,
+      "reviews": 205,
+      "stock": 0,
+      "added": "2026-05-02",
+      "images": [
+        "https://picsum.photos/seed/river-sandals-a/900/900",
+        "https://picsum.photos/seed/river-sandals-b/900/900"
+      ],
+      "attributes": {
+        "اللون": "زيتي",
+        "الخامة": "فلين ومطاط طبيعي",
+        "المقاس": "أوروبي 41"
+      },
+      "tags": ["صيفي"],
+      "description": "صنادل بنعل فلين يأخذ شكل القدم، مع نعل مطاطي مناسب للحجر المبلول."
+    },
+    {
+      "id": 301,
+      "sku": "LNO-EMB-301",
+      "name": "مصباح إمبر للطاولة",
+      "brand": "لومن آند أوك",
+      "category": "إضاءة",
+      "price": 149.0,
+      "compare_at_price": null,
+      "rating": 4.6,
+      "reviews": 88,
+      "stock": 27,
+      "added": "2026-01-21",
+      "images": [
+        "https://picsum.photos/seed/ember-lamp-a/900/900",
+        "https://picsum.photos/seed/ember-lamp-b/900/900"
+      ],
+      "attributes": {
+        "اللون": "نحاسي",
+        "الخامة": "نحاس صلب وغطاء كتان",
+        "القدرة": "9 واط",
+        "قابل للتعتيم": "نعم"
+      },
+      "tags": ["غرفة نوم", "ضوء دافئ"],
+      "description": "مصباح عمودي من النحاس غير المطلي بغطاء كتاني مصنوع يدوياً، يزداد دفئاً مع الاستخدام."
+    },
+    {
+      "id": 302,
+      "sku": "LNO-SOL-302",
+      "name": "مصباح سولستيس الأرضي",
+      "brand": "لومن آند أوك",
+      "category": "إضاءة",
+      "price": 349.0,
+      "compare_at_price": 429.0,
+      "rating": 4.7,
+      "reviews": 54,
+      "stock": 5,
+      "added": "2026-08-14",
+      "images": [
+        "https://picsum.photos/seed/solstice-lamp-a/900/900",
+        "https://picsum.photos/seed/solstice-lamp-b/900/900"
+      ],
+      "attributes": {
+        "اللون": "أسود",
+        "الخامة": "فولاذ مطلي بالمسحوق",
+        "القدرة": "18 واط",
+        "قابل للتعتيم": "نعم"
+      },
+      "tags": ["غرفة معيشة", "تصميم مميز"],
+      "description": "قوس بارتفاع مترين يمتد فوق الأريكة دون الحاجة إلى طاولة جانبية، مع قاعدة رخامية موازنة."
+    },
+    {
+      "id": 303,
+      "sku": "LNO-COV-303",
+      "name": "سبوت كوف الجداري",
+      "brand": "لومن آند أوك",
+      "category": "إضاءة",
+      "price": 96.0,
+      "compare_at_price": null,
+      "rating": 4.3,
+      "reviews": 47,
+      "stock": 38,
+      "added": "2026-03-29",
+      "images": [
+        "https://picsum.photos/seed/cove-sconce-a/900/900",
+        "https://picsum.photos/seed/cove-sconce-b/900/900"
+      ],
+      "attributes": {
+        "اللون": "عاجي",
+        "الخامة": "سيراميك مصبوب",
+        "القدرة": "6 واط",
+        "قابل للتعتيم": "لا"
+      },
+      "tags": ["ممر", "إضاءة غير مباشرة"],
+      "description": "سبوت جداري يوجّه الضوء للأعلى، بخيار التوصيل بالمقبس أو التوصيل المباشر، مع إضاءة ناعمة بلا ظلال."
+    },
+    {
+      "id": 304,
+      "sku": "LNO-ARI-304",
+      "name": "ثريا آريا من زجاج الأوبال",
+      "brand": "لومن آند أوك",
+      "category": "إضاءة",
+      "price": 225.0,
+      "compare_at_price": null,
+      "rating": 4.8,
+      "reviews": 36,
+      "stock": 11,
+      "added": "2026-07-06",
+      "images": [
+        "https://picsum.photos/seed/aria-pendant-a/900/900",
+        "https://picsum.photos/seed/aria-pendant-b/900/900"
+      ],
+      "attributes": {
+        "اللون": "أوبالي",
+        "الخامة": "زجاج أوبال منفوخ يدوياً",
+        "القدرة": "12 واط",
+        "قابل للتعتيم": "نعم"
+      },
+      "tags": ["مطبخ", "طاولة طعام"],
+      "description": "ثريا من زجاج الأوبال منفوخ يدوياً تضيء بتساوٍ من كل الزوايا، معلّقة على متر من الحبل المجدول."
+    },
+    {
+      "id": 401,
+      "sku": "VNT-MRD-401",
+      "name": "ساعة ميريديان كرونوغراف",
+      "brand": "فانتيج",
+      "category": "أجهزة قابلة للارتداء",
+      "price": 549.0,
+      "compare_at_price": null,
+      "rating": 4.8,
+      "reviews": 72,
+      "stock": 4,
+      "added": "2026-02-22",
+      "images": [
+        "https://picsum.photos/seed/meridian-watch-a/900/900",
+        "https://picsum.photos/seed/meridian-watch-b/900/900"
+      ],
+      "attributes": {
+        "اللون": "فولاذي",
+        "الخامة": "فولاذ 316L وكريستال سافير",
+        "الحركة": "أوتوماتيكية",
+        "مقاومة الماء": "100 متر"
+      },
+      "tags": ["ميكانيكية", "يومية"],
+      "description": "كرونوغراف أوتوماتيكي بمقاس 40 ملم وقرص أشععي وسوار بفصل سريع واحتياطي طاقة 60 ساعة."
+    },
+    {
+      "id": 402,
+      "sku": "VNT-PLS-402",
+      "name": "سوار بالس فيت 3",
+      "brand": "فانتيج",
+      "category": "أجهزة قابلة للارتداء",
+      "price": 129.0,
+      "compare_at_price": 169.0,
+      "rating": 4.2,
+      "reviews": 611,
+      "stock": 76,
+      "added": "2026-10-01",
+      "images": [
+        "https://picsum.photos/seed/pulse-band-a/900/900",
+        "https://picsum.photos/seed/pulse-band-b/900/900"
+      ],
+      "attributes": {
+        "اللون": "كحلي ليلي",
+        "الخامة": "سيليكون",
+        "البطارية": "10 أيام",
+        "مقاومة الماء": "50 متراً"
+      },
+      "tags": ["لياقة", "نوم"],
+      "description": "متتبّع نحيل بشاشة AMOLED مقاس 1.4 بوصة، وقياس مستمر للأكسجين، وبطارية تكفي عشرة أيام."
+    },
+    {
+      "id": 403,
+      "sku": "VNT-RDG-403",
+      "name": "نظارات ريدج المستقطبة",
+      "brand": "فانتيج",
+      "category": "نظارات",
+      "price": 189.0,
+      "compare_at_price": null,
+      "rating": 4.5,
+      "reviews": 119,
+      "stock": 21,
+      "added": "2026-06-11",
+      "images": [
+        "https://picsum.photos/seed/ridge-sunglasses-a/900/900",
+        "https://picsum.photos/seed/ridge-sunglasses-b/900/900"
+      ],
+      "attributes": {
+        "اللون": "بني منقّط",
+        "الخامة": "أسيتات إيطالية",
+        "العدسة": "مستقطبة، فئة 3"
+      },
+      "tags": ["حماية UV400"],
+      "description": "إطار أسيتات بجسر مفتوح وعدسات معدنية مستقطبة ومفصلات نابضية تتحمّل الجيب الأمامي."
+    },
+    {
+      "id": 404,
+      "sku": "VNT-SGN-404",
+      "name": "محفظة سيجنال الجلدية",
+      "brand": "فانتيج",
+      "category": "إكسسوارات",
+      "price": 68.0,
+      "compare_at_price": null,
+      "rating": 4.4,
+      "reviews": 233,
+      "stock": 58,
+      "added": "2026-04-03",
+      "images": [
+        "https://picsum.photos/seed/signal-wallet-a/900/900",
+        "https://picsum.photos/seed/signal-wallet-b/900/900"
+      ],
+      "attributes": {
+        "اللون": "بني جملي",
+        "الخامة": "جلد طبيعي كامل الحبيبات",
+        "السعة": "8 بطاقات"
+      },
+      "tags": ["حمل يومي"],
+      "description": "محفظة مطوية بجلد مدبوغ نباتياً وخياطة يدوية، رفيعة بما يكفي للجيب الأمامي."
+    },
+    {
+      "id": 405,
+      "sku": "VNT-RUN-405",
+      "name": "حذاء ريدج اليومي للجري",
+      "brand": "فانتيج",
+      "category": "أحذية",
+      "price": 155.0,
+      "compare_at_price": 185.0,
+      "rating": 4.3,
+      "reviews": 341,
+      "stock": 26,
+      "added": "2026-08-29",
+      "images": [
+        "https://picsum.photos/seed/ridge-trainer-a/900/900",
+        "https://picsum.photos/seed/ridge-trainer-b/900/900"
+      ],
+      "attributes": {
+        "اللون": "رمادي فاتح",
+        "الخامة": "نسيج محبوك هندسياً",
+        "فرق الارتفاع": "8 ملم",
+        "المقاس": "أوروبي 43"
+      },
+      "tags": ["جري"],
+      "description": "حذاء جري يومي بنعل فوم فائق الحرجة ومقدمة واسعة للأصابع مناسب للمسافات الطويلة المريحة."
+    },
+    {
+      "id": 501,
+      "sku": "MRW-KTL-501",
+      "name": "غلاية مارلو رقم 4",
+      "brand": "مارلو",
+      "category": "مطبخ",
+      "price": 118.0,
+      "compare_at_price": null,
+      "rating": 4.6,
+      "reviews": 187,
+      "stock": 33,
+      "added": "2026-05-27",
+      "images": [
+        "https://picsum.photos/seed/marlowe-kettle-a/900/900",
+        "https://picsum.photos/seed/marlowe-kettle-b/900/900"
+      ],
+      "attributes": {
+        "اللون": "أخضر مريمي",
+        "الخامة": "فولاذ مطلي بالمينا",
+        "السعة": "1.7 لتر",
+        "القدرة": "2200 واط"
+      },
+      "tags": ["شاي", "على الطاولة"],
+      "description": "فوهة انسيابية طويلة وغطاء مغناطيسي وكابل يُخزَّن في القاعدة. غليان آمن وصامت."
+    },
+    {
+      "id": 502,
+      "sku": "MRW-POR-502",
+      "name": "طقم تحضير القهوة بور أوفر",
+      "brand": "مارلو",
+      "category": "مطبخ",
+      "price": 74.0,
+      "compare_at_price": 92.0,
+      "rating": 4.5,
+      "reviews": 146,
+      "stock": 49,
+      "added": "2026-09-05",
+      "images": [
+        "https://picsum.photos/seed/pour-over-set-a/900/900",
+        "https://picsum.photos/seed/pour-over-set-b/900/900"
+      ],
+      "attributes": {
+        "اللون": "طبيعي",
+        "الخامة": "زجاج بوروسيليكات",
+        "السعة": "600 مل"
+      },
+      "tags": ["قهوة"],
+      "description": "مصفاة مخروطية بقاعدة مسطحة مع دورق مطابق، وعلبة تضم 100 فلتر غير مبيّض."
+    },
+    {
+      "id": 503,
+      "sku": "MRW-HRT-503",
+      "name": "مقلاة هيرث من الحديد الزهر",
+      "brand": "مارلو",
+      "category": "مطبخ",
+      "price": 89.0,
+      "compare_at_price": 110.0,
+      "rating": 4.9,
+      "reviews": 398,
+      "stock": 17,
+      "added": "2026-01-09",
+      "images": [
+        "https://picsum.photos/seed/cast-iron-skillet-a/900/900",
+        "https://picsum.photos/seed/cast-iron-skillet-b/900/900"
+      ],
+      "attributes": {
+        "اللون": "أسود",
+        "الخامة": "حديد زهر",
+        "المقاس": "26 سم"
+      },
+      "tags": ["تحمير", "صالحة للفرن"],
+      "description": "مقلاة مصبوبة بالرمل ومعتمدة مسبقاً بزيت بذر الكتان، بسطح طهي مخرط وفوهة صَبّ على الجانبين."
+    },
+    {
+      "id": 504,
+      "sku": "MRW-TRR-504",
+      "name": "طقم طعام تيرا الخزفي",
+      "brand": "مارلو",
+      "category": "مطبخ",
+      "price": 145.0,
+      "compare_at_price": null,
+      "rating": 4.7,
+      "reviews": 91,
+      "stock": 12,
+      "added": "2026-07-18",
+      "images": [
+        "https://picsum.photos/seed/terra-dinner-set-a/900/900",
+        "https://picsum.photos/seed/terra-dinner-set-b/900/900"
+      ],
+      "attributes": {
+        "اللون": "طيني",
+        "الخامة": "حجر خزفي",
+        "عدد القطع": "12 قطعة"
+      },
+      "tags": ["أدوات مائدة"],
+      "description": "اثنتا عشرة قطعة من الحجر الخزفي بطلاع متغيّر: أربعة أطباق رئيسية، وأربعة أطباق جانبية، وأربعة أوانٍ."
+    },
+    {
+      "id": 505,
+      "sku": "MRW-BRW-505",
+      "name": "مطحنة قهوة برو مارك 2",
+      "brand": "مارلو",
+      "category": "مطبخ",
+      "price": 165.0,
+      "compare_at_price": null,
+      "rating": 4.6,
+      "reviews": 78,
+      "stock": 0,
+      "added": "2026-10-08",
+      "images": [
+        "https://picsum.photos/seed/brew-grinder-a/900/900",
+        "https://picsum.photos/seed/brew-grinder-b/900/900"
+      ],
+      "attributes": {
+        "اللون": "أسود مطفي",
+        "الخامة": "أسنان طحن من الفولاذ المقاوم",
+        "السعة": "300 غرام",
+        "عدد الدرجات": "40 درجة"
+      },
+      "tags": ["قهوة"],
+      "description": "مطحنة بأسنان مخروطية وقمع تغذية مغناطيسي وحلقة ضبط بلا درجات وقناة تصريف منخفضة البقايا."
+    },
+    {
+      "id": 601,
+      "sku": "KST-DSK-601",
+      "name": "إطار مكتب 120",
+      "brand": "كيسترل",
+      "category": "مكتب وأعمال",
+      "price": 480.0,
+      "compare_at_price": null,
+      "rating": 4.7,
+      "reviews": 64,
+      "stock": 8,
+      "added": "2026-03-15",
+      "images": [
+        "https://picsum.photos/seed/desk-frame-a/900/900",
+        "https://picsum.photos/seed/desk-frame-b/900/900"
+      ],
+      "attributes": {
+        "اللون": "بلوطي",
+        "الخامة": "خشب بلوط صلب وفولاذ مطوي",
+        "المقاس": "120 × 60 سم",
+        "قابل للتعديل": "لا"
+      },
+      "tags": ["مساحة عمل"],
+      "description": "مكتب كتابة بعرض 120 سم بسطح بلوط سميك 40 ملم وقناة مدمجة للكابلات وأقدام لبادية للموازنة."
+    },
+    {
+      "id": 602,
+      "sku": "KST-HBR-602",
+      "name": "كرسي هاربور المكتبي",
+      "brand": "كيسترل",
+      "category": "مكتب وأعمال",
+      "price": 395.0,
+      "compare_at_price": 460.0,
+      "rating": 4.4,
+      "reviews": 152,
+      "stock": 15,
+      "added": "2026-06-23",
+      "images": [
+        "https://picsum.photos/seed/harbor-chair-a/900/900",
+        "https://picsum.photos/seed/harbor-chair-b/900/900"
+      ],
+      "attributes": {
+        "اللون": "رمادي فحمي",
+        "الخامة": "شبكة معاد التصنيع وألومنيوم",
+        "قابل للتعديل": "نعم",
+        "الحِمل الأقصى": "120 كجم"
+      },
+      "tags": ["مريح"],
+      "description": "كرسي مكتبي بضمان عشر سنوات، مع دعم قابل للضبط لمنطقة أسفل الظهر وعمق المقعد، وظهر شبكي يبقى بارداً."
+    },
+    {
+      "id": 603,
+      "sku": "KST-SHL-603",
+      "name": "نظام رفوف ثلاثي المستويات",
+      "brand": "كيسترل",
+      "category": "مكتب وأعمال",
+      "price": 265.0,
+      "compare_at_price": null,
+      "rating": 4.3,
+      "reviews": 47,
+      "stock": 19,
+      "added": "2026-04-28",
+      "images": [
+        "https://picsum.photos/seed/shelf-system-a/900/900",
+        "https://picsum.photos/seed/shelf-system-b/900/900"
+      ],
+      "attributes": {
+        "اللون": "رمادي فاتح",
+        "الخامة": "فولاذ مطلي بالمسحوق",
+        "الحِمل الأقصى": "40 كجم لكل مستوى"
+      },
+      "tags": ["تخزين"],
+      "description": "رفوف فولاذية قائمة بذاتها تُركّب بالبراغي دون أدوات، وتبقى مستوية حتى على أرض غير منتظمة."
+    },
+    {
+      "id": 604,
+      "sku": "KST-NDT-604",
+      "name": "حامل الحاسوب المحمول",
+      "brand": "كيسترل",
+      "category": "مكتب وأعمال",
+      "price": 62.0,
+      "compare_at_price": 79.0,
+      "rating": 4.1,
+      "reviews": 208,
+      "stock": 88,
+      "added": "2026-08-08",
+      "images": [
+        "https://picsum.photos/seed/notebook-riser-a/900/900",
+        "https://picsum.photos/seed/notebook-riser-b/900/900"
+      ],
+      "attributes": {
+        "اللون": "فضي",
+        "الخامة": "ألومنيوم",
+        "قابل للتعديل": "نعم"
+      },
+      "tags": ["مريح"],
+      "description": "حامل من الألومنيوم المخرط بإعدادين للارتفاع وأقدام سيليكون لا تترك أثراً على المكتب."
+    }
+  ]
+}
