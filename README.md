@@ -9,7 +9,9 @@ index.html          page structure (lang="ar" dir="rtl")
 styles.css          all styling (logical properties, light + dark theme, responsive)
 app.js              loads products.json, builds facets, filters, sorts, renders, handles the cart
 products.json       the catalogue data (188 products) — generated, but you can edit it too
+images/             every product photo, downloaded from the store (see "Hosting the pictures")
 build-products.py   reads the store's WooCommerce Store API and rewrites products.json
+download_images.py  downloads the product photos into images/ and rewrites the JSON paths
 products.demo.json  the original hand-written sample catalogue (kept as a backup)
 serve.cmd           optional: starts a local server (Python) so fetch() is allowed
 ```
@@ -109,8 +111,42 @@ Store API, no auth) page by page, and writes `products.json`. What it does:
   in-stock priced product with an image, always five different brands, gallery photos preferred
   inside the randomness), and the carousel visits them in a shuffled order rather than 1→2→3→4→5.
   `خلط الصور` under the images redraws the band with a fresh random set.
-- **Offline-safe images.** If a remote image fails, the card falls back to a generated SVG
+- **Offline-safe images.** If an image fails to load, the card falls back to a generated SVG
   placeholder instead of a broken-image icon.
+
+## Hosting the pictures
+
+Every product photo lives in `images/` inside this repo, so the page has **no dependency on the
+store staying online** (and no hotlink/CORS surprises). `products.json` stores relative paths
+like `images/2026/09/yclzhj.jpg`.
+
+```
+python download_images.py          # download what is missing, rewrite products.json
+```
+
+- Layout mirrors the store's uploads folders: `images/<yyyy>/<mm>/<name>.<ext>` (`images/misc/`
+  when a URL has no upload date). The year/month is the same information `added` is computed from.
+- `images/manifest.json` maps the original store URL → local file. Repeat runs skip anything
+  already downloaded, and two different URLs that share a file name never collide (`-<hash8>`
+  suffix). Raw Arabic characters in store URLs are percent-encoded for the request only, so the
+  readable URL stays in the manifest.
+- `build-products.py` runs this automatically (unless `IMAGES=remote` is set), so a data refresh
+  stays self-hosted: `IMAGES=remote python build-products.py` keeps absolute store URLs instead.
+- 295 images, ~74 MB total. Nothing is deleted, so re-running is always safe.
+
+## Deploying it
+
+The site is plain static files — host the whole folder anywhere:
+
+- **GitHub Pages** (free): repo → *Settings → Pages → Deploy from a branch → `main` / `/ (root)`.
+  Note that **Pages on a private repo needs a paid plan** (Pro/Team); on GitHub Free the repo
+  must be public. Pages allows 1 GB per site and 100 GB/month of traffic — this site is ~74 MB.
+- **Cloudflare Pages / Netlify** (free): connect the repo or drag-and-drop the folder. Works with
+  a private repo and has no bandwidth limit; good choice if the code must stay private.
+- On the store's own hosting: copy the folder into `public_html/<subfolder>/`.
+
+The only external request left is Google Fonts (Cairo + Amiri). To go 100% self-contained,
+download the two font families into `fonts/` and add `@font-face` rules to `styles.css`.
 
 ## Editing the data by hand
 
@@ -129,7 +165,7 @@ Each product in `products.json`:
   "reviews": 0,
   "stock": null,
   "added": "2026-09-01",
-  "images": ["https://perfumespalace.store/wp-content/uploads/2026/09/yclzhj.jpg"],
+  "images": ["images/2026/09/yclzhj.jpg"],
   "attributes": { "التصنيف": "نيش", "الحجم": "علبة اصلية كاملة (100 مل)", "الموسم": ["خريفي", "شتوي"] },
   "tags": ["متاح للتقسيم"],
   "description": "مجموعة IBRAQ التوباكو 9×20 مل — Extrait de Parfum",
@@ -146,7 +182,8 @@ Each product in `products.json`:
   catalogue** (30-day window), not with `meta.updated`.
 - `attributes` — free-form key/value pairs, string or list. The key becomes the filter group
   title, so write it in Arabic (`"الشاشة": "13 بوصة"` gives a **الشاشة** filter).
-- `images` — the first one is used on the card, all of them appear in the quick-view gallery.
+- `images` — relative paths under `images/` (or absolute URLs — both work). The first one is used
+  on the card, all of them appear in the quick-view gallery.
 - `url` (optional) — adds the «فتح المنتج في المتجر» link in the modal.
 - `meta` — `store` (name), `tagline` (split on `—` into the hero headline plus the rotating
   words), `currency`, `locale`, `updated` (the date shown in the header), `whatsapp` (adds the
