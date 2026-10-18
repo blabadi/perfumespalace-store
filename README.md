@@ -145,6 +145,57 @@ python download_images.py          # download what is missing, rewrite products.
   stays self-hosted: `IMAGES=remote python build-products.py` keeps absolute store URLs instead.
 - 295 images, ~74 MB total. Nothing is deleted, so re-running is always safe.
 
+## Meta / WhatsApp product feed
+
+The WhatsApp Business catalogue (and Facebook/Instagram shops) is Meta's own list of items — a
+website cannot be pointed at it. What you can hand over is a **product feed**, generated from
+`products.json`:
+
+```
+python webp_to_jpeg.py         # JPEG twins for the WebP images (Meta only accepts JPG/PNG)
+python build-feed.py           # writes feed.xml + feed.csv
+python build-feed.py --check   # same, then HEAD-check every image URL
+```
+
+Both files live in the repo root, so once pushed they are public:
+
+- <https://catalog.perfumespalace.store/feed.xml> — RSS 2.0 with the `g:` namespace (recommended)
+- <https://catalog.perfumespalace.store/feed.csv> — the same rows, same column names
+
+`--base` overrides the URL prefix (it defaults to the domain in `CNAME`), e.g.
+`python build-feed.py --base https://blabadi.github.io/perfumespalace-store/`.
+
+### Connecting it to WhatsApp
+
+1. **Commerce Manager** (<https://business.facebook.com/commerce>) → create a catalogue of type
+   *E-commerce*, currency **ILS**.
+2. In that catalogue: **Data sources → Scheduled feed** → paste the `feed.xml` URL → daily
+   schedule.
+3. Read **Diagnostics** after the first fetch: anything Meta rejects is listed with a reason, so
+   you fix the data or the builder and re-run.
+4. **WhatsApp Manager → your WhatsApp Business account → catalogue** → connect this catalogue to
+   the number (Meta moves that toggle around; it sits with the account's business settings).
+5. The items then show on the WhatsApp Business profile and are reachable at
+   `https://wa.me/c/972566008917`, where a customer can build a cart and send it to you.
+
+### What the feed contains
+
+- One row per catalogue row (**185** rows): `id` (the product id — the same value the WhatsApp
+  Cloud API calls `retailer_id`), `title`, `description`, `availability`, `condition`, `price`,
+  `sale_price` (165 rows), `link` (the WooCommerce product page, so a catalogue tap leads to the
+  real checkout), `image_link` + `additional_image_link` (up to 10), `brand`, and
+  `google_product_category` (drop it with `--no-gpc`).
+- Prices carry the ISO code — `280.00 ILS`. `compare_at_price` becomes `sale_price`, with the
+  higher price left in `price` so Meta can strike it through.
+- **3 rows are skipped**: products tagged «السعر عند الطلب» have no price, and Meta requires one.
+- Sold-out rows stay in the feed as `out of stock` (`stock == 0` → `in stock` otherwise). The one
+  sold-out product in the current data is also priceless, which is why every row today is
+  `in stock`.
+- WebP pictures point at a JPEG twin under `images/jpg/…` (102 files, ~14 MB) and everything else
+  keeps its own file. The site itself still loads the smaller WebP files. One twin is 394×450 px
+  while Meta recommends at least 500×500 — replace that product's photo if you want it perfect.
+- After a data refresh, re-run both scripts and push, so the feed matches the new catalogue.
+
 ## Deploying it
 
 Live on **GitHub Pages**: <https://catalog.perfumespalace.store/> (custom domain, HTTPS enforced)
