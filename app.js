@@ -66,6 +66,14 @@
       data-fallback="${esc(placeholder(p))}"
       onerror="this.onerror=null;this.src=this.dataset.fallback">`;
 
+  // مصغّرة لمنتج له عدة صور: إطاران متطابقان نبدّل بينهما بتلاشٍ ناعم، وتُحمَّل كل صورة عند الطلب فقط.
+  const rotThumb = (p) =>
+    `<span class="thumb-rot" data-imgs="${esc(p.images.join('|'))}" data-idx="0" data-cur="0">
+      ${imgTag(p, 'thumb-frame is-on')}
+      <img class="thumb-frame" alt="" aria-hidden="true" loading="lazy"
+        data-fallback="${esc(placeholder(p))}" onerror="this.onerror=null;this.src=this.dataset.fallback">
+    </span>`;
+
   /* ---------- الحالة ---------- */
   const state = {
     q: '',
@@ -422,7 +430,7 @@
       <div class="card-media">
         <button class="media-open" type="button" data-quick="${p.id}"
                 aria-label="عرض تفاصيل «${esc(p.name)}»">
-          ${imgTag(p)}
+          ${p.images && p.images.length > 1 ? rotThumb(p) : imgTag(p)}
           <span class="quick" aria-hidden="true">عرض تفاصيل المنتج</span>
         </button>
         <div class="badges">${badges.join('')}</div>
@@ -465,6 +473,63 @@
     renderChips();
     persistState();
     syncAddButtons();
+    initRotation();
+  }
+
+  /* ---------- تدوير صور المصغّرة ---------- */
+  // المنتجات ذات الصور المتعددة تُبدّل صورتها: ببطء تلقائياً، وبسرعة عند مرور المؤشر أو التركيز.
+  const ROTATE_TICK = 800;     // إيقاع الفحص بالمللي ثانية
+  const ROTATE_EVERY = 4;      // كم فحصاً بين صورتين في الوضع العادي (≈3.2 ثانية)
+  const ROTATE_MARGIN = 160;   // هامش فوق/تحت الشاشة تُعتبر به البطاقة ظاهرة
+  let rotCards = [];
+  let rotTimer = 0;
+  let rotTick = 0;
+
+  // ينقل المصغّرة إلى الصورة التالية: تُحمَّل في الإطار المخفي أولاً ثم يبدأ التلاشي (بلا وميض).
+  function advanceThumb(el) {
+    const urls = el.dataset.imgs ? el.dataset.imgs.split('|') : [];
+    const frames = $$('.thumb-frame', el);
+    if (urls.length < 2 || frames.length < 2) return;
+    const cur = Number(el.dataset.cur) || 0;
+    const nextFrame = frames[1 - cur];
+    const nextIdx = (Number(el.dataset.idx) + 1) % urls.length;
+    const seq = (el._rotSeq = (el._rotSeq || 0) + 1);
+    const swap = () => {
+      if (el._rotSeq !== seq) return;    // جاءت دورة أحدث — نتجاهل هذه
+      el.dataset.cur = String(1 - cur);
+      el.dataset.idx = String(nextIdx);
+      frames[cur].classList.remove('is-on');
+      nextFrame.classList.add('is-on');
+    };
+    // الصورة التالية محمّلة سلفاً (مجموعة من صورتين مثلاً) — لا داعي لانتظار التحميل.
+    if (nextFrame.getAttribute('src') === urls[nextIdx]) { swap(); return; }
+    nextFrame.onload = swap;
+    nextFrame.src = urls[nextIdx];
+  }
+
+  function rotationTick() {
+    const modal = $('#modal');
+    // بلا تدوير في تبويب مخفي أو خلف نافذة التفاصيل.
+    if (document.hidden || (modal && !modal.hidden)) return;
+    // البطاقات الظاهرة فقط (بهامش) — القراءة أولاً ثم التعديل، بلا إجهاد للتخطيط.
+    const top = -ROTATE_MARGIN, bottom = window.innerHeight + ROTATE_MARGIN;
+    const visible = [];
+    for (const el of rotCards) {
+      const r = el.getBoundingClientRect();
+      if (r.bottom > top && r.top < bottom) visible.push(el);
+    }
+    if (!visible.length) return;
+    rotTick++;
+    visible.forEach((el, i) => {
+      const every = el._hot ? 1 : ROTATE_EVERY;   // أسرع مع التحويم
+      if ((rotTick + i) % every === 0) advanceThumb(el);
+    });
+  }
+
+  function initRotation() {
+    rotCards = reducedMotion() ? [] : $$('#grid .thumb-rot');
+    rotTick = 0;
+    if (!rotTimer && rotCards.length) rotTimer = setInterval(rotationTick, ROTATE_TICK);
   }
 
   /* ---------- نافذة التفاصيل ---------- */
@@ -954,6 +1019,18 @@
 
     $('#sort').value = state.sort;
     $('#sort').addEventListener('change', (e) => { state.sort = e.target.value; render(); });
+
+    // تدوير صور المصغّرة يتسارع عندما يمر المؤشر على البطاقة أو يصلها التركيز.
+    const markHot = (e, hot) => {
+      const card = e.target.closest ? e.target.closest('.card') : null;
+      const thumb = card && card.querySelector('.thumb-rot');
+      if (thumb) thumb._hot = hot;
+    };
+    const gridRoot = $('#grid');
+    gridRoot.addEventListener('pointerover', (e) => markHot(e, true));
+    gridRoot.addEventListener('pointerout', (e) => markHot(e, false));
+    gridRoot.addEventListener('focusin', (e) => markHot(e, true));
+    gridRoot.addEventListener('focusout', (e) => markHot(e, false));
 
     $$('.view-toggle button').forEach((b) => {
       b.classList.toggle('is-active', b.dataset.view === state.view);

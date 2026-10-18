@@ -95,6 +95,12 @@ Store API, no auth) page by page, and writes `products.json`. What it does:
   button**: clicking it (or pressing Enter on it) opens the quick-view modal with image gallery,
   spec table, a link to the real product page and a WhatsApp order link. The same applies to the
   cart thumbnails, which open the modal above the drawer (`z-index` 68 vs 65).
+- **Rotating thumbnails.** A product with more than one photo cycles through them inside the
+  card: two stacked frames cross-fade, advancing one image every ~3.2 s (staggered card by card)
+  and ~4× faster while the pointer or the keyboard focus is on that card. Only cards on screen are
+  cycled, each image is downloaded just before it is shown, the quick-view modal pauses the
+  rotation, and a hidden tab or `prefers-reduced-motion` stops it entirely. Tuning constants:
+  `ROTATE_TICK`, `ROTATE_EVERY`, `ROTATE_MARGIN` in `app.js`.
 - **Cart drawer.** `أضف` on a card (or in the quick-view modal) opens a side drawer listing
   every added product with its thumbnail, quantity stepper (`−` / `+`), line total and remove
   link; the footer shows piece count, savings from sale prices, how many lines are
