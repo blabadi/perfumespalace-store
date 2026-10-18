@@ -211,8 +211,8 @@
     return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
   }
 
-  function facetShell(title, key, bodyHtml, collapsed = false, scroll = false) {
-    return `<div class="facet${collapsed ? ' collapsed' : ''}${scroll ? ' is-scroll' : ''}" data-facet="${esc(key)}">
+  function facetShell(title, key, bodyHtml, collapsed = false) {
+    return `<div class="facet${collapsed ? ' collapsed' : ''}" data-facet="${esc(key)}">
       <button class="facet-head" type="button" aria-expanded="${collapsed ? 'false' : 'true'}">
         <span class="facet-title">${esc(title)}</span>${chevron()}
       </button>
@@ -233,40 +233,57 @@
     return 0;
   }
 
-  function checkRow(group, value, n, checked) {
-    return `<label class="check${n === 0 && !checked ? ' is-empty' : ''}">
+  function checkRow(group, value, n, checked, extra = false) {
+    return `<label class="check${extra ? ' facet-extra' : ''}${n === 0 && !checked ? ' is-empty' : ''}"${extra ? ' hidden' : ''}>
       <input type="checkbox" data-group="${esc(group)}" value="${esc(value)}" ${checked ? 'checked' : ''}>
       <span>${esc(value)}</span><span class="n">${n}</span>
     </label>`;
   }
 
-  // حقول طويلة مثل العلامات التجارية (49 قيمة) تحتاج بحثاً داخل المجموعة نفسها.
+  // المجموعات الطويلة مثل العلامات التجارية (49 قيمة): بحث داخل المجموعة + زر «عرض المزيد».
   const LONG_GROUP = 12;
+  const FACET_VISIBLE = 10;
   const facetSearch = (placeholder) =>
     `<input class="facet-search" type="search" placeholder="${esc(placeholder)}"
       aria-label="${esc(placeholder)}" autocomplete="off">
      <p class="facet-empty" hidden>لا تطابق في هذه المجموعة</p>`;
 
-  function valueRows(group, values, selected, searchPlaceholder) {
-    const rows = values.map((v) => checkRow(group, v, facetCount(group, v), selected.has(v))).join('');
-    return (values.length > LONG_GROUP ? facetSearch(searchPlaceholder) : '') + rows;
+  function facetMore(hiddenCount) {
+    return `<button class="facet-more" type="button" aria-expanded="false">
+      <span class="facet-more-label">عرض المزيد</span>
+      <span class="facet-more-n">+${hiddenCount}</span>
+    </button>`;
   }
+
+  // القيم بعد FACET_VISIBLE تبقى مخفية حتى يضغط المستخدم «عرض المزيد» أو يبحث داخل المجموعة.
+  function valueRows(group, values, selected, searchPlaceholder) {
+    const long = values.length > LONG_GROUP;
+    const rows = values.map((v, i) =>
+      checkRow(group, v, facetCount(group, v), selected.has(v), long && i >= FACET_VISIBLE)).join('');
+    return (long ? facetSearch(searchPlaceholder) : '') + rows + (long ? facetMore(values.length - FACET_VISIBLE) : '');
+  }
+
+  // مجموعات التصفية المعروضة: العلامة التجارية، السعر، وخصائص المنتج (التصنيف).
+  // الباقي مُخفى بطلب من المتجر ويمكن إعادته بحذف اسمه من هذه القائمة.
+  const HIDDEN_FACETS = new Set(['الفئة', 'التوفر', 'الحجم', 'الموسم', 'الاستعمال', 'الاتجاه']);
 
   function renderFilters() {
     const groups = [];
+    // يضيف مجموعة إلى الواجهة إلا إذا كانت مطلوباً إخفاؤها.
+    const addFacet = (title, key, bodyHtml, collapsed = false) => {
+      if (!HIDDEN_FACETS.has(title)) groups.push(facetShell(title, key, bodyHtml, collapsed));
+    };
 
     // العلامات الأكثر منتجاتٍ أولاً ثم أبجدياً.
     const brandValues = [...FACETS.brand.keys()].sort((a, b) =>
       (FACETS.brand.get(b) - FACETS.brand.get(a)) || String(a).localeCompare(String(b), locale()));
-    groups.push(facetShell('العلامة التجارية', 'brand',
-      valueRows('brand', brandValues, state.brands, 'بحث في العلامات التجارية'),
-      false, brandValues.length > LONG_GROUP));
+    addFacet('العلامة التجارية', 'brand',
+      valueRows('brand', brandValues, state.brands, 'بحث في العلامات التجارية'));
 
     const categoryValues = [...FACETS.category.keys()]
       .sort((a, b) => String(a).localeCompare(String(b), locale()));
-    groups.push(facetShell('الفئة', 'category',
-      valueRows('category', categoryValues, state.categories, 'بحث في الفئات'),
-      false, categoryValues.length > LONG_GROUP));
+    addFacet('الفئة', 'category',
+      valueRows('category', categoryValues, state.categories, 'بحث في الفئات'));
 
     const priceBody = `
       <div class="price-ui">
@@ -281,21 +298,21 @@
           <input id="price-max-field" type="number" min="${bounds.min}" max="${bounds.max}" step="1" value="${state.max}" aria-label="أعلى سعر">
         </div>
       </div>`;
-    groups.push(facetShell('السعر', 'price', priceBody));
+    addFacet('السعر', 'price', priceBody);
 
     const availBody = `
       <label class="check"><input type="checkbox" data-group="sale" ${state.sale ? 'checked' : ''}><span>عليها تخفيضات</span>
         <span class="n">${facetCount('sale', '')}</span></label>
       <label class="check"><input type="checkbox" data-group="stock" ${state.inStock ? 'checked' : ''}><span>متوفر في المخزون</span>
         <span class="n">${facetCount('stock', '')}</span></label>`;
-    groups.push(facetShell('التوفر', 'availability', availBody));
+    addFacet('التوفر', 'availability', availBody);
 
     if (hasRatings) {
       const ratingBody = [4.5, 4.0, 3.5].map((r) => `
         <label class="check"><input type="checkbox" data-group="rating" value="${r}" ${state.minRating === r ? 'checked' : ''}>
           <span>${r.toFixed(1)} وأعلى ★</span>
           <span class="n">${facetCount('rating', r)}</span></label>`).join('');
-      groups.push(facetShell('التقييم', 'rating', ratingBody));
+      addFacet('التقييم', 'rating', ratingBody);
     }
 
     // الخصائص المخصصة مأخوذة مباشرة من JSON.
@@ -305,7 +322,7 @@
         String(a).localeCompare(String(b), locale(), { numeric: true }));
       const body = valueRows('attr:' + key, values, state.attrs[key], `بحث في ${label(key)}`);
       const collapsed = i >= 6 || values.length > 14;
-      groups.push(facetShell(label(key), key, body, collapsed, values.length > LONG_GROUP));
+      addFacet(label(key), key, body, collapsed);
     }
 
     $('#facet-groups').innerHTML = groups.join('');
@@ -331,6 +348,11 @@
         if (n) n.textContent = total;
         row.classList.toggle('is-empty', total === 0 && !on);
       }
+    });
+
+    // لو كان أحد الفلاتر المختارة مخفياً خلف «عرض المزيد» نفتح المجموعة تلقائياً.
+    $$('#facet-groups .facet').forEach((facet) => {
+      if ($$('.facet-extra input:checked', facet).length) setFacetExpanded(facet, true);
     });
   }
 
@@ -890,16 +912,34 @@
   // تصفية صفوف المجموعة نفسها (بحث داخل قائمة العلامات التجارية مثلاً).
   function filterFacetRows(input) {
     const needle = norm(input.value);
+    const facet = input.closest('.facet');
     const body = input.closest('.facet-body');
     if (!body) return;
+    const open = !!facet && facet.classList.contains('is-expanded');
     let shown = 0;
     $$('.check', body).forEach((row) => {
       const hit = !needle || norm(row.textContent).includes(needle);
-      row.hidden = !hit;
+      // أثناء البحث تظهر كل النتائج ولو كانت مخفية خلف «عرض المزيد»، وبدونه تعود للاختفاء.
+      const beyond = row.classList.contains('facet-extra') && !needle && !open;
+      row.hidden = !hit || beyond;
       if (hit) shown++;
     });
+    if (facet) facet.classList.toggle('is-searching', !!needle);
     const note = $('.facet-empty', body);
     if (note) note.hidden = shown > 0;
+  }
+
+  // فتح/إغلاق بقية قيم المجموعة الطويلة («عرض المزيد» / «عرض أقل»).
+  function setFacetExpanded(facet, open) {
+    facet.classList.toggle('is-expanded', open);
+    $$('.facet-extra', facet).forEach((row) => { row.hidden = !open; });
+    const btn = $('.facet-more', facet);
+    if (!btn) return;
+    btn.setAttribute('aria-expanded', String(open));
+    const label = $('.facet-more-label', btn);
+    const count = $('.facet-more-n', btn);
+    if (label) label.textContent = open ? 'عرض أقل' : 'عرض المزيد';
+    if (count) count.hidden = open;
   }
 
   function bind() {
@@ -947,6 +987,13 @@
     });
 
     facetRoot.addEventListener('click', (e) => {
+      const more = e.target.closest('.facet-more');
+      if (more) {
+        const facet = more.closest('.facet');
+        setFacetExpanded(facet, !facet.classList.contains('is-expanded'));
+        return;
+      }
+
       const head = e.target.closest('.facet-head');
       if (!head) return;
       const facet = head.closest('.facet');
@@ -1127,8 +1174,10 @@
     [...cart.keys()].forEach((id) => { if (!known.has(id)) cart.delete(id); });
     saveCart();
 
-    document.title = `${meta.store || 'الكتالوج'} — الكتالوج`;
-    $('.logo-text').innerHTML = esc(meta.store || 'الكتالوج').replace(/\s+(\S+)$/, ' <em>$1</em>');
+    // اسم المتجر يبقى موصولاً بالبيانات: عنوان الصفحة + الوصف الصوتي للشعار.
+    const storeName = meta.store || 'قصر العطور';
+    document.title = `${storeName} — الكتالوج`;
+    $$('.logo').forEach((el) => el.setAttribute('aria-label', `${storeName} — Perfumes Palace`));
     $('#updated').textContent = new Date(meta.updated || Date.now())
       .toLocaleDateString(locale(), { month: 'long', day: 'numeric', year: 'numeric' });
 

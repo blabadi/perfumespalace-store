@@ -66,10 +66,13 @@ Store API, no auth) page by page, and writes `products.json`. What it does:
   Autoplay pauses on hover, when the hero scrolls out of view, or when the tab is hidden, and the
   whole thing collapses to a static layout under `prefers-reduced-motion`. Two hero buttons jump
   to the results: `تصفّح الكتالوج` and `منتجات عليها تخفيضات` (which applies the sale filter).
-- **Facets built from the data.** Brand (العلامة التجارية — 49 values) and Category (الفئة)
-  are fixed groups; every other attribute key in the JSON becomes its own filter group
-  automatically. Keys with a single value across the catalogue are skipped. Long groups get
-  a **search box inside the group** and a local scroll area; groups far down the list render
+- **Facets built from the data.** Brand (العلامة التجارية — 49 values), Price, and the product
+  attributes (`التصنيف`) are the groups shown. Every attribute key in the JSON becomes its own
+  filter group automatically, then the titles listed in `HIDDEN_FACETS` in `app.js`
+  (`الفئة`, `التوفر`, `الحجم`, `الموسم`, `الاستعمال`, `الاتجاه`) are skipped — delete a name
+  from that set to bring its group back. Keys with a single value across the catalogue are
+  skipped too. Long groups (more than 12 values) get a **search box inside the group** and a
+  **«عرض المزيد» button** that reveals the remaining values; groups far down the list render
   collapsed and expand on click.
 - **Multi-value attributes.** An attribute may hold a list (`"الموسم": ["خريفي", "شتوي"]`).
   Each value becomes its own filter row, and a product matches if it carries any of the
@@ -77,7 +80,9 @@ Store API, no auth) page by page, and writes `products.json`. What it does:
 - **Price filter** with a dual-handle slider plus typed min/max fields, derived from the
   lowest/highest priced product (40 – 1,500 ₪ here). Products with `price: null` are always
   kept and show `السعر عند الطلب`.
-- **Availability** (عليها تخفيضات / متوفر في المخزون). The **rating** group and the star
+- **Availability** (عليها تخفيضات / متوفر في المخزون): its facet group is hidden, but both
+  filters still work — the hero's `منتجات عليها تخفيضات` button turns the sale filter on, and
+  the active chip removes it. The **rating** group and the star
   lines appear only when at least one product actually has reviews — this store has none, so
   they are hidden instead of showing empty 4.5★ rows.
 - **Facet counts** update as you filter, and each group's count ignores its own selection —

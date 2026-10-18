@@ -13,6 +13,8 @@
   --sale: #b4402f;
   --sale-soft: #fbe9e6;
   --gold: #b7873a;
+  /* ذهبي الشعار مأخوذ من صورة الشعار نفسها */
+  --logo-gold: #cfa524;
   --shadow: 0 1px 2px rgba(27,26,23,.05), 0 8px 24px -12px rgba(27,26,23,.18);
   --shadow-lg: 0 24px 60px -24px rgba(27,26,23,.35);
   --radius: 14px;
@@ -20,6 +22,8 @@
   --maxw: 1320px;
   --font: "Cairo", "IBM Plex Sans Arabic", "Segoe UI", Tahoma, ui-sans-serif, system-ui, sans-serif;
   --serif: "Amiri", "Traditional Arabic", "Iowan Old Style", Georgia, serif;
+  /* خط الشعار: هندسي خفيف بحروف متباعدة، قريب من خط صورة الشعار. */
+  --logo-font: "Jost", "Century Gothic", "Futura", "Questrial", "Cairo", sans-serif;
 }
 
 [data-theme="dark"] {
@@ -72,14 +76,32 @@ svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width:
   max-width: var(--maxw); margin: 0 auto; padding: 14px 24px;
   display: flex; align-items: center; gap: 20px;
 }
-.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
-.logo-mark {
-  width: 26px; height: 26px; border-radius: 8px; flex: none;
-  background: linear-gradient(140deg, var(--accent), var(--gold));
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,.12);
+.logo { display: flex; align-items: center; gap: 11px; text-decoration: none; color: var(--ink); flex: none; }
+/* الشعار: تاج ذهبي + الاسم بخط هندسي بحروف متباعدة، كما في صورة الشعار. */
+.logo-crown {
+  width: auto; height: 30px; flex: none;
+  fill: var(--logo-gold); stroke: none;
+  transition: transform .35s cubic-bezier(.2,.8,.2,1);
 }
-.logo-text { font-family: var(--serif); font-size: 21px; }
-.logo-text em { font-style: normal; color: var(--ink-3); font-size: 15px; }
+.logo:hover .logo-crown { transform: translateY(-2px) rotate(-3deg); }
+.logo-words { display: grid; gap: 2px; line-height: 1; }
+.logo-name {
+  font-family: var(--logo-font); font-weight: 300; font-size: 15px;
+  letter-spacing: .17em; margin-inline-end: -.17em; text-transform: uppercase;
+  color: var(--logo-gold); white-space: nowrap;
+}
+.logo-sub {
+  font-family: var(--logo-font); font-weight: 300; font-size: 7px;
+  letter-spacing: .42em; margin-inline-end: -.42em; text-transform: uppercase;
+  color: var(--logo-gold); opacity: .9; white-space: nowrap;
+}
+.logo:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+/* نسخة مكدّسة (التاج فوق الاسم) في التذييل — بنفس ترتيب صورة الشعار. */
+.logo-stacked { flex-direction: column; gap: 10px; }
+.logo-stacked .logo-words { justify-items: center; }
+.logo-stacked .logo-crown { height: 64px; }
+.logo-stacked .logo-name { font-size: 29px; letter-spacing: .2em; margin-inline-end: -.2em; }
+.logo-stacked .logo-sub { font-size: 11.5px; letter-spacing: .52em; margin-inline-end: -.52em; }
 
 .search {
   flex: 1; max-width: 460px; position: relative;
@@ -119,8 +141,9 @@ svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width:
 }
 .hero-bg {
   position: absolute; inset: -30% -14% auto -14%; height: 132%; pointer-events: none; z-index: 0;
-  transform: translate3d(calc(var(--mx, 0) * 18px), calc(var(--my, 0) * 18px), 0);
-  transition: transform .6s cubic-bezier(.2,.8,.2,1);
+  /* البارالاكس على الخلفية الزخرفية فقط — بلا transition حتى لا يلاحق المؤشر ببطء. */
+  transform: translate3d(calc(var(--mx, 0) * 14px), calc(var(--my, 0) * 14px), 0);
+  will-change: transform;
 }
 .blob { position: absolute; border-radius: 50%; filter: blur(52px); opacity: .5; }
 .blob-1 {
@@ -161,7 +184,8 @@ svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width:
 }
 .hero-copy { display: grid; align-content: start; }
 @keyframes rise { from { opacity: 0; transform: translateY(20px); } }
-.hero-copy > *, .hero-art { animation: rise .85s cubic-bezier(.2,.8,.2,1) both; animation-delay: calc(var(--d, 0) * 110ms); }
+/* fill-mode: backwards (وليس both) — بعد انتهاء الحركة يجب ألا يبقى الـanimation ماسكاً لخاصية transform. */
+.hero-copy > *, .hero-art { animation: rise .85s cubic-bezier(.2,.8,.2,1) backwards; animation-delay: calc(var(--d, 0) * 110ms); }
 
 .eyebrow { margin: 0 0 12px; font-size: 12.5px; color: var(--accent); font-weight: 700; display: flex; align-items: center; gap: 9px; }
 .eyebrow::before {
@@ -193,8 +217,10 @@ svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width:
 .hero-stats dt { font-size: 11.5px; color: var(--ink-3); font-weight: 600; }
 .hero-stats dd { margin: 0; font-family: var(--serif); font-size: 24px; line-height: 1.25; }
 
-/* شريط الصور: صورة منتج حقيقية لكل شريحة، وتكبير بطيء (Ken Burns) */
-.hero-art { position: relative; transform: translate3d(calc(var(--mx, 0) * -12px), calc(var(--my, 0) * -12px), 0); transition: transform .7s cubic-bezier(.2,.8,.2,1); }
+/* شريط الصور: صورة منتج حقيقية لكل شريحة، وتكبير بطيء (Ken Burns).
+   الصور لا تتحرك مع المؤشر إطلاقاً: أي transform على .hero-art + transition + animation
+   معاً يجعل الصورة «ترتجف» تحت المؤشر، لذلك بقي البارالاكس على .hero-bg وحده. */
+.hero-art { position: relative; }
 .hero-stage {
   position: relative; aspect-ratio: 4 / 3; border: 1px solid var(--line); border-radius: var(--radius);
   background: var(--line-2); box-shadow: var(--shadow-lg); overflow: hidden;
@@ -284,7 +310,7 @@ svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width:
 .facet-body { margin-top: 10px; display: grid; gap: 2px; }
 .facet.collapsed .facet-body { display: none; }
 
-/* المجموعات الطويلة (49 علامة تجارية مثلاً): بحث داخل المجموعة + تمرير محلي */
+/* المجموعات الطويلة (49 علامة تجارية مثلاً): بحث داخل المجموعة + زر «عرض المزيد» */
 .facet-search {
   font: inherit; font-size: 13px; color: var(--ink);
   background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
@@ -292,10 +318,17 @@ svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width:
 }
 .facet-search:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 .facet-empty { font-size: 12.5px; color: var(--ink-3); margin: 0 0 6px; }
-.facet-body.is-scroll {
-  max-height: 272px; overflow-y: auto; overscroll-behavior: contain;
-  padding-inline-end: 6px; margin-inline-end: -6px;
+.facet-more {
+  margin-top: 6px; padding: 8px 10px; display: flex; align-items: center; justify-content: center; gap: 6px;
+  font: inherit; font-size: 12.5px; font-weight: 600; color: var(--accent); cursor: pointer;
+  background: transparent; border: 1px dashed var(--line); border-radius: 9px;
+  transition: background .15s, border-color .15s;
 }
+.facet-more:hover { background: var(--accent-soft); border-color: var(--accent); }
+.facet-more:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.facet-more-n { font-size: 11px; font-weight: 500; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+/* أثناء البحث الداخلي يكفي إظهار النتائج، فلا حاجة للزر. */
+.facet.is-searching .facet-more { display: none; }
 
 .check {
   display: flex; align-items: center; gap: 9px; padding: 5px 6px; margin: 0 -6px;
@@ -595,7 +628,8 @@ svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width:
 .cart-foot .link-btn { display: block; margin: 12px auto 0; }
 
 .footer { border-top: 1px solid var(--line); background: var(--surface-2); }
-.footer p { max-width: var(--maxw); margin: 0 auto; padding: 22px 24px; font-size: 13px; color: var(--ink-3); }
+.footer-inner { max-width: var(--maxw); margin: 0 auto; padding: 30px 24px; display: grid; gap: 16px; justify-items: center; }
+.footer p { margin: 0; font-size: 13px; color: var(--ink-3); text-align: center; }
 
 /* ============ responsive ============ */
 @media (max-width: 1000px) {
