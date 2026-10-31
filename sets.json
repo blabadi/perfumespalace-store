@@ -1,0 +1,621 @@
+{
+  "catalog_feed": "https://catalog.perfumespalace.store/feed.xml",
+  "generated_from": "قصر العطور (2026-10-17)",
+  "note": "Rule-based Meta product sets. Push with: python create-sets.py --apply",
+  "sets": [
+    {
+      "name": "French Avenue",
+      "retailer_id": "set_french_avenue",
+      "filter": {
+        "brand": {
+          "eq": "French Avenue"
+        }
+      },
+      "items": 37,
+      "ids": [
+        "3564",
+        "3562",
+        "3547",
+        "3545",
+        "3523",
+        "3508",
+        "3506",
+        "3503",
+        "3498",
+        "3496",
+        "3494",
+        "3473",
+        "3465",
+        "3460",
+        "3457",
+        "3452",
+        "3348",
+        "3251",
+        "3042",
+        "3041",
+        "3037",
+        "3030",
+        "3009",
+        "2962",
+        "2961",
+        "2960",
+        "2957",
+        "2821",
+        "2818",
+        "2799",
+        "2691",
+        "2689",
+        "2677",
+        "2561",
+        "2560",
+        "2559",
+        "2558"
+      ],
+      "metadata": {
+        "description": "French Avenue — 37 منتج",
+        "external_url": "https://catalog.perfumespalace.store/#brand=French+Avenue",
+        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/08/parfum-nabatieh-french-avenue.jpg"
+      }
+    },
+    {
+      "name": "Paris Corner",
+      "retailer_id": "set_paris_corner",
+      "filter": {
+        "brand": {
+          "eq": "Paris Corner"
+        }
+      },
+      "items": 15,
+      "ids": [
+        "2959",
+        "2904",
+        "2903",
+        "2897",
+        "2866",
+        "2863",
+        "2857",
+        "2812",
+        "2690",
+        "2674",
+        "2673",
+        "2670",
+        "2589",
+        "2385",
+        "2382"
+      ],
+      "metadata": {
+        "description": "Paris Corner — 15 منتج",
+        "external_url": "https://catalog.perfumespalace.store/#brand=Paris+Corner",
+        "cover_image_url": "https://catalog.perfumespalace.store/images/jpg/2025/08/PRD-8392XZ.jpg"
+      }
+    },
+    {
+      "name": "Afnan",
+      "retailer_id": "set_afnan",
+      "filter": {
+        "brand": {
+          "eq": "Afnan"
+        }
+      },
+      "items": 12,
+      "ids": [
+        "3511",
+        "3500",
+        "3147",
+        "3128",
+        "2854",
+        "2845",
+        "2841",
+        "2581",
+        "2579",
+        "2381",
+        "2378",
+        "2376"
+      ],
+      "metadata": {
+        "description": "Afnan — 12 منتج",
+        "external_url": "https://catalog.perfumespalace.store/#brand=Afnan",
+        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/05/Afnan-9pm-Rebel1.png"
+      }
+    },
+    {
+      "name": "Fragrance world",
+      "retailer_id": "set_fragrance_world",
+      "filter": {
+        "brand": {
+          "eq": "Fragrance world"
+        }
+      },
+      "items": 12,
+      "ids": [
+        "3513",
+        "3199",
+        "3164",
+        "3012",
+        "3011",
+        "3010",
+        "2764",
+        "2573",
+        "2571",
+        "2570",
+        "2568",
+        "2566"
+      ],
+      "metadata": {
+        "description": "Fragrance world — 12 منتج",
+        "external_url": "https://catalog.perfumespalace.store/#brand=Fragrance+world",
+        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/05/colosseum_fragrance_world.jpg"
+      }
+    },
+    {
+      "name": "Alharamin",
+      "retailer_id": "set_alharamin",
+      "filter": {
+        "brand": {
+          "eq": "Alharamin"
+        }
+      },
+      "items": 10,
+      "ids": [
+        "3568",
+        "3259",
+        "3230",
+        "3226",
+        "3224",
+        "3222",
+        "3154",
+        "3028",
+        "2984",
+        "2676"
+      ],
+      "metadata": {
+        "description": "Alharamin — 10 منتج",
+        "external_url": "https://catalog.perfumespalace.store/#brand=Alharamin",
+        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/09/88guw3.jpg"
+      }
+    },
+    {
+      "name": "Masion Asrar",
+      "retailer_id": "set_masion_asrar",
+      "filter": {
+        "brand": {
+          "eq": "Masion Asrar"
+        }
+      },
+      "items": 6,
+      "ids": [
+        "3351",
+        "3330",
+        "3244",
+        "3142",
+        "3139",
+        "3135"
+      ],
+      "metadata": {
+        "description": "Masion Asrar — 6 منتج",
+        "external_url": "https://catalog.perfumespalace.store/#brand=Masion+Asrar",
+        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/01/C40C3202-6088-44AD-AAF2-4E725F1B0E60_1024x1024402x.jpg"
+      }
+    },
+    {
+      "name": "لطافة Lattafa",
+      "retailer_id": "set_lattafa",
+      "filter": {
+        "brand": {
+          "eq": "لطافة Lattafa"
+        }
+      },
+      "items": 6,
+      "ids": [
+        "2808",
+        "2684",
+        "2683",
+        "2682",
+        "2656",
+        "2555"
+      ],
+      "metadata": {
+        "description": "لطافة Lattafa — 6 منتج",
+        "external_url": "https://catalog.perfumespalace.store/#brand=%D9%84%D8%B7%D8%A7%D9%81%D8%A9+Lattafa",
+        "cover_image_url": "https://catalog.perfumespalace.store/images/jpg/2025/03/40251665_1-lattafa-fakhar-black-eau-de-parfum-imported-long-lasting-perfumed-bod.jpg"
+      }
+    },
+    {
+      "name": "Armaf",
+      "retailer_id": "set_armaf",
+      "filter": {
+        "brand": {
+          "eq": "Armaf"
+        }
+      },
+      "items": 5,
+      "ids": [
+        "3488",
+        "3237",
+        "2909",
+        "2832",
+        "2826"
+      ],
+      "metadata": {
+        "description": "Armaf — 5 منتج",
+        "external_url": "https://catalog.perfumespalace.store/#brand=Armaf",
+        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/04/ARMAF-CLUB-DE-NUIT-INTENSE-150ML.png"
+      }
+    },
+    {
+      "name": "Creed",
+      "retailer_id": "set_creed",
+      "filter": {
+        "brand": {
+          "eq": "Creed"
+        }
+      },
+      "items": 5,
+      "ids": [
+        "3020",
+        "3019",
+        "3018",
+        "2769",
+        "2758"
+      ],
+      "metadata": {
+        "description": "Creed — 5 منتج",
+        "external_url": "https://catalog.perfumespalace.store/#brand=Creed",
+        "cover_image_url": "https://catalog.perfumespalace.store/images/2025/08/GIT-4821CR.jpg"
+      }
+    },
+    {
+      "name": "Rue Broca",
+      "retailer_id": "set_rue_broca",
+      "filter": {
+        "brand": {
+          "eq": "Rue Broca"
+        }
+      },
+      "items": 5,
+      "ids": [
+        "3470",
+        "2860",
+        "2785",
+        "2586",
+        "2584"
+      ],
+      "metadata": {
+        "description": "Rue Broca — 5 منتج",
+        "external_url": "https://catalog.perfumespalace.store/#brand=Rue+Broca",
+        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/03/Hooked-Intensely1-3.png"
+      }
+    },
+    {
+      "name": "Dumel Paris",
+      "retailer_id": "set_dumel_paris",
+      "filter": {
+        "brand": {
+          "eq": "Dumel Paris"
+        }
+      },
+      "items": 4,
+      "ids": [
+        "3201",
+        "3066",
+        "3062",
+        "3057"
+      ],
+      "metadata": {
+        "description": "Dumel Paris — 4 منتج",
+        "external_url": "https://catalog.perfumespalace.store/#brand=Dumel+Paris",
+        "cover_image_url": "https://catalog.perfumespalace.store/images/2025/09/defender-volle-extrait-de-parfum-by-dumel-paris-for-men-100ml.png"
+      }
+    },
+    {
+      "name": "Xerjoff",
+      "retailer_id": "set_xerjoff",
+      "filter": {
+        "brand": {
+          "eq": "Xerjoff"
+        }
+      },
+      "items": 4,
+      "ids": [
+        "2806",
+        "2801",
+        "2065",
+        "2064"
+      ],
+      "metadata": {
+        "description": "Xerjoff — 4 منتج",
+        "external_url": "https://catalog.perfumespalace.store/#brand=Xerjoff",
+        "cover_image_url": "https://catalog.perfumespalace.store/images/jpg/2025/03/8054320903062-2_jpg_grande.jpg"
+      }
+    },
+    {
+      "name": "Assaf",
+      "retailer_id": "set_assaf",
+      "filter": {
+        "brand": {
+          "eq": "Assaf"
+        }
+      },
+      "items": 3,
+      "ids": [
+        "3552",
+        "3161",
+        "3159"
+      ],
+      "metadata": {
+        "description": "Assaf — 3 منتج",
+        "external_url": "https://catalog.perfumespalace.store/#brand=Assaf",
+        "cover_image_url": "https://catalog.perfumespalace.store/images/jpg/2026/08/assaf-frankel-set-cover.jpg"
+      }
+    },
+    {
+      "name": "Dumont Paris",
+      "retailer_id": "set_dumont_paris",
+      "filter": {
+        "brand": {
+          "eq": "Dumont Paris"
+        }
+      },
+      "items": 3,
+      "ids": [
+        "2884",
+        "2882",
+        "2678"
+      ],
+      "metadata": {
+        "description": "Dumont Paris — 3 منتج",
+        "external_url": "https://catalog.perfumespalace.store/#brand=Dumont+Paris",
+        "cover_image_url": "https://catalog.perfumespalace.store/images/jpg/2025/05/nitro-pour-homme.jpg"
+      }
+    },
+    {
+      "name": "Fragrance Delux",
+      "retailer_id": "set_fragrance_delux",
+      "filter": {
+        "brand": {
+          "eq": "Fragrance Delux"
+        }
+      },
+      "items": 3,
+      "ids": [
+        "3490",
+        "3001",
+        "2838"
+      ],
+      "metadata": {
+        "description": "Fragrance Delux — 3 منتج",
+        "external_url": "https://catalog.perfumespalace.store/#brand=Fragrance+Delux",
+        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/04/Fragrance-Deluxe-Valentine-Man-Intense-EDP-100ML.jpg"
+      }
+    },
+    {
+      "name": "Rasasi",
+      "retailer_id": "set_rasasi",
+      "filter": {
+        "brand": {
+          "eq": "Rasasi"
+        }
+      },
+      "items": 3,
+      "ids": [
+        "3476",
+        "2964",
+        "2886"
+      ],
+      "metadata": {
+        "description": "Rasasi — 3 منتج",
+        "external_url": "https://catalog.perfumespalace.store/#brand=Rasasi",
+        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/03/Hawas-For-Him-Perfume-100ml-EDP-Rasasi-169998753.jpg"
+      }
+    },
+    {
+      "name": "BOIS 1920",
+      "retailer_id": "set_bois_1920",
+      "filter": {
+        "brand": {
+          "eq": "BOIS 1920"
+        }
+      },
+      "items": 2,
+      "ids": [
+        "2305",
+        "2304"
+      ],
+      "metadata": {
+        "description": "BOIS 1920 — 2 منتج",
+        "external_url": "https://catalog.perfumespalace.store/#brand=BOIS+1920",
+        "cover_image_url": "https://catalog.perfumespalace.store/images/2024/06/classic-bois-1920-1.jpg"
+      }
+    },
+    {
+      "name": "GULF ORCHID",
+      "retailer_id": "set_gulf_orchid",
+      "filter": {
+        "brand": {
+          "eq": "GULF ORCHID"
+        }
+      },
+      "items": 2,
+      "ids": [
+        "3327",
+        "3145"
+      ],
+      "metadata": {
+        "description": "GULF ORCHID — 2 منتج",
+        "external_url": "https://catalog.perfumespalace.store/#brand=GULF+ORCHID",
+        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/01/Yatch_Club_Box_Gulf_Orchid_Perfume28129.jpg"
+      }
+    },
+    {
+      "name": "Ibraheem Al Qurashi",
+      "retailer_id": "set_ibraheem_al_qurashi",
+      "filter": {
+        "brand": {
+          "eq": "Ibraheem Al Qurashi"
+        }
+      },
+      "items": 2,
+      "ids": [
+        "3572",
+        "2955"
+      ],
+      "metadata": {
+        "description": "Ibraheem Al Qurashi — 2 منتج",
+        "external_url": "https://catalog.perfumespalace.store/#brand=Ibraheem+Al+Qurashi",
+        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/09/yclzhj.jpg"
+      }
+    },
+    {
+      "name": "Lattafa",
+      "retailer_id": "set_lattafa_d98b24",
+      "filter": {
+        "brand": {
+          "eq": "Lattafa"
+        }
+      },
+      "items": 2,
+      "ids": [
+        "3535",
+        "2966"
+      ],
+      "metadata": {
+        "description": "Lattafa — 2 منتج",
+        "external_url": "https://catalog.perfumespalace.store/#brand=Lattafa",
+        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/08/Khamrah-Dukhan-1_a62cb1af-0737-4709-86c2-f275a5f5b023.png"
+      }
+    },
+    {
+      "name": "Maison Alhambra",
+      "retailer_id": "set_maison_alhambra",
+      "filter": {
+        "brand": {
+          "eq": "Maison Alhambra"
+        }
+      },
+      "items": 2,
+      "ids": [
+        "2963",
+        "2905"
+      ],
+      "metadata": {
+        "description": "Maison Alhambra — 2 منتج",
+        "external_url": "https://catalog.perfumespalace.store/#brand=Maison+Alhambra",
+        "cover_image_url": "https://catalog.perfumespalace.store/images/2025/08/YTX-5834MA.jpeg"
+      }
+    },
+    {
+      "name": "Orto Parisi",
+      "retailer_id": "set_orto_parisi",
+      "filter": {
+        "brand": {
+          "eq": "Orto Parisi"
+        }
+      },
+      "items": 2,
+      "ids": [
+        "2877",
+        "2060"
+      ],
+      "metadata": {
+        "description": "Orto Parisi — 2 منتج",
+        "external_url": "https://catalog.perfumespalace.store/#brand=Orto+Parisi",
+        "cover_image_url": "https://catalog.perfumespalace.store/images/2025/05/megamare1.jpg"
+      }
+    },
+    {
+      "name": "Perfumes de Marly",
+      "retailer_id": "set_perfumes_de_marly",
+      "filter": {
+        "brand": {
+          "eq": "Perfumes de Marly"
+        }
+      },
+      "items": 2,
+      "ids": [
+        "2303",
+        "2302"
+      ],
+      "metadata": {
+        "description": "Perfumes de Marly — 2 منتج",
+        "external_url": "https://catalog.perfumespalace.store/#brand=Perfumes+de+Marly",
+        "cover_image_url": "https://catalog.perfumespalace.store/images/jpg/2024/06/greenly-main.jpg"
+      }
+    },
+    {
+      "name": "Sospiro",
+      "retailer_id": "set_sospiro",
+      "filter": {
+        "brand": {
+          "eq": "Sospiro"
+        }
+      },
+      "items": 2,
+      "ids": [
+        "3533",
+        "2773"
+      ],
+      "metadata": {
+        "description": "Sospiro — 2 منتج",
+        "external_url": "https://catalog.perfumespalace.store/#brand=Sospiro",
+        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/08/DSC02074copy_22043d3e-3c67-43ab-baa2-8efd06c0f899.jpg"
+      }
+    },
+    {
+      "name": "Woods Collection",
+      "retailer_id": "set_woods_collection",
+      "filter": {
+        "brand": {
+          "eq": "Woods Collection"
+        }
+      },
+      "items": 2,
+      "ids": [
+        "3293",
+        "2662"
+      ],
+      "metadata": {
+        "description": "Woods Collection — 2 منتج",
+        "external_url": "https://catalog.perfumespalace.store/#brand=Woods+Collection",
+        "cover_image_url": "https://catalog.perfumespalace.store/images/2025/12/436513.jpg"
+      }
+    },
+    {
+      "name": "Zimaya",
+      "retailer_id": "set_zimaya",
+      "filter": {
+        "brand": {
+          "eq": "Zimaya"
+        }
+      },
+      "items": 2,
+      "ids": [
+        "3492",
+        "3463"
+      ],
+      "metadata": {
+        "description": "Zimaya — 2 منتج",
+        "external_url": "https://catalog.perfumespalace.store/#brand=Zimaya",
+        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/05/INEKAS-LUNA-Zimaya2.png"
+      }
+    },
+    {
+      "name": "العز للعود",
+      "retailer_id": "set_b3ab3ad57",
+      "filter": {
+        "brand": {
+          "eq": "العز للعود"
+        }
+      },
+      "items": 2,
+      "ids": [
+        "3516",
+        "3345"
+      ],
+      "metadata": {
+        "description": "العز للعود — 2 منتج",
+        "external_url": "https://catalog.perfumespalace.store/#brand=%D8%A7%D9%84%D8%B9%D8%B2+%D9%84%D9%84%D8%B9%D9%88%D8%AF",
+        "cover_image_url": "https://catalog.perfumespalace.store/images/jpg/2026/05/HERSH2NEW.jpg"
+      }
+    }
+  ]
+}

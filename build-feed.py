@@ -10,6 +10,7 @@ Run:  python build-feed.py                                 (feed.xml + feed.csv)
       python build-feed.py --base https://catalog.perfumespalace.store/
       python build-feed.py --out feed --check              (also HEAD-check image URLs)
       python build-feed.py --no-gpc                        (drop google_product_category)
+      python build-feed.py --sets                          (also write sets.json)
 
 Rules applied here:
   * a price is mandatory, so the «السعر عند الطلب» rows (price null) are skipped;
@@ -19,11 +20,17 @@ Rules applied here:
   * prices are quoted in the catalogue currency with the ISO code ("280.00 ILS").
 
 Feed URL for Commerce Manager: <base>/feed.xml  (or /feed.csv).
+
+--sets also writes sets.json, one Meta product set per brand, built as a filter rule
+({"brand": {"eq": "French Avenue"}}) rather than a frozen list of items, so the set
+follows the feed. Push it with create-sets.py.
 """
 
 import csv
+import hashlib
 import json
 import os
+import re
 import sys
 import urllib.parse
 import urllib.request
@@ -34,12 +41,14 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from webp_to_jpeg import twin_path            # noqa: E402  (needs the path tweak above)
 
 SRC_JSON = "products.json"
+SETS_JSON = "sets.json"
 DEFAULT_BASE = "https://catalog.perfumespalace.store/"
 MAX_TITLE = 200           # Meta's limit
 MAX_DESC = 5000           # Meta's limit
 MAX_IMAGES = 10           # image_link + additional_image_link
 GPC = "Health & Beauty > Personal Care > Cosmetics > Perfume & Cologne"
 CHECK_HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; catalogue-feed-check)"}
+UNSPECIFIED = "غير محدد"  # the store's "no brand" value -- useless as a set
 
 
 def text(value, limit):
@@ -159,6 +168,71 @@ def write_csv(path, rows, names):
             writer.writerow([cell(name, row.get(name, "")) for name in names])
 
 
+def slug(value):
+    """ASCII lowercase id for a brand name; an Arabic-only name falls back to a hash."""
+    latin = re.sub(r"[^a-z0-9]+", "_", str(value or "").strip().lower()).strip("_")
+    if not latin:
+        latin = "b" + hashlib.md5(str(value).encode("utf-8")).hexdigest()[:8]
+    return latin
+
+
+def sets_for(rows, base, by="brand", field="brand", op="eq", min_items=2,
+             keep_unspecified=False, prefix=""):
+    """One product set per brand, as a filter rule over the feed rows.
+
+    A rule-based set is what Commerce Manager shows as "Brand is X": Meta re-evaluates
+    it on every feed upload, so the set never needs re-creating when a product is
+    added. `by="ids"` instead freezes the current items with retailer_id/is_any.
+    """
+    groups = {}
+    for row in rows:
+        value = text(row.get(field), MAX_TITLE)
+        if not value or (value == UNSPECIFIED and not keep_unspecified):
+            continue
+        groups.setdefault(value, []).append(row)
+
+    sets, taken = [], {}
+    for value in sorted(groups, key=lambda v: (-len(groups[v]), v)):
+        items = groups[value]
+        if len(items) < min_items:
+            continue
+        key = slug(value)
+        if key in taken:                      # two brands cannot share one retailer id
+            key = "%s_%s" % (key, hashlib.md5(value.encode("utf-8")).hexdigest()[:6])
+        taken[key] = value
+        if by == "ids":
+            rule = {"retailer_id": {"is_any": [row["id"] for row in items]}}
+        else:
+            rule = {field: {op: value}}
+        sets.append({
+            "name": text(prefix + value, 100),
+            "retailer_id": "set_" + key,
+            "filter": rule,
+            "items": len(items),
+            # Informational only: what the rule matches today, so the file can be
+            # reviewed in a diff. The API call sends the rule, not this list.
+            "ids": [row["id"] for row in items],
+            "metadata": {
+                "description": text("%s — %d منتج" % (value, len(items)), 500),
+                "external_url": base + "#" + urllib.parse.urlencode({field: value}),
+                "cover_image_url": items[0]["image_link"],
+            },
+        })
+    return sets
+
+
+def write_sets(path, sets, meta, base, out):
+    payload = {
+        "catalog_feed": "%s%s.xml" % (base, out),
+        "generated_from": "%s (%s)" % (meta.get("store") or "", meta.get("updated") or ""),
+        "note": "Rule-based Meta product sets. Push with: python create-sets.py --apply",
+        "sets": sets,
+    }
+    with open(path, "w", encoding="utf-8", newline="\n") as fh:
+        json.dump(payload, fh, ensure_ascii=False, indent=2)
+        fh.write("\n")
+
+
 def check_urls(urls):
     """HEAD every image URL and report the ones that do not answer 200."""
     def head(url):
@@ -184,6 +258,14 @@ def main():
     out = "feed"
     with_gpc = True
     do_check = False
+    do_sets = False
+    sets_file = SETS_JSON
+    sets_min = 2
+    sets_by = "brand"
+    sets_field = "brand"
+    sets_op = "eq"
+    sets_prefix = ""
+    sets_keep_unspecified = False
     positional = []
     index = 0
     while index < len(args):
@@ -198,9 +280,33 @@ def main():
             with_gpc = False
         elif arg == "--check":
             do_check = True
+        elif arg == "--sets":
+            do_sets = True
+        elif arg == "--sets-file":
+            index += 1
+            sets_file, do_sets = args[index], True
+        elif arg == "--sets-min":
+            index += 1
+            sets_min, do_sets = int(args[index]), True
+        elif arg == "--sets-by":
+            index += 1
+            sets_by, do_sets = args[index], True
+        elif arg == "--sets-field":
+            index += 1
+            sets_field, do_sets = args[index], True
+        elif arg == "--sets-op":
+            index += 1
+            sets_op, do_sets = args[index], True
+        elif arg == "--sets-prefix":
+            index += 1
+            sets_prefix, do_sets = args[index], True
+        elif arg == "--sets-keep-unspecified":
+            sets_keep_unspecified, do_sets = True, True
         else:
             positional.append(arg)
         index += 1
+    if sets_by not in ("brand", "ids"):
+        sys.exit("--sets-by must be 'brand' (a rule) or 'ids' (a frozen list)")
     if positional:
         source_json = positional[0]
     else:
@@ -251,6 +357,24 @@ def main():
               "`python webp_to_jpeg.py` (Meta only accepts JPG/PNG for image_link)"
               % len(set(missing_twin)))
     print("  feed URL for Commerce Manager: %s%s.xml" % (base, out))
+
+    if do_sets:
+        sets = sets_for(rows, base, by=sets_by, field=sets_field, op=sets_op,
+                        min_items=sets_min, keep_unspecified=sets_keep_unspecified,
+                        prefix=sets_prefix)
+        write_sets(sets_file, sets, meta, base, out)
+        brands = {text(row.get(sets_field), MAX_TITLE) for row in rows if row.get(sets_field)}
+        thin = len([b for b in brands if b and b != UNSPECIFIED]) - len(sets)
+        print("  sets: %d written to %s (%.1f KB) — %d brand value(s) in the feed, "
+              "%d below --sets-min %d" % (
+                  len(sets), sets_file, os.path.getsize(sets_file) / 1024.0,
+                  len(brands), max(thin, 0), sets_min))
+        for item in sets[:8]:
+            print("        %-24s %3d items  %s" % (text(item["name"], 24), item["items"],
+                                                   json.dumps(item["filter"], ensure_ascii=False)[:70]))
+        if len(sets) > 8:
+            print("        … %d more" % (len(sets) - 8))
+        print("  push them: python create-sets.py            (dry run)")
 
     if do_check:
         urls = sorted({url for row in rows for url in [row["image_link"]] + row.get("additional_image_link", [])})

@@ -194,7 +194,69 @@ Both files live in the repo root, so once pushed they are public:
 - WebP pictures point at a JPEG twin under `images/jpg/…` (102 files, ~14 MB) and everything else
   keeps its own file. The site itself still loads the smaller WebP files. One twin is 394×450 px
   while Meta recommends at least 500×500 — replace that product's photo if you want it perfect.
-- After a data refresh, re-run both scripts and push, so the feed matches the new catalogue.
+- After a data refresh, re-run both scripts and push, so the feed matches the new catalogue
+  (`python build-feed.py --sets` also refreshes the product sets below).
+
+### Product sets by brand
+
+A **product set** is Meta's own saved filter over the catalogue — Commerce Manager shows it as
+*Brand is French Avenue*. It is not a copy of the items, so the set follows the feed: when a new
+French Avenue product arrives with the next upload, it is inside the set already. Sets are what
+Advantage+ catalog ads, shop collections and the Cloud API `product_set_id` arguments point at.
+
+```
+python build-feed.py --sets      # writes sets.json next to feed.xml
+python create-sets.py            # plan only: what it would create/update, no API call
+python create-sets.py --list     # what is already in the catalogue
+python create-sets.py --apply    # write for real
+```
+
+`sets.json` holds one entry per brand: the rule (`{"brand": {"eq": "French Avenue"}}`), a stable
+`retailer_id` (`set_french_avenue`) so the script recognises its own sets on the next run, the
+item count, and metadata (cover image + a deep link back to
+`https://catalog.perfumespalace.store/#brand=French+Avenue`).
+
+Before it can write, give it two things — both are secrets, so keep them in the environment:
+
+```
+set META_CATALOG_ID=1234567890     # Commerce Manager -> Catalogue -> Settings -> Catalogue ID
+set META_TOKEN=EAAG...             # system-user token with the catalog_management permission
+```
+
+The token comes from **Business Settings → Users → System users** → create one, add it as an admin
+of the catalogue, *Generate token*, and grant `catalog_management`. Then:
+
+```
+python create-sets.py --only French --apply    # one brand first, to see it land in the UI
+python create-sets.py --apply                  # then all of them
+```
+
+The run is idempotent: sets are matched by `retailer_id`, then by rule, then by name, so a second
+run reports `already correct` instead of creating duplicates (Meta refuses a duplicate rule with
+error 10803 anyway). A set you made by hand is never renamed or rewritten — if it already carries
+the same rule the script skips it, and if it holds your name with a different rule you get a
+`conflict` line to resolve. `--delete-stale` removes only *our* sets (`set_*`) that fell out of
+`sets.json`; nothing else is touched.
+
+Tuning the split:
+
+- `--sets-min 3` keeps only brands with at least that many items; `--sets-min 1` takes every brand.
+- `--sets-keep-unspecified` also makes a set out of «غير محدد», the store's "no brand" value
+  (skipped by default).
+- `--sets-prefix "Brand: "` renames them, e.g. so they sort together in Commerce Manager.
+- `--sets-field product_type --sets-op i_contains` builds the rules on another feed column.
+- `--sets-by ids` freezes the current items with `{"retailer_id": {"is_any": [...]}}` instead of a
+  rule — only useful if you want a set that must *not* change.
+
+Today that is **27 sets** out of 49 brand values: 21 brands have a single item (a one-item set is
+noise in the UI) and «غير محدد» is skipped, so 155 of the 185 rows are covered. Two things worth
+knowing:
+
+- The store data spells some brands two ways — `Lattafa` (2 rows) and `لطافة Lattafa` (6 rows) are
+  different values, so they become two sets. Fix it in the store's brand field and both the feed
+  and the sets follow.
+- Arabic brand names are fine in set names and rules (Meta only forbids non-ASCII characters in
+  *label* filters), so `لطافة Lattafa` and `العز للعود` get real rules.
 
 ## Deploying it
 
