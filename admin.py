@@ -95,7 +95,11 @@ def counts():
     products, meta = data.get("products", []), data.get("meta", {})
     shown, hidden = [p for p in products if is_visible(p, meta)], \
                     [p for p in products if not is_visible(p, meta)]
-    xml = open(path(FEED_XML), encoding="utf-8").read() if os.path.exists(path(FEED_XML)) else ""
+    if os.path.exists(path(FEED_XML)):
+        with open(path(FEED_XML), encoding="utf-8") as fh:
+            xml = fh.read()
+    else:
+        xml = ""
     try:
         sets = len(read_json(SETS).get("sets", []))
     except (OSError, ValueError):
