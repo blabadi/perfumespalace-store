@@ -13,6 +13,9 @@ Run:  python build-feed.py                                 (feed.xml + feed.csv)
       python build-feed.py --sets                          (also write sets.json)
 
 Rules applied here:
+  * visibility rules from visibility.py are applied first, so a row hidden in
+    products.json ("visible": false, or meta.show_out_of_stock = false) is left out
+    of the feed and Meta drops it from the catalogue on the next scheduled fetch;
   * a price is mandatory, so the «السعر عند الطلب» rows (price null) are skipped;
   * sold-out items stay in the feed, marked "out of stock";
   * WebP images point at the JPEG twin written by webp_to_jpeg.py, because Meta only
@@ -39,6 +42,7 @@ from xml.sax.saxutils import escape
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from brand_aliases import UNSPECIFIED, canonical_brand   # noqa: E402  (path tweak above)
+from visibility import split as split_rows, why_hidden   # noqa: E402  (same)
 from webp_to_jpeg import twin_path            # noqa: E402  (needs the path tweak above)
 
 SRC_JSON = "products.json"
@@ -326,7 +330,8 @@ def main():
     currency = (meta.get("currency") or "ILS").upper()
 
     rows, skipped, missing_twin = [], [], []
-    for product in data["products"]:
+    listed, hidden_rows = split_rows(data["products"], meta)
+    for product in listed:
         row = row_for(product, base, currency, with_gpc)
         if row is None:
             skipped.append(product.get("name") or product.get("id"))
@@ -342,9 +347,14 @@ def main():
     write_xml(xml_path, rows, names, meta, base)
     write_csv(csv_path, rows, names)
 
-    print("  products: %d -> feed rows %d, skipped %d" % (len(data["products"]), len(rows), len(skipped)))
+    print("  products: %d -> listed %d, hidden %d -> feed rows %d, skipped %d"
+          % (len(data["products"]), len(listed), len(hidden_rows), len(rows), len(skipped)))
     for name in skipped[:5]:
         print("        skipped (no price): %s" % text(name, 60))
+    for product in hidden_rows[:5]:
+        print("        hidden: %s (%s)" % (text(product.get("name"), 60), why_hidden(product, meta)))
+    if len(hidden_rows) > 5:
+        print("        … %d more hidden" % (len(hidden_rows) - 5))
     print("  columns: %s" % ", ".join(names))
     print("  files: %s (%.1f KB), %s (%.1f KB)" % (
         xml_path, os.path.getsize(xml_path) / 1024.0,

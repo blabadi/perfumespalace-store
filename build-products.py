@@ -8,6 +8,10 @@ The store runs WooCommerce, so the data comes from its public Store API:
 Run:  python build-products.py
 Out:  products.json   (the catalogue file the page reads)
       products.demo.json is kept as the original sample catalogue.
+
+Hand-made visibility choices ("visible" on a row, meta.show_out_of_stock) are copied
+from the products.json already on disk onto the fresh rows by product id, so a
+refresh never undoes them -- see visibility.py and set-visibility.py.
 """
 
 import html
@@ -21,6 +25,7 @@ import urllib.request
 from datetime import date
 
 from brand_aliases import canonical_brand
+from visibility import BULK_KEY, FLAG, is_visible, saved_choices
 
 BASE = "https://perfumespalace.store"
 API = BASE + "/wp-json/wc/store/v1/products"
@@ -257,6 +262,19 @@ def main():
         "whatsapp": "+972566008917",
     }
 
+    # Hand-made visibility choices survive a refresh: they are keyed by product id.
+    flags, bulk = saved_choices()
+    restored = 0
+    for p in out:
+        if p["id"] in flags:
+            p[FLAG] = flags[p["id"]]
+            restored += 1
+    if bulk is not None:
+        meta[BULK_KEY] = bulk
+    if restored or bulk is not None:
+        print("  kept visibility choices: %d row flag(s), %s=%s"
+              % (restored, BULK_KEY, json.dumps(bulk)))
+
     with open("products.json", "w", encoding="utf-8") as fh:
         json.dump({"meta": meta, "products": out}, fh, ensure_ascii=False, indent=2)
 
@@ -273,7 +291,7 @@ def main():
     brands = {}
     cats = {}
     attrs = {}
-    on_sale = sold_out = no_price = 0
+    on_sale = sold_out = no_price = hidden = 0
     for p in out:
         brands[p["brand"]] = brands.get(p["brand"], 0) + 1
         cats[p["category"]] = cats.get(p["category"], 0) + 1
@@ -283,6 +301,7 @@ def main():
         on_sale += 1 if p["compare_at_price"] else 0
         sold_out += 1 if p["stock"] == 0 else 0
         no_price += 1 if p["price"] is None else 0
+        hidden += 1 if not is_visible(p, meta) else 0
 
     prices = [p["price"] for p in out if p["price"] is not None]
     print("wrote products.json")
@@ -293,6 +312,7 @@ def main():
     print("  price range   : %.2f - %.2f %s" % (min(prices), max(prices), meta["currency"]))
     print("  on sale       : %d" % on_sale)
     print("  sold out      : %d" % sold_out)
+    print("  hidden        : %d  (python set-visibility.py hide|show|oos)" % hidden)
     print("  price on request: %d" % no_price)
     print("  with images   : %d" % sum(1 for p in out if p["images"]))
     print("  with gallery  : %d" % sum(1 for p in out if len(p["images"]) > 1))

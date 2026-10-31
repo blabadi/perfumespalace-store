@@ -44,8 +44,18 @@
   const discount = (p) => isSale(p) ? Math.round((1 - p.price / p.compare_at_price) * 100) : 0;
 
   // WooCommerce يخفي الكميات الدقيقة: 0 = نفدت، null = متوفرة بكمية غير معلنة.
-  const soldOut = (p) => p.stock === 0;
+  const soldOut = (p) => p.stock === 0 || p.stock === '0';
   const lowStock = (p) => typeof p.stock === 'number' && p.stock > 0 && p.stock <= 8;
+
+  // قواعد إظهار المنتجات نفسها الموجودة في visibility.py، حتى يتفق ما تعرضه الصفحة
+  // مع ما يُرسل إلى كتالوج Meta. «visible» للمنتج يتقدّم على مفتاح meta.show_out_of_stock.
+  const OFF_WORDS = new Set(['false', '0', 'no', 'off', '']);
+  const truthy = (v) => (typeof v === 'string' ? !OFF_WORDS.has(v.trim().toLowerCase()) : Boolean(v));
+  const isShown = (p, meta) => {
+    if (p.visible != null) return truthy(p.visible);
+    if (soldOut(p)) return truthy(meta.show_out_of_stock ?? true);
+    return true;
+  };
 
   // بديل محلي آمن إذا فشل رابط الصورة.
   const placeholder = (p) => {
@@ -308,11 +318,13 @@
       </div>`;
     addFacet('السعر', 'price', priceBody);
 
+    // خيار المخزون لا معنى له إذا لم تكن هناك منتجات قد نفدت أصلاً.
+    const stockRow = DATA.products.some(soldOut) ? `
+      <label class="check"><input type="checkbox" data-group="stock" ${state.inStock ? 'checked' : ''}><span>متوفر في المخزون</span>
+        <span class="n">${facetCount('stock', '')}</span></label>` : '';
     const availBody = `
       <label class="check"><input type="checkbox" data-group="sale" ${state.sale ? 'checked' : ''}><span>عليها تخفيضات</span>
-        <span class="n">${facetCount('sale', '')}</span></label>
-      <label class="check"><input type="checkbox" data-group="stock" ${state.inStock ? 'checked' : ''}><span>متوفر في المخزون</span>
-        <span class="n">${facetCount('stock', '')}</span></label>`;
+        <span class="n">${facetCount('sale', '')}</span></label>${stockRow}`;
     addFacet('التوفر', 'availability', availBody);
 
     if (hasRatings) {
@@ -1226,6 +1238,14 @@
     if (!res.ok) throw new Error('products.json أعاد الخطأ ' + res.status);
     const data = await res.json();
     if (!Array.isArray(data.products)) throw new Error('لا بد أن يحتوي products.json على مصفوفة products');
+    // المنتجات المخفية بإعدادات الكتالوج لا تُعرض أصلاً: لا في القائمة ولا في أعداد الفلاتر
+    // ولا في السلة، تماماً كما هي الحال في كتالوج Meta.
+    const meta = data.meta || {};
+    const total = data.products.length;
+    data.products = data.products.filter((p) => isShown(p, meta));
+    if (data.products.length !== total) {
+      console.info(`${total - data.products.length} من ${total} منتجاً مخفية بإعدادات الكتالوج`);
+    }
     return data;
   }
 

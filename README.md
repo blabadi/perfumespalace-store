@@ -13,6 +13,8 @@ images/             every product photo, downloaded from the store (see "Hosting
 build-products.py   reads the store's WooCommerce Store API and rewrites products.json
 download_images.py  downloads the product photos into images/ and rewrites the JSON paths
 brand_aliases.py    brands the store spells two ways, folded onto the one to keep
+visibility.py       the hide/show rule for products.json, shared by the page and the feed
+set-visibility.py   command line to hide/show products without editing the JSON by hand
 build-feed.py       writes feed.xml + feed.csv (the Meta/WhatsApp feed) and sets.json
 webp_to_jpeg.py     JPEG twins of the WebP photos — Meta only accepts JPG/PNG
 create-sets.py      pushes sets.json into a Meta catalogue as product sets
@@ -53,6 +55,9 @@ Store API, no auth) page by page, and writes `products.json`. What it does:
 - Products the store lists with no price get `price: null` and the tag `السعر عند الطلب`.
 - `stock` is `0` when out of stock, otherwise `null` (WooCommerce does not expose exact
   quantities through this API).
+- Hand-made visibility choices — `"visible"` on a row, `meta.show_out_of_stock` — are copied
+  from the `products.json` that is already on disk onto the fresh rows by product id, so a
+  refresh never undoes them (see [Hiding products](#hiding-products-out-of-stock-or-one-you-no-longer-sell)).
 - `added` is taken from the image upload month (`/wp-content/uploads/2026/09/…`), which is
   the closest thing to a date-added this API offers.
 - Descriptions are HTML → plain text, with the wishlist-plugin junk removed.
@@ -338,6 +343,8 @@ Each product in `products.json`:
 - `price: null` — shows `السعر عند الطلب` and is excluded from the slider range.
 - `stock` — `0` shows `نفدت الكمية` and disables add-to-cart; a number 8 or lower shows
   `بقي N فقط`; `null` means available with an unlisted quantity.
+- `visible` (optional) — `false` leaves the product out of the page **and** out of the Meta feed;
+  `true` keeps it listed even when sold out. Omit it to follow `meta.show_out_of_stock`.
 - `added` — the `جديد` badge compares each product with the **newest product date in the
   catalogue** (30-day window), not with `meta.updated`.
 - `attributes` — free-form key/value pairs, string or list. The key becomes the filter group
@@ -348,6 +355,49 @@ Each product in `products.json`:
 - `meta` — `store` (name), `tagline` (split on `—` into the hero headline plus the rotating
   words), `currency`, `locale`, `updated` (the date shown in the header), `whatsapp` (adds the
   «اطلب عبر واتساب» link), `source`.
+
+### Hiding products (out of stock, or one you no longer sell)
+
+Two switches, both inside `products.json`, both read by the page (`app.js`) and by the Meta feed
+(`build-feed.py`) — so a hidden product disappears from the grid, the filter counts, the cart and
+the WhatsApp catalogue at the same time.
+
+| switch | where | effect |
+| --- | --- | --- |
+| `"show_out_of_stock": false` | `meta` | every row with `stock: 0` is left out |
+| `"visible": false` | one product row | that row is left out, whatever its stock |
+| `"visible": true` | one product row | that row stays, even while the switch above is `false` |
+
+A product's own flag always wins over the bulk switch. Nothing is deleted: the row keeps its id,
+so the product returns the moment the flag goes away.
+
+Editing 5,000 lines of JSON by hand is awkward, so there is a helper:
+
+```
+python set-visibility.py list                          # what is hidden, what is sold out
+python set-visibility.py oos off                       # hide everything that is sold out
+python set-visibility.py oos on                        # show it again (the default)
+python set-visibility.py hide 2681                     # by product id
+python set-visibility.py hide "نجدية" "French Avenue"  # by name, brand or sku
+python set-visibility.py hide --oos                    # flag every sold-out row one by one
+python set-visibility.py show 2681                     # bring one back
+python set-visibility.py clear                         # remove every "visible" flag
+```
+
+Add `--dry-run` to preview, or `--file copy.json` to try it on a copy first.
+
+The rule itself lives in `visibility.py` and is mirrored in `app.js`, so the page and the feed
+cannot disagree. After changing it, rebuild the feed:
+
+```
+python build-feed.py --sets      # hidden rows leave feed.xml / feed.csv / sets.json
+python create-sets.py --apply    # only when the sets' item counts changed
+```
+
+Meta's side: a scheduled feed re-import replaces the catalogue items, so a hidden product is
+removed from the Facebook / WhatsApp catalogue on the next fetch. To keep sold-out items listed
+but unbuyable instead, leave `show_out_of_stock` alone — they go out as `availability:
+out of stock` and the page shows `نفدت الكمية`.
 
 ### Currency and numerals
 
