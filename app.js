@@ -1238,10 +1238,11 @@
     try {
       DATA = await load();
     } catch (err) {
-      $('#count').textContent = 'تعذّر تحميل products.json';
-      $('#grid').innerHTML = `<div class="empty"><h3>تعذّر تحميل products.json</h3>
-        <p>${esc(err.message)}. المتصفحات تمنع <code>fetch()</code> في صفحات <code>file://</code> — شغّل خادماً محلياً:
-        <code>python -m http.server 8000</code> ثم افتح <code>http://localhost:8000</code>.</p></div>`;
+      $('#count').textContent = 'تعذّر تحميل الكتالوج';
+      $('#grid').innerHTML = `<div class="empty"><h3>تعذّر تحميل الكتالوج</h3>
+        <p>يبدو أن هناك خللاً مؤقتاً. أعد تحميل الصفحة بعد قليل، أو تصفّح العطور مباشرة في
+        <a href="https://perfumespalace.store">متجر قصر العطور</a>.</p></div>`;
+      console.error('load failed:', err);
       return;
     }
 
