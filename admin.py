@@ -667,7 +667,9 @@ $('#oos').addEventListener('change', async ev => {
 });
 
 $('#publish').addEventListener('click', async () => {
-  const pending = (state.pending || []).join('\\n');
+  // state.pending comes from the last /api/state, so fall back to naming the files
+  const pending = (state.pending || []).join('\\n') ||
+                  'products.json, feed.xml, feed.csv, sets.json';
   if (!confirm('سيتم رفع الملفات التالية إلى الموقع (git commit + push):\\n\\n' + pending +
                '\\n\\nمتابعة؟')) return;
   say('جارٍ النشر...');
@@ -675,8 +677,9 @@ $('#publish').addEventListener('click', async () => {
     // the {} matters: api() only sends POST when it is given a body, and publishing
     // is a POST-only route
     const out = await api('/api/publish', {});
-    say((out.ok ? 'تم النشر.\\n' : 'توقف النشر:\\n') + out.log, out.ok ? 'ok' : 'bad');
     await load();
+    // say() after load(), because load() also writes to the status box
+    say((out.ok ? 'تم النشر.\\n' : 'توقف النشر:\\n') + out.log, out.ok ? 'ok' : 'bad');
   } catch (e) { say('فشل النشر: ' + e.message, 'bad'); }
 });
 
