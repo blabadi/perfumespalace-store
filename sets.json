@@ -94,7 +94,7 @@
           "eq": "Fragrance world"
         }
       },
-      "items": 11,
+      "items": 12,
       "ids": [
         "3513",
         "3199",
@@ -106,10 +106,11 @@
         "2573",
         "2571",
         "2568",
-        "2566"
+        "2566",
+        "2563"
       ],
       "metadata": {
-        "description": "Fragrance world — 11 منتج",
+        "description": "Fragrance world — 12 منتج",
         "external_url": "https://catalog.perfumespalace.store/#brand=Fragrance+world",
         "cover_image_url": "https://catalog.perfumespalace.store/images/2026/05/colosseum_fragrance_world.jpg"
       }
