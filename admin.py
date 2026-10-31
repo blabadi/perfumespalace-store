@@ -272,6 +272,9 @@ class Handler(BaseHTTPRequestHandler):
                 })
         if route.startswith("images/") or route.startswith("/images/"):
             return self.send_image(route)
+        if route.startswith("/api/"):
+            # every api route changes files, so it is POST-only: say so instead of a bare 404
+            return self.send(405, {"error": "%s only accepts POST" % route})
         return self.send(404, {"error": "not found: %s" % route})
 
     def send_image(self, route):
@@ -669,7 +672,9 @@ $('#publish').addEventListener('click', async () => {
                '\\n\\nمتابعة؟')) return;
   say('جارٍ النشر...');
   try {
-    const out = await api('/api/publish');
+    // the {} matters: api() only sends POST when it is given a body, and publishing
+    // is a POST-only route
+    const out = await api('/api/publish', {});
     say((out.ok ? 'تم النشر.\\n' : 'توقف النشر:\\n') + out.log, out.ok ? 'ok' : 'bad');
     await load();
   } catch (e) { say('فشل النشر: ' + e.message, 'bad'); }
