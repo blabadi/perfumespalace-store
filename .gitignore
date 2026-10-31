@@ -6,3 +6,6 @@ __pycache__/
 Thumbs.db
 Desktop.ini
 .DS_Store
+
+# admin.py keeps one copy of products.json from before its last save
+products.json.bak
