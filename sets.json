@@ -11,7 +11,7 @@
           "eq": "French Avenue"
         }
       },
-      "items": 37,
+      "items": 35,
       "ids": [
         "3564",
         "3562",
@@ -32,7 +32,6 @@
         "3348",
         "3251",
         "3042",
-        "3041",
         "3037",
         "3030",
         "3009",
@@ -41,7 +40,6 @@
         "2960",
         "2957",
         "2821",
-        "2818",
         "2799",
         "2691",
         "2689",
@@ -52,7 +50,7 @@
         "2558"
       ],
       "metadata": {
-        "description": "French Avenue — 37 منتج",
+        "description": "French Avenue — 35 منتج",
         "external_url": "https://catalog.perfumespalace.store/#brand=French+Avenue",
         "cover_image_url": "https://catalog.perfumespalace.store/images/2026/08/parfum-nabatieh-french-avenue.jpg"
       }
@@ -65,9 +63,8 @@
           "eq": "Paris Corner"
         }
       },
-      "items": 15,
+      "items": 14,
       "ids": [
-        "2959",
         "2904",
         "2903",
         "2897",
@@ -84,38 +81,9 @@
         "2382"
       ],
       "metadata": {
-        "description": "Paris Corner — 15 منتج",
+        "description": "Paris Corner — 14 منتج",
         "external_url": "https://catalog.perfumespalace.store/#brand=Paris+Corner",
-        "cover_image_url": "https://catalog.perfumespalace.store/images/jpg/2025/08/PRD-8392XZ.jpg"
-      }
-    },
-    {
-      "name": "Afnan",
-      "retailer_id": "set_afnan",
-      "filter": {
-        "brand": {
-          "eq": "Afnan"
-        }
-      },
-      "items": 12,
-      "ids": [
-        "3511",
-        "3500",
-        "3147",
-        "3128",
-        "2854",
-        "2845",
-        "2841",
-        "2581",
-        "2579",
-        "2381",
-        "2378",
-        "2376"
-      ],
-      "metadata": {
-        "description": "Afnan — 12 منتج",
-        "external_url": "https://catalog.perfumespalace.store/#brand=Afnan",
-        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/05/Afnan-9pm-Rebel1.png"
+        "cover_image_url": "https://catalog.perfumespalace.store/images/jpg/2025/06/71FuZPRvWpL._SL1500.jpg"
       }
     },
     {
@@ -148,6 +116,34 @@
       }
     },
     {
+      "name": "Afnan",
+      "retailer_id": "set_afnan",
+      "filter": {
+        "brand": {
+          "eq": "Afnan"
+        }
+      },
+      "items": 11,
+      "ids": [
+        "3511",
+        "3500",
+        "3147",
+        "3128",
+        "2854",
+        "2845",
+        "2841",
+        "2581",
+        "2579",
+        "2381",
+        "2376"
+      ],
+      "metadata": {
+        "description": "Afnan — 11 منتج",
+        "external_url": "https://catalog.perfumespalace.store/#brand=Afnan",
+        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/05/Afnan-9pm-Rebel1.png"
+      }
+    },
+    {
       "name": "Alharamin",
       "retailer_id": "set_alharamin",
       "filter": {
@@ -155,13 +151,12 @@
           "eq": "Alharamin"
         }
       },
-      "items": 10,
+      "items": 9,
       "ids": [
         "3568",
         "3259",
         "3230",
         "3226",
-        "3224",
         "3222",
         "3154",
         "3028",
@@ -169,7 +164,7 @@
         "2676"
       ],
       "metadata": {
-        "description": "Alharamin — 10 منتج",
+        "description": "Alharamin — 9 منتج",
         "external_url": "https://catalog.perfumespalace.store/#brand=Alharamin",
         "cover_image_url": "https://catalog.perfumespalace.store/images/2026/09/88guw3.jpg"
       }
