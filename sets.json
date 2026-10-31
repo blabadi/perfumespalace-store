@@ -94,7 +94,7 @@
           "eq": "Fragrance world"
         }
       },
-      "items": 12,
+      "items": 11,
       "ids": [
         "3513",
         "3199",
@@ -105,12 +105,11 @@
         "2764",
         "2573",
         "2571",
-        "2570",
         "2568",
         "2566"
       ],
       "metadata": {
-        "description": "Fragrance world — 12 منتج",
+        "description": "Fragrance world — 11 منتج",
         "external_url": "https://catalog.perfumespalace.store/#brand=Fragrance+world",
         "cover_image_url": "https://catalog.perfumespalace.store/images/2026/05/colosseum_fragrance_world.jpg"
       }
@@ -123,22 +122,20 @@
           "eq": "Afnan"
         }
       },
-      "items": 11,
+      "items": 9,
       "ids": [
         "3511",
-        "3500",
         "3147",
         "3128",
         "2854",
         "2845",
         "2841",
-        "2581",
         "2579",
         "2381",
         "2376"
       ],
       "metadata": {
-        "description": "Afnan — 11 منتج",
+        "description": "Afnan — 9 منتج",
         "external_url": "https://catalog.perfumespalace.store/#brand=Afnan",
         "cover_image_url": "https://catalog.perfumespalace.store/images/2026/05/Afnan-9pm-Rebel1.png"
       }
@@ -177,19 +174,18 @@
           "eq": "لطافة Lattafa"
         }
       },
-      "items": 8,
+      "items": 7,
       "ids": [
         "3535",
         "2966",
         "2808",
-        "2684",
         "2683",
         "2682",
         "2656",
         "2555"
       ],
       "metadata": {
-        "description": "لطافة Lattafa — 8 منتج",
+        "description": "لطافة Lattafa — 7 منتج",
         "external_url": "https://catalog.perfumespalace.store/#brand=%D9%84%D8%B7%D8%A7%D9%81%D8%A9+Lattafa",
         "cover_image_url": "https://catalog.perfumespalace.store/images/2026/08/Khamrah-Dukhan-1_a62cb1af-0737-4709-86c2-f275a5f5b023.png"
       }
@@ -284,27 +280,6 @@
       }
     },
     {
-      "name": "Dumel Paris",
-      "retailer_id": "set_dumel_paris",
-      "filter": {
-        "brand": {
-          "eq": "Dumel Paris"
-        }
-      },
-      "items": 4,
-      "ids": [
-        "3201",
-        "3066",
-        "3062",
-        "3057"
-      ],
-      "metadata": {
-        "description": "Dumel Paris — 4 منتج",
-        "external_url": "https://catalog.perfumespalace.store/#brand=Dumel+Paris",
-        "cover_image_url": "https://catalog.perfumespalace.store/images/2025/09/defender-volle-extrait-de-parfum-by-dumel-paris-for-men-100ml.png"
-      }
-    },
-    {
       "name": "Xerjoff",
       "retailer_id": "set_xerjoff",
       "filter": {
@@ -343,6 +318,26 @@
         "description": "Assaf — 3 منتج",
         "external_url": "https://catalog.perfumespalace.store/#brand=Assaf",
         "cover_image_url": "https://catalog.perfumespalace.store/images/jpg/2026/08/assaf-frankel-set-cover.jpg"
+      }
+    },
+    {
+      "name": "Dumel Paris",
+      "retailer_id": "set_dumel_paris",
+      "filter": {
+        "brand": {
+          "eq": "Dumel Paris"
+        }
+      },
+      "items": 3,
+      "ids": [
+        "3201",
+        "3062",
+        "3057"
+      ],
+      "metadata": {
+        "description": "Dumel Paris — 3 منتج",
+        "external_url": "https://catalog.perfumespalace.store/#brand=Dumel+Paris",
+        "cover_image_url": "https://catalog.perfumespalace.store/images/2025/09/defender-volle-extrait-de-parfum-by-dumel-paris-for-men-100ml.png"
       }
     },
     {
@@ -498,25 +493,6 @@
         "description": "Orto Parisi — 2 منتج",
         "external_url": "https://catalog.perfumespalace.store/#brand=Orto+Parisi",
         "cover_image_url": "https://catalog.perfumespalace.store/images/2025/05/megamare1.jpg"
-      }
-    },
-    {
-      "name": "Perfumes de Marly",
-      "retailer_id": "set_perfumes_de_marly",
-      "filter": {
-        "brand": {
-          "eq": "Perfumes de Marly"
-        }
-      },
-      "items": 2,
-      "ids": [
-        "2303",
-        "2302"
-      ],
-      "metadata": {
-        "description": "Perfumes de Marly — 2 منتج",
-        "external_url": "https://catalog.perfumespalace.store/#brand=Perfumes+de+Marly",
-        "cover_image_url": "https://catalog.perfumespalace.store/images/jpg/2024/06/greenly-main.jpg"
       }
     },
     {
