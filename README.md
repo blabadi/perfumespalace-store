@@ -46,9 +46,11 @@ Store API, no auth) page by page, and writes `products.json`. What it does:
 - **185 store products → 188 catalogue rows**: the 2 variable products are expanded into one
   row per variation, each with its own price and size.
 - `pa_brand` becomes `brand`; WooCommerce categories become `category`; the attribute
-  taxonomies `pa_classification`, `pa_size`, `pa_season`, `pa_usage`, `pa_direction` become
-  the Arabic attribute keys `التصنيف`, `الحجم`, `الموسم`, `الاستعمال`, `الاتجاه` — which is
-  what turns them into filter groups.
+  taxonomies in `KEEP_ATTRS` — `pa_classification` and `pa_size` — become the Arabic attribute
+  keys `التصنيف` and `الحجم`, which is what turns them into filter groups. The store also has
+  `pa_season`, `pa_usage` and `pa_direction`; they are deliberately left out of `KEEP_ATTRS`,
+  so season, day/night and scent direction are never imported. Add a line back to `KEEP_ATTRS`
+  if you ever want one again.
 - `pa_samples` (single value) becomes the tag `متاح للتقسيم` instead of a useless filter.
 - Prices come from `prices.price` / `regular_price` (ILS, 0 decimals); a real sale price
   higher than the current price becomes `compare_at_price` → `خصم N%` badge.
@@ -80,14 +82,16 @@ Store API, no auth) page by page, and writes `products.json`. What it does:
 - **Facets built from the data.** Brand (العلامة التجارية — 49 values), Price, and the product
   attributes (`التصنيف`) are the groups shown. Every attribute key in the JSON becomes its own
   filter group automatically, then the titles listed in `HIDDEN_FACETS` in `app.js`
-  (`الفئة`, `التوفر`, `الحجم`, `الموسم`, `الاستعمال`, `الاتجاه`) are skipped — delete a name
-  from that set to bring its group back. Keys with a single value across the catalogue are
-  skipped too. Long groups (more than 12 values) get a **search box inside the group** and a
-  **«عرض المزيد» button** that reveals the remaining values; groups far down the list render
-  collapsed and expand on click.
-- **Multi-value attributes.** An attribute may hold a list (`"الموسم": ["خريفي", "شتوي"]`).
+  (`الفئة`, `التوفر`, `الحجم`) are skipped — delete a name from that set to bring its group
+  back. Season, day/night and scent direction are not here at all: they were removed from
+  `products.json` and from `KEEP_ATTRS`, not just hidden. Keys with a single value across the
+  catalogue are skipped too. Long groups (more than 12 values) get a **search box inside the
+  group** and a **«عرض المزيد» button** that reveals the remaining values; groups far down the
+  list render collapsed and expand on click.
+- **Multi-value attributes.** An attribute may hold a list — one product is listed with two
+  sizes: `"الحجم": ["105 مل", "علبة اصلية كاملة (100 مل)"]`.
   Each value becomes its own filter row, and a product matches if it carries any of the
-  selected values. In the card and spec table the values are shown joined: `خريفي، شتوي`.
+  selected values. In the card and spec table the values are shown joined: `105 مل، علبة اصلية كاملة (100 مل)`.
 - **Price filter** with a dual-handle slider plus typed min/max fields, derived from the
   lowest/highest priced product (40 – 1,500 ₪ here). Products with `price: null` are always
   kept and show `السعر عند الطلب`.
@@ -331,7 +335,7 @@ Each product in `products.json`:
   "stock": null,
   "added": "2026-09-01",
   "images": ["images/2026/09/yclzhj.jpg"],
-  "attributes": { "التصنيف": "نيش", "الحجم": "علبة اصلية كاملة (100 مل)", "الموسم": ["خريفي", "شتوي"] },
+  "attributes": { "التصنيف": "نيش", "الحجم": "علبة اصلية كاملة (100 مل)" },
   "tags": ["متاح للتقسيم"],
   "description": "مجموعة IBRAQ التوباكو 9×20 مل — Extrait de Parfum",
   "url": "https://perfumespalace.store/product/…"

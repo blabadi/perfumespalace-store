@@ -36,12 +36,11 @@ HEADERS = {
 
 # Attribute taxonomies to keep as filter groups (Arabic name -> taxonomy).
 # pa_brand becomes the "brand" field instead of an attribute group.
+# pa_season / pa_usage / pa_direction are left out on purpose: the store's own
+# shoppers do not filter by season, day/night or scent direction.
 KEEP_ATTRS = {
     "pa_classification": "التصنيف",
     "pa_size": "الحجم",
-    "pa_season": "الموسم",
-    "pa_usage": "الاستعمال",
-    "pa_direction": "الاتجاه",
 }
 # Single-value taxonomies are not useful as filters -> turned into a tag instead.
 TAG_ATTRS = {"pa_samples": "متاح للتقسيم"}
@@ -178,7 +177,7 @@ def map_product(p, fallback_date, parent=None):
                 if name:
                     add_terms(attrs, KEEP_ATTRS[group["taxonomy"]], [name])
 
-    # A product may carry several terms for one attribute (e.g. seasons). Keep them as a
+    # A product may carry several terms for one attribute (e.g. two sizes). Keep them as a
     # list so the catalogue can filter on each term separately; a single term stays a string.
     attrs = {k: (v[0] if len(v) == 1 else v) for k, v in attrs.items() if v}
 
