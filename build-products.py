@@ -20,6 +20,8 @@ import urllib.parse
 import urllib.request
 from datetime import date
 
+from brand_aliases import canonical_brand
+
 BASE = "https://perfumespalace.store"
 API = BASE + "/wp-json/wc/store/v1/products"
 HEADERS = {
@@ -203,7 +205,7 @@ def map_product(p, fallback_date, parent=None):
         "id": p["id"],
         "sku": sku,
         "name": html.unescape(p.get("name") or "").strip(),
-        "brand": brand or "غير محدد",
+        "brand": canonical_brand(brand),
         "category": categories[0] if categories else "غير محدد",
         "price": price,
         "compare_at_price": compare,

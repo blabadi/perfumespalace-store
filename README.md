@@ -12,6 +12,12 @@ products.json       the catalogue data (188 products) — generated, but you can
 images/             every product photo, downloaded from the store (see "Hosting the pictures")
 build-products.py   reads the store's WooCommerce Store API and rewrites products.json
 download_images.py  downloads the product photos into images/ and rewrites the JSON paths
+brand_aliases.py    brands the store spells two ways, folded onto the one to keep
+build-feed.py       writes feed.xml + feed.csv (the Meta/WhatsApp feed) and sets.json
+webp_to_jpeg.py     JPEG twins of the WebP photos — Meta only accepts JPG/PNG
+create-sets.py      pushes sets.json into a Meta catalogue as product sets
+feed.xml, feed.csv  the generated feed, public at <domain>/feed.xml
+sets.json           one Meta product set per brand, ready to push
 products.demo.json  the original hand-written sample catalogue (kept as a backup)
 serve.cmd           optional: starts a local server (Python) so fetch() is allowed
 ```
@@ -248,13 +254,14 @@ Tuning the split:
 - `--sets-by ids` freezes the current items with `{"retailer_id": {"is_any": [...]}}` instead of a
   rule — only useful if you want a set that must *not* change.
 
-Today that is **27 sets** out of 49 brand values: 21 brands have a single item (a one-item set is
+Today that is **26 sets** out of 48 brand values: 21 brands have a single item (a one-item set is
 noise in the UI) and «غير محدد» is skipped, so 155 of the 185 rows are covered. Two things worth
 knowing:
 
-- The store data spells some brands two ways — `Lattafa` (2 rows) and `لطافة Lattafa` (6 rows) are
-  different values, so they become two sets. Fix it in the store's brand field and both the feed
-  and the sets follow.
+- `brand_aliases.py` folds a brand the store spells two ways onto the spelling with more products
+  (`Lattafa` → `لطافة Lattafa`), so one house means one facet on the site and one set in Meta.
+  Both build-products.py and build-feed.py apply it, so it survives a data refresh; delete the
+  entry once the store's own brand tag agrees.
 - Arabic brand names are fine in set names and rules (Meta only forbids non-ASCII characters in
   *label* filters), so `لطافة Lattafa` and `العز للعود` get real rules.
 

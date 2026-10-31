@@ -175,6 +175,31 @@
       }
     },
     {
+      "name": "لطافة Lattafa",
+      "retailer_id": "set_lattafa",
+      "filter": {
+        "brand": {
+          "eq": "لطافة Lattafa"
+        }
+      },
+      "items": 8,
+      "ids": [
+        "3535",
+        "2966",
+        "2808",
+        "2684",
+        "2683",
+        "2682",
+        "2656",
+        "2555"
+      ],
+      "metadata": {
+        "description": "لطافة Lattafa — 8 منتج",
+        "external_url": "https://catalog.perfumespalace.store/#brand=%D9%84%D8%B7%D8%A7%D9%81%D8%A9+Lattafa",
+        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/08/Khamrah-Dukhan-1_a62cb1af-0737-4709-86c2-f275a5f5b023.png"
+      }
+    },
+    {
       "name": "Masion Asrar",
       "retailer_id": "set_masion_asrar",
       "filter": {
@@ -195,29 +220,6 @@
         "description": "Masion Asrar — 6 منتج",
         "external_url": "https://catalog.perfumespalace.store/#brand=Masion+Asrar",
         "cover_image_url": "https://catalog.perfumespalace.store/images/2026/01/C40C3202-6088-44AD-AAF2-4E725F1B0E60_1024x1024402x.jpg"
-      }
-    },
-    {
-      "name": "لطافة Lattafa",
-      "retailer_id": "set_lattafa",
-      "filter": {
-        "brand": {
-          "eq": "لطافة Lattafa"
-        }
-      },
-      "items": 6,
-      "ids": [
-        "2808",
-        "2684",
-        "2683",
-        "2682",
-        "2656",
-        "2555"
-      ],
-      "metadata": {
-        "description": "لطافة Lattafa — 6 منتج",
-        "external_url": "https://catalog.perfumespalace.store/#brand=%D9%84%D8%B7%D8%A7%D9%81%D8%A9+Lattafa",
-        "cover_image_url": "https://catalog.perfumespalace.store/images/jpg/2025/03/40251665_1-lattafa-fakhar-black-eau-de-parfum-imported-long-lasting-perfumed-bod.jpg"
       }
     },
     {
@@ -463,25 +465,6 @@
         "description": "Ibraheem Al Qurashi — 2 منتج",
         "external_url": "https://catalog.perfumespalace.store/#brand=Ibraheem+Al+Qurashi",
         "cover_image_url": "https://catalog.perfumespalace.store/images/2026/09/yclzhj.jpg"
-      }
-    },
-    {
-      "name": "Lattafa",
-      "retailer_id": "set_lattafa_d98b24",
-      "filter": {
-        "brand": {
-          "eq": "Lattafa"
-        }
-      },
-      "items": 2,
-      "ids": [
-        "3535",
-        "2966"
-      ],
-      "metadata": {
-        "description": "Lattafa — 2 منتج",
-        "external_url": "https://catalog.perfumespalace.store/#brand=Lattafa",
-        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/08/Khamrah-Dukhan-1_a62cb1af-0737-4709-86c2-f275a5f5b023.png"
       }
     },
     {

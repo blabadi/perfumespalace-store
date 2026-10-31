@@ -38,6 +38,7 @@ from concurrent.futures import ThreadPoolExecutor
 from xml.sax.saxutils import escape
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from brand_aliases import UNSPECIFIED, canonical_brand   # noqa: E402  (path tweak above)
 from webp_to_jpeg import twin_path            # noqa: E402  (needs the path tweak above)
 
 SRC_JSON = "products.json"
@@ -48,7 +49,6 @@ MAX_DESC = 5000           # Meta's limit
 MAX_IMAGES = 10           # image_link + additional_image_link
 GPC = "Health & Beauty > Personal Care > Cosmetics > Perfume & Cologne"
 CHECK_HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; catalogue-feed-check)"}
-UNSPECIFIED = "غير محدد"  # the store's "no brand" value -- useless as a set
 
 
 def text(value, limit):
@@ -114,7 +114,7 @@ def row_for(product, base, currency, with_gpc=True):
         "price": money(was_price if on_sale else price, currency),
         "link": product.get("url") or base,
         "image_link": images[0],
-        "brand": text(product.get("brand"), MAX_TITLE),
+        "brand": text(canonical_brand(product.get("brand")), MAX_TITLE),
     }
     if on_sale:
         row["sale_price"] = money(price, currency)
