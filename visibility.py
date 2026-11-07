@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-One visibility rule for products.json, shared by the site (app.js), the Meta feed
-(build-feed.py) and the scraper (build-products.py), so a product cannot be hidden
-in one place and still show up in another.
+One visibility rule for products.json, shared by the site (app.js) and the Meta feed
+(build-feed.py), so a product cannot be hidden in one place and still show up in
+another.
 
 Two levers, both edited in products.json:
 
@@ -71,22 +71,3 @@ def why_hidden(product, meta=None):
     if sold_out(product):
         return "نفدت الكمية + show_out_of_stock=false"
     return ""
-
-
-def saved_choices(path="products.json"):
-    """Manual choices already in the file: {id: visible flag} plus the bulk switch.
-
-    build-products.py scrapes fresh rows and knows nothing about hand edits, so it
-    calls this first and copies the answers back onto the new rows by product id.
-    Returns ({}, None) when the file is missing or unreadable.
-    """
-    import json
-
-    try:
-        with open(path, encoding="utf-8-sig") as fh:
-            data = json.load(fh)
-    except (OSError, ValueError):
-        return {}, None
-    flags = {p.get("id"): p[FLAG] for p in data.get("products", []) if p.get(FLAG) is not None}
-    bulk = (data.get("meta") or {}).get(BULK_KEY)
-    return flags, bulk

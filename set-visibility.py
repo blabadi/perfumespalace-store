@@ -11,14 +11,13 @@ Run:  python set-visibility.py list                 (what is hidden, what is sol
       python set-visibility.py oos on
       python set-visibility.py clear                (drop every "visible" flag)
 
-Add --dry-run to any command to see what would change. The file is written back in
-the same shape build-products.py writes it, so diffs stay readable.
+Add --dry-run to any command to see what would change. The file is written back with
+indent=2 and the Arabic unescaped, so diffs stay readable.
 
 What it edits, and what reads it back:
   "visible": false|true   on a product row  -> app.js, build-feed.py
   meta.show_out_of_stock  false|true        -> app.js, build-feed.py
-Both rules live in visibility.py. build-products.py copies these choices onto a fresh
-scrape, so a data refresh cannot undo them.
+Both rules live in visibility.py, so the page and the feed cannot disagree.
 """
 
 import json
@@ -41,8 +40,8 @@ def load(path):
 def save(path, data, dry_run):
     if dry_run:
         return
-    # Same call build-products.py uses: indent=2, no escaping, and the file's usual
-    # CRLF line endings come from the default newline handling.
+    # indent=2 with the Arabic unescaped; CRLF line endings come from the default
+    # newline handling on Windows.
     with open(path, "w", encoding="utf-8") as fh:
         json.dump(data, fh, ensure_ascii=False, indent=2)
 

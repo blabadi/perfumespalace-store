@@ -15,8 +15,8 @@ Why it is safe to leave running:
 
 Every save does three things:
   1. copies products.json to products.json.bak (the state before that save);
-  2. edits the row and writes the file back in the shape build-products.py writes it
-     (indent=2, Arabic unescaped, CRLF), so git diffs stay readable;
+  2. edits the row and writes the file back with indent=2 and the Arabic unescaped,
+     CRLF line endings, so git diffs stay readable;
   3. runs build-feed.py --sets, so feed.xml / feed.csv / sets.json always match.
 
 Publishing to the live site is a separate, deliberate button: git add + commit + push.
@@ -71,7 +71,7 @@ def file_rev():
 
 
 def write_json(data):
-    """Backup, then write with the same call build-products.py / set-visibility.py use."""
+    """Backup, then write with the same call set-visibility.py uses."""
     if os.path.exists(path(SRC)):
         with open(path(SRC), "rb") as src, open(path(BACKUP), "wb") as dst:
             dst.write(src.read())
@@ -135,7 +135,6 @@ def rows_for_page():
             "sold_out": sold_out(p),
             "reason": why_hidden(p, meta),
             "image": images[0] if images else "",
-            "url": p.get("url") or "",
         })
     return out, meta
 
@@ -542,7 +541,6 @@ function rowHtml(p) {
     '<td class=acts><button data-act=save ' + (dirty ? '' : 'disabled') + '>حفظ</button>' +
       (p.visible === null || p.visible === undefined ? '' :
        '<button class=ghost data-act=clear title="أزل العلامة اليدوية وارجع للقاعدة العامة">أزل</button>') +
-      (p.url ? '<a href="' + esc(p.url) + '" target=_blank rel=noopener>المتجر</a>' : '') +
     '</td></tr>';
 }
 

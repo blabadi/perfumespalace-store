@@ -67,7 +67,7 @@ def money(amount, currency):
 
 
 def describe(product):
-    """The store's own description, or a short one built from the row itself."""
+    """The row's own description, or a short one built from the row itself."""
     own = text(product.get("description"), MAX_DESC)
     if own:
         return own
@@ -116,7 +116,7 @@ def row_for(product, base, currency, with_gpc=True):
         "availability": "out of stock" if product.get("stock") == 0 else "in stock",
         "condition": "new",
         "price": money(was_price if on_sale else price, currency),
-        "link": product.get("url") or base,
+        "link": base,
         "image_link": images[0],
         "brand": text(canonical_brand(product.get("brand")), MAX_TITLE),
     }

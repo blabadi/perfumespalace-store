@@ -1,18 +1,17 @@
 # قصر العطور — Arabic RTL product catalogue (Perfumes Palace)
 
 A WooCommerce-style product catalogue in **Arabic and right-to-left**, built from a plain
-JSON file that is generated from the live store **perfumespalace.store**. No build step, no
+JSON file that lives in this repo. `products.json` is the source of truth — nothing here
+reads a store API, scrapes a site or downloads anything at build time. No build step, no
 dependencies — open it in a browser.
 
 ```
 index.html          page structure (lang="ar" dir="rtl")
 styles.css          all styling (logical properties, light + dark theme, responsive)
 app.js              loads products.json, builds facets, filters, sorts, renders, handles the cart
-products.json       the catalogue data (188 products) — generated, but you can edit it too
-images/             every product photo, downloaded from the store (see "Hosting the pictures")
-build-products.py   reads the store's WooCommerce Store API and rewrites products.json
-download_images.py  downloads the product photos into images/ and rewrites the JSON paths
-brand_aliases.py    brands the store spells two ways, folded onto the one to keep
+products.json       the catalogue data (189 products) — the source of truth, edit it here
+images/             every product photo, self-hosted (see "The pictures")
+brand_aliases.py    brands written two ways, folded onto the one to keep
 visibility.py       the hide/show rule for products.json, shared by the page and the feed
 set-visibility.py   command line to hide/show products without editing the JSON by hand
 admin.py            local browser page for editing name, price and visibility  (run it, don't deploy it)
@@ -39,35 +38,23 @@ then open <http://localhost:8000>. On Windows you can double-click `serve.cmd` i
 To change product names, prices or visibility, use the local editing page instead — see
 [Editing products in a browser](#editing-products-in-a-browser-local-admin-page).
 
-## Refreshing the data from the store
+## Where the data lives
 
-```
-python build-products.py
-```
+`products.json` is the only data source: the page fetches it, `build-feed.py` reads it, and
+`admin.py` / `set-visibility.py` edit it. Nothing in this project calls a store API, scrapes
+a page or downloads anything at build time — the photos are already in `images/`.
 
-It reads `https://perfumespalace.store/wp-json/wc/store/v1/products` (the public WooCommerce
-Store API, no auth) page by page, and writes `products.json`. What it does:
+To add a product:
 
-- **185 store products → 188 catalogue rows**: the 2 variable products are expanded into one
-  row per variation, each with its own price and size.
-- `pa_brand` becomes `brand`; WooCommerce categories become `category`; the attribute
-  taxonomies in `KEEP_ATTRS` — `pa_classification` and `pa_size` — become the Arabic attribute
-  keys `التصنيف` and `الحجم`, which is what turns them into filter groups. The store also has
-  `pa_season`, `pa_usage` and `pa_direction`; they are deliberately left out of `KEEP_ATTRS`,
-  so season, day/night and scent direction are never imported. Add a line back to `KEEP_ATTRS`
-  if you ever want one again.
-- `pa_samples` (single value) becomes the tag `متاح للتقسيم` instead of a useless filter.
-- Prices come from `prices.price` / `regular_price` (ILS, 0 decimals); a real sale price
-  higher than the current price becomes `compare_at_price` → `خصم N%` badge.
-- Products the store lists with no price get `price: null` and the tag `السعر عند الطلب`.
-- `stock` is `0` when out of stock, otherwise `null` (WooCommerce does not expose exact
-  quantities through this API).
-- Hand-made visibility choices — `"visible"` on a row, `meta.show_out_of_stock` — are copied
-  from the `products.json` that is already on disk onto the fresh rows by product id, so a
-  refresh never undoes them (see [Hiding products](#hiding-products-out-of-stock-or-one-you-no-longer-sell)).
-- `added` is taken from the image upload month (`/wp-content/uploads/2026/09/…`), which is
-  the closest thing to a date-added this API offers.
-- Descriptions are HTML → plain text, with the wishlist-plugin junk removed.
+1. put its photo under `images/` (e.g. `images/2026/11/bujairami-hectic.jpg`);
+2. append a row to `products` in `products.json` — the shape is in
+   [Editing the data by hand](#editing-the-data-by-hand);
+3. run `python build-feed.py --sets` so `feed.xml`, `feed.csv` and `sets.json` include it;
+4. commit the JSON, the photo and the three generated files.
+
+`added` is plain data too — write the date you started selling the product. The `جديد` badge
+compares each row against the newest `added` value in the catalogue (30-day window), so a
+new row with today's date makes it the reference point.
 
 ## What the page does
 
@@ -145,25 +132,23 @@ Store API, no auth) page by page, and writes `products.json`. What it does:
 - **Offline-safe images.** If an image fails to load, the card falls back to a generated SVG
   placeholder instead of a broken-image icon.
 
-## Hosting the pictures
+## The pictures
 
-Every product photo lives in `images/` inside this repo, so the page has **no dependency on the
-store staying online** (and no hotlink/CORS surprises). `products.json` stores relative paths
+Every product photo lives in `images/` inside this repo, so the page has **no dependency on
+any external site** (and no hotlink/CORS surprises). `products.json` stores relative paths
 like `images/2026/09/yclzhj.jpg`.
 
-```
-python download_images.py          # download what is missing, rewrite products.json
-```
-
-- Layout mirrors the store's uploads folders: `images/<yyyy>/<mm>/<name>.<ext>` (`images/misc/`
-  when a URL has no upload date). The year/month is the same information `added` is computed from.
-- `images/manifest.json` maps the original store URL → local file. Repeat runs skip anything
-  already downloaded, and two different URLs that share a file name never collide (`-<hash8>`
-  suffix). Raw Arabic characters in store URLs are percent-encoded for the request only, so the
-  readable URL stays in the manifest.
-- `build-products.py` runs this automatically (unless `IMAGES=remote` is set), so a data refresh
-  stays self-hosted: `IMAGES=remote python build-products.py` keeps absolute store URLs instead.
-- 295 images, ~74 MB total. Nothing is deleted, so re-running is always safe.
+- Layout: `images/<yyyy>/<mm>/<name>.<ext>` (the year/month is just where the photo was filed,
+  it no longer drives anything) and `images/misc/` for undated ones. Any path under `images/`
+  works — `images/2026/11/bujairami-hectic.jpg` was added by hand.
+- `images/jpg/…` holds the JPEG twins of the 102 WebP photos, written by
+  `python webp_to_jpeg.py`; that folder exists only because Meta does not accept WebP.
+  The site itself loads the smaller WebP files.
+- `images/manifest.json` maps the original external URL → local file for the photos that came
+  from the old store import. It is provenance only — nothing reads it at runtime, and no script
+  downloads images any more.
+- 296 product images (~88 MB with the JPEG twins). Nothing here is generated at build time.
+- To change a photo, drop the new file under `images/` and point the row's `images` array at it.
 
 ## Meta / WhatsApp product feed
 
@@ -200,21 +185,22 @@ Both files live in the repo root, so once pushed they are public:
 
 ### What the feed contains
 
-- One row per catalogue row (**185** rows): `id` (the product id — the same value the WhatsApp
-  Cloud API calls `retailer_id`), `title`, `description`, `availability`, `condition`, `price`,
-  `sale_price` (165 rows), `link` (the WooCommerce product page, so a catalogue tap leads to the
-  real checkout), `image_link` + `additional_image_link` (up to 10), `brand`, and
-  `google_product_category` (drop it with `--no-gpc`).
+- One row per priced, visible catalogue row (**175** rows): `id` (the product id — the same value
+  the WhatsApp Cloud API calls `retailer_id`), `title`, `description`, `availability`, `condition`,
+  `price`, `sale_price` (153 rows), `link` (the catalogue home,
+  `https://catalog.perfumespalace.store/`, so a tap opens the catalogue), `image_link` +
+  `additional_image_link` (up to 10), `brand`, and `google_product_category` (drop it with
+  `--no-gpc`).
 - Prices carry the ISO code — `280.00 ILS`. `compare_at_price` becomes `sale_price`, with the
   higher price left in `price` so Meta can strike it through.
-- **3 rows are skipped**: products tagged «السعر عند الطلب» have no price, and Meta requires one.
-- Sold-out rows stay in the feed as `out of stock` (`stock == 0` → `in stock` otherwise). The one
-  sold-out product in the current data is also priceless, which is why every row today is
-  `in stock`.
+- **1 row is skipped**: products tagged «السعر عند الطلب» have no price, and Meta requires one
+  (today that is Dior Homme Parfum).
+- Sold-out rows stay in the feed as `out of stock` (`stock == 0` → `in stock` otherwise). There is
+  no sold-out row in the current data, so every row today is `in stock`.
 - WebP pictures point at a JPEG twin under `images/jpg/…` (102 files, ~14 MB) and everything else
   keeps its own file. The site itself still loads the smaller WebP files. One twin is 394×450 px
   while Meta recommends at least 500×500 — replace that product's photo if you want it perfect.
-- After a data refresh, re-run both scripts and push, so the feed matches the new catalogue
+- After changing products.json, re-run both scripts and push, so the feed matches the catalogue
   (`python build-feed.py --sets` also refreshes the product sets below).
 
 ### Product sets by brand
@@ -261,21 +247,21 @@ the same rule the script skips it, and if it holds your name with a different ru
 Tuning the split:
 
 - `--sets-min 3` keeps only brands with at least that many items; `--sets-min 1` takes every brand.
-- `--sets-keep-unspecified` also makes a set out of «غير محدد», the store's "no brand" value
+- `--sets-keep-unspecified` also makes a set out of «غير محدد», the "no brand" value
   (skipped by default).
 - `--sets-prefix "Brand: "` renames them, e.g. so they sort together in Commerce Manager.
 - `--sets-field product_type --sets-op i_contains` builds the rules on another feed column.
 - `--sets-by ids` freezes the current items with `{"retailer_id": {"is_any": [...]}}` instead of a
   rule — only useful if you want a set that must *not* change.
 
-Today that is **26 sets** out of 48 brand values: 21 brands have a single item (a one-item set is
-noise in the UI) and «غير محدد» is skipped, so 155 of the 185 rows are covered. Two things worth
-knowing:
+Today that is **25 sets** out of 48 brand values: 22 brands have a single item (a one-item set is
+noise in the UI) and «غير محدد» is skipped, so 144 of the 175 feed rows are covered (the other 9
+have no brand). Two things worth knowing:
 
-- `brand_aliases.py` folds a brand the store spells two ways onto the spelling with more products
+- `brand_aliases.py` folds two spellings of one house onto the spelling with more products
   (`Lattafa` → `لطافة Lattafa`), so one house means one facet on the site and one set in Meta.
-  Both build-products.py and build-feed.py apply it, so it survives a data refresh; delete the
-  entry once the store's own brand tag agrees.
+  build-feed.py applies it, so the feed and the sets agree even if a row in products.json uses
+  the other spelling; delete the entry once the catalogue uses one spelling.
 - Arabic brand names are fine in set names and rules (Meta only forbids non-ASCII characters in
   *label* filters), so `لطافة Lattafa` and `العز للعود` get real rules.
 
@@ -342,8 +328,8 @@ Each row shows the photo, an editable name, an editable price, the stock state, 
 Every **حفظ** does three things:
 
 1. copies `products.json` to `products.json.bak` (the file as it was before that save);
-2. writes the row back in exactly the shape `build-products.py` writes it, so `git diff`
-   stays two lines instead of five thousand;
+2. writes the row back in the file's own shape — indent=2, Arabic unescaped, CRLF — so
+   `git diff` stays two lines instead of five thousand;
 3. runs `build-feed.py --sets`, so `feed.xml`, `feed.csv` and `sets.json` always match the
    data — Meta can never be left holding an old price or a product you hid.
 
@@ -359,7 +345,7 @@ Why it cannot leak:
 - there is no `admin.html` in the repository: the page is generated by `admin.py`, so
   `catalog.perfumespalace.store` has nothing to serve;
 - if `products.json` changes while the page is open (another window, or a
-  `python build-products.py` refresh), the page refuses to save and asks you to reload, so
+  `python set-visibility.py` run), the page refuses to save and asks you to reload, so
   an old page can never overwrite a new file;
 - the tick box writes the same `visible` flag as `set-visibility.py`, and the header tick
   box is the `meta.show_out_of_stock` switch — both follow the one rule in `visibility.py`.
@@ -389,7 +375,7 @@ Each product in `products.json`:
   "attributes": { "التصنيف": "نيش", "الحجم": "علبة اصلية كاملة (100 مل)" },
   "tags": ["متاح للتقسيم"],
   "description": "مجموعة IBRAQ التوباكو 9×20 مل — Extrait de Parfum",
-  "url": "https://perfumespalace.store/product/…"
+  "categories": []
 }
 ```
 
@@ -406,10 +392,10 @@ Each product in `products.json`:
   title, so write it in Arabic (`"الشاشة": "13 بوصة"` gives a **الشاشة** filter).
 - `images` — relative paths under `images/` (or absolute URLs — both work). The first one is used
   on the card, all of them appear in the quick-view gallery.
-- `url` (optional) — adds the «فتح المنتج في المتجر» link in the modal.
+- `id` — must be unique; a hand-added row can use any unused number (`900001` is one).
 - `meta` — `store` (name), `tagline` (split on `—` into the hero headline plus the rotating
   words), `currency`, `locale`, `updated` (the date shown in the header), `whatsapp` (adds the
-  «اطلب عبر واتساب» link), `source`.
+  «اطلب عبر واتساب» link), `source` (the public catalogue URL).
 
 ### Hiding products (out of stock, or one you no longer sell)
 

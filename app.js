@@ -1,5 +1,5 @@
 /* قصر العطور — كتالوج قابل للتصفية (RTL / عربي)
-   مصدر البيانات: products.json (مبني من متجر perfumespalace.store عبر build-products.py) */
+   مصدر البيانات: products.json — ملف البيانات الوحيد، يُحرَّر هنا مباشرة */
 
 (() => {
   'use strict';
@@ -43,7 +43,7 @@
   const isSale = (p) => p.compare_at_price != null && p.price != null && p.compare_at_price > p.price;
   const discount = (p) => isSale(p) ? Math.round((1 - p.price / p.compare_at_price) * 100) : 0;
 
-  // WooCommerce يخفي الكميات الدقيقة: 0 = نفدت، null = متوفرة بكمية غير معلنة.
+  // الكمية: 0 = نفدت، null = متوفرة بكمية غير معلنة.
   const soldOut = (p) => p.stock === 0 || p.stock === '0';
   const lowStock = (p) => typeof p.stock === 'number' && p.stock > 0 && p.stock <= 8;
 
@@ -554,7 +554,6 @@
       .map((k) => `<tr><th>${esc(label(k))}</th><td>${esc(attrDisplay(p, k))}</td></tr>`).join('');
     const meta = DATA.meta || {};
     const links = [];
-    if (p.url) links.push(`<a class="text-link" href="${esc(p.url)}" target="_blank" rel="noopener noreferrer">فتح المنتج في المتجر</a>`);
     if (meta.whatsapp) links.push(`<a class="text-link" href="https://wa.me/${esc(String(meta.whatsapp).replace(/\D/g, ''))}" target="_blank" rel="noopener noreferrer">اطلب عبر واتساب</a>`);
 
     $('#modal-body').innerHTML = `<div class="modal-grid">
