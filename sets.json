@@ -1,6 +1,6 @@
 {
   "catalog_feed": "https://catalog.perfumespalace.store/feed.xml",
-  "generated_from": "قصر العطور (2026-10-17)",
+  "generated_from": "قصر العطور (2026-11-07)",
   "note": "Rule-based Meta product sets. Push with: python create-sets.py --apply",
   "sets": [
     {

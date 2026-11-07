@@ -4,11 +4,35 @@
     "tagline": "عطور أصلية من وكالاتها المعتمدة — نيش وديزاينر وبدائل، وتقسيمات متوفرة.",
     "currency": "ILS",
     "locale": "ar-EG-u-nu-latn",
-    "updated": "2026-10-17",
+    "updated": "2026-11-07",
     "source": "https://perfumespalace.store",
     "whatsapp": "+972566008917"
   },
   "products": [
+    {
+      "id": 900001,
+      "sku": "BUJ-HECTIC-100ML",
+      "name": "Bujairami Hectic 100ml بوجيرامي هيكتيك 100 مل",
+      "brand": "Bujairami",
+      "category": "للجنسين",
+      "price": 199.0,
+      "compare_at_price": null,
+      "rating": 0.0,
+      "reviews": 0,
+      "stock": null,
+      "added": "2026-11-07",
+      "images": [
+        "images/2026/11/bujairami-hectic.jpg"
+      ],
+      "attributes": {
+        "التصنيف": "بدائل",
+        "الحجم": "علبة اصلية كاملة (100 مل)"
+      },
+      "tags": [],
+      "description": "عطر Bujairami Hectic — إكسترايت دو بارفان 100 مل للجنسين، بديل مقارب لـ Louis Vuitton Imagination. المقدمة: الأترج وبرغموت كالابريا والبرتقال الصقلي؛ القلب: الزنجبيل النيجيري والقرفة السيلانية والنيرولي التونسي؛ القاعدة: الشاي الأسود الصيني والأمبروكسان وخشب الغاياكو واللبان.",
+      "categories": [],
+      "url": null
+    },
     {
       "id": 3572,
       "sku": "IBRAQ-TOB-SET-9X20",
