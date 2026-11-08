@@ -281,6 +281,27 @@
       }
     },
     {
+      "name": "Dumont Paris",
+      "retailer_id": "set_dumont_paris",
+      "filter": {
+        "brand": {
+          "eq": "Dumont Paris"
+        }
+      },
+      "items": 4,
+      "ids": [
+        "900002",
+        "2884",
+        "2882",
+        "2678"
+      ],
+      "metadata": {
+        "description": "Dumont Paris — 4 منتج",
+        "external_url": "https://catalog.perfumespalace.store/#brand=Dumont+Paris",
+        "cover_image_url": "https://catalog.perfumespalace.store/images/2025/01/nitro-red-intensely.jpg"
+      }
+    },
+    {
       "name": "Xerjoff",
       "retailer_id": "set_xerjoff",
       "filter": {
@@ -339,26 +360,6 @@
         "description": "Dumel Paris — 3 منتج",
         "external_url": "https://catalog.perfumespalace.store/#brand=Dumel+Paris",
         "cover_image_url": "https://catalog.perfumespalace.store/images/2025/09/defender-volle-extrait-de-parfum-by-dumel-paris-for-men-100ml.png"
-      }
-    },
-    {
-      "name": "Dumont Paris",
-      "retailer_id": "set_dumont_paris",
-      "filter": {
-        "brand": {
-          "eq": "Dumont Paris"
-        }
-      },
-      "items": 3,
-      "ids": [
-        "2884",
-        "2882",
-        "2678"
-      ],
-      "metadata": {
-        "description": "Dumont Paris — 3 منتج",
-        "external_url": "https://catalog.perfumespalace.store/#brand=Dumont+Paris",
-        "cover_image_url": "https://catalog.perfumespalace.store/images/jpg/2025/05/nitro-pour-homme.jpg"
       }
     },
     {
