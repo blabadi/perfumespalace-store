@@ -33,12 +33,38 @@
       "categories": []
     },
     {
+      "id": 900002,
+      "sku": "DMNTNITRRDINT100",
+      "name": "نايترو ريد انتينسلي Nitro Red Intensely",
+      "brand": "Dumont Paris",
+      "category": "رجالي",
+      "price": 125.0,
+      "compare_at_price": null,
+      "rating": 0.0,
+      "reviews": 0,
+      "stock": null,
+      "added": "2026-11-07",
+      "images": [
+        "images/2025/01/nitro-red-intensely.jpg",
+        "images/2025/01/nitro-red-intensely-2.jpg"
+      ],
+      "attributes": {
+        "الحجم": "علبة اصلية كاملة (100 مل)",
+        "التصنيف": "بدائل"
+      },
+      "tags": [],
+      "description": "",
+      "categories": [
+        "رجالي"
+      ]
+    },
+    {
       "id": 3572,
       "sku": "IBRAQ-TOB-SET-9X20",
       "name": "Ibraq Tobacco Collection Set 9x20ml ابراق مجموعة توباكو 9×20 مل",
       "brand": "Ibraheem Al Qurashi",
       "category": "غير محدد",
-      "price": 280.0,
+      "price": 260.0,
       "compare_at_price": null,
       "rating": 0.0,
       "reviews": 0,
@@ -58,7 +84,7 @@
       "name": "Al haramin Aqua Dubai (Tester) 100 ml الحرمين اكوا دبي",
       "brand": "Alharamin",
       "category": "للجنسين",
-      "price": 140.0,
+      "price": 120.0,
       "compare_at_price": 250.0,
       "rating": 0.0,
       "reviews": 0,
@@ -184,7 +210,7 @@
       "name": "Assaf Frankel Set عساف فرانكل",
       "brand": "Assaf",
       "category": "غير محدد",
-      "price": 420.0,
+      "price": 350.0,
       "compare_at_price": null,
       "rating": 0.0,
       "reviews": 0,
@@ -991,7 +1017,7 @@
       "name": "Yacht Club يخت كلوب",
       "brand": "GULF ORCHID",
       "category": "للجنسين",
-      "price": 120.0,
+      "price": 90.0,
       "compare_at_price": 160.0,
       "rating": 0.0,
       "reviews": 0,
