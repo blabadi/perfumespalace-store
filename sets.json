@@ -11,7 +11,7 @@
           "eq": "French Avenue"
         }
       },
-      "items": 35,
+      "items": 36,
       "ids": [
         "3564",
         "3562",
@@ -47,10 +47,11 @@
         "2561",
         "2560",
         "2559",
-        "2558"
+        "2558",
+        "900003"
       ],
       "metadata": {
-        "description": "French Avenue — 35 منتج",
+        "description": "French Avenue — 36 منتج",
         "external_url": "https://catalog.perfumespalace.store/#brand=French+Avenue",
         "cover_image_url": "https://catalog.perfumespalace.store/images/2026/08/parfum-nabatieh-french-avenue.jpg"
       }

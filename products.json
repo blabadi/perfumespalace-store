@@ -4687,6 +4687,31 @@
       "categories": [
         "رجالي"
       ]
+    },
+    {
+      "id": 900003,
+      "sku": "FARBLNDSEQ-100",
+      "name": "Royal Blend Sequoia رويال بلند سيكويا",
+      "brand": "French Avenue",
+      "category": "للجنسين",
+      "price": 120.0,
+      "compare_at_price": null,
+      "rating": 0.0,
+      "reviews": 0,
+      "stock": null,
+      "added": "2026-11-08",
+      "images": [
+        "images/2026/11/royal-blend-sequoia.jpg"
+      ],
+      "attributes": {
+        "الحجم": "علبة اصلية كاملة (100 مل)",
+        "التصنيف": "بدائل"
+      },
+      "tags": [],
+      "description": "",
+      "categories": [
+        "للجنسين"
+      ]
     }
   ]
 }
