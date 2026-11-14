@@ -1,0 +1,1213 @@
+{
+  "project": "alternative-pictures",
+  "note": "status: known | probable | unknown | skip-designer | skip-original | set. 'original' = the designer/niche perfume the product is inspired by.",
+  "entries": {
+    "2376": {
+      "original": "Jean Paul Gaultier Ultra Male",
+      "original_brand": "Jean Paul Gaultier",
+      "status": "known",
+      "source": "model",
+      "notes": "Afnan 9PM is the well-known Ultra Male clone | user confirmed probable list"
+    },
+    "2378": {
+      "original": "Giorgio Armani My Way",
+      "status": "known",
+      "source": "web",
+      "notes": "9AM Pour Femme, 70% dupe of My Way | user confirmed probable list",
+      "original_brand": "Giorgio Armani"
+    },
+    "2381": {
+      "original": "Creed Aventus",
+      "original_brand": "Creed",
+      "status": "known",
+      "source": "user",
+      "notes": "user answered"
+    },
+    "2579": {
+      "original": "Bvlgari Tygar",
+      "original_brand": "Bvlgari",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل بلغاري تايغار و سوسبيرو فبراتو (secondary: Sospiro Vibrato)"
+    },
+    "2581": {
+      "status": "skip",
+      "source": "user",
+      "notes": "Supremacy Tapis Rouge - user answered N/A, no badge"
+    },
+    "2841": {
+      "original": "Creed Aventus Absolu",
+      "status": "known",
+      "source": "web",
+      "notes": "community: clone of Aventus Absolu | user confirmed probable list",
+      "original_brand": "Creed"
+    },
+    "2845": {
+      "original": "MFK Baccarat Rouge 540",
+      "original_brand": "MFK",
+      "status": "known",
+      "source": "user",
+      "notes": "user answered"
+    },
+    "3128": {
+      "original": "Jean Paul Gaultier Le Male Elixir Absolu",
+      "original_brand": "Jean Paul Gaultier",
+      "status": "known",
+      "source": "user",
+      "notes": "user correction Nov 14: Le Male Elixir Absolu (not plain Elixir)"
+    },
+    "3147": {
+      "original": "Louis Vuitton Pacific Chill",
+      "original_brand": "Louis Vuitton",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل باسيفك تشيل لوي فيتون"
+    },
+    "3500": {
+      "status": "skip",
+      "source": "user",
+      "notes": "Afnan 9PM Night Out - user answered N/A, no badge"
+    },
+    "3511": {
+      "original": "MFK Baccarat Rouge 540",
+      "original_brand": "MFK",
+      "status": "known",
+      "source": "user",
+      "notes": "user answered (dup of 2845)"
+    },
+    "2676": {
+      "original": "Xerjoff Erba Pura",
+      "original_brand": "Xerjoff",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل ايربا بيورا"
+    },
+    "2984": {
+      "original": "Xerjoff Erba Pura",
+      "original_brand": "Xerjoff",
+      "status": "known",
+      "source": "description",
+      "notes": "AlHaramain Amber Oud Gold"
+    },
+    "3028": {
+      "original": "Louis Vuitton Imagination",
+      "original_brand": "Louis Vuitton",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل ايماجنيشن"
+    },
+    "3154": {
+      "original": "Creed Green Irish Tweed",
+      "original_brand": "Creed",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل جرين ايرش تويد"
+    },
+    "3222": {
+      "original": "Chanel Bleu de Chanel",
+      "original_brand": "Chanel",
+      "status": "known",
+      "source": "user",
+      "notes": "user: EDP"
+    },
+    "3224": {
+      "original": "Xerjoff Erba Pura",
+      "original_brand": "Xerjoff",
+      "status": "known",
+      "source": "user",
+      "notes": "user corrected: Erba Pura (was Erba Gold)"
+    },
+    "3226": {
+      "original": "Maison Francis Kurkdjian Baccarat Rouge 540",
+      "original_brand": "MFK",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل بكرات رووج"
+    },
+    "3230": {
+      "original": "Tom Ford Tobacco Vanille",
+      "original_brand": "Tom Ford",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل توباكو فانيل"
+    },
+    "3259": {
+      "original": "Montale Arabians Tonka",
+      "original_brand": "Montale",
+      "status": "known",
+      "source": "web",
+      "notes": "confirmed Dubai Night -> Montale Arabians Tonka | user confirmed probable list"
+    },
+    "3568": {
+      "original": "Louis Vuitton Imagination",
+      "original_brand": "Louis Vuitton",
+      "status": "known",
+      "source": "description",
+      "notes": "Aqua Dubai tester, same as 3028"
+    },
+    "2053": {
+      "status": "skip-designer",
+      "source": "brand",
+      "notes": "Mugler Alien"
+    },
+    "3525": {
+      "original": "Louis Vuitton Imagination",
+      "status": "known",
+      "source": "web",
+      "notes": "Arabiyat Marwa, 78%, multiple sources | user confirmed probable list",
+      "original_brand": "Louis Vuitton"
+    },
+    "2826": {
+      "original": "Creed Silver Mountain Water",
+      "original_brand": "Creed",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل كريد سلفر ماونتن"
+    },
+    "2832": {
+      "original": "YSL Myself",
+      "original_brand": "Yves Saint Laurent",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل واي اس ال ماي سيلف"
+    },
+    "2909": {
+      "original": "Chanel Bleu de Chanel",
+      "original_brand": "Chanel",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل بلو دي شانيل"
+    },
+    "3237": {
+      "original": "Dior Sauvage EDP",
+      "original_brand": "Dior",
+      "status": "known",
+      "source": "user",
+      "notes": "user correction: Sauvage EDP (not Elixir)"
+    },
+    "3488": {
+      "original": "Creed Aventus",
+      "original_brand": "Creed",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل كريد افنتوس"
+    },
+    "3159": {
+      "original": "Creed Aventus",
+      "original_brand": "Creed",
+      "status": "known",
+      "source": "description",
+      "notes": "Assaf Frankel Aventus"
+    },
+    "3161": {
+      "original": "Creed Aventus",
+      "original_brand": "Creed",
+      "status": "known",
+      "source": "description",
+      "notes": "Frankel Aventus Intense - same original, higher concentration"
+    },
+    "3552": {
+      "status": "skip-set",
+      "source": "user",
+      "notes": "Set - user said leave sets alone"
+    },
+    "2304": {
+      "status": "skip-designer",
+      "source": "brand",
+      "notes": "BOIS 1920"
+    },
+    "2305": {
+      "status": "skip-designer",
+      "source": "brand",
+      "notes": "BOIS 1920"
+    },
+    "900001": {
+      "original": "Louis Vuitton Imagination",
+      "original_brand": "Louis Vuitton",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل مقارب لـ LV Imagination"
+    },
+    "2056": {
+      "status": "skip-designer",
+      "source": "brand",
+      "notes": "Burberry Hero"
+    },
+    "3479": {
+      "status": "skip-designer",
+      "source": "brand",
+      "notes": "Xerjoff Casamorati"
+    },
+    "2758": {
+      "status": "skip-designer",
+      "source": "brand",
+      "notes": "Creed Aventus"
+    },
+    "2769": {
+      "status": "skip-designer",
+      "source": "brand",
+      "notes": "Creed Centaurus"
+    },
+    "3018": {
+      "status": "skip-designer",
+      "source": "brand",
+      "notes": "Creed Delphiniums"
+    },
+    "3019": {
+      "status": "skip-designer",
+      "source": "brand",
+      "notes": "Creed Aventus Absolu"
+    },
+    "3020": {
+      "status": "skip-designer",
+      "source": "brand",
+      "notes": "Creed Green Irish Tweed"
+    },
+    "148": {
+      "status": "skip-designer",
+      "source": "brand",
+      "notes": "Dior Homme Parfum"
+    },
+    "3527": {
+      "status": "skip-designer",
+      "source": "brand",
+      "notes": "Dior Sauvage Parfum"
+    },
+    "3057": {
+      "original": "Gucci Guilty Elixir de Parfum Pour Homme",
+      "original_brand": "Gucci",
+      "status": "known",
+      "source": "user",
+      "notes": "user confirmed Pour Homme (green); badge was Pour Femme purple - being replaced"
+    },
+    "3062": {
+      "original": "Giorgio Armani Stronger With You Intensely",
+      "original_brand": "Giorgio Armani",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل you انتنسلي | user confirmed probable list"
+    },
+    "3066": {
+      "status": "skip-set",
+      "source": "user",
+      "notes": "Set - user said leave sets alone"
+    },
+    "3201": {
+      "original": "YSL Y Elixir",
+      "original_brand": "Yves Saint Laurent",
+      "status": "known",
+      "source": "user",
+      "notes": "user re-correction Nov 14: Defender Voille -> YSL Y Elixir (reverts Gucci Guilty Elixir mix-up)"
+    },
+    "2678": {
+      "original": "Paco Rabanne Invictus",
+      "original_brand": "Paco Rabanne",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل انفكتس"
+    },
+    "2882": {
+      "original": "Paco Rabanne Invictus + Giorgio Armani Stronger With You Intensely",
+      "original_brand": "Paco Rabanne / Giorgio Armani",
+      "status": "known",
+      "source": "user",
+      "notes": "user wants TWO small bottles in the badge corner (Nitro White)"
+    },
+    "2884": {
+      "original": "Bond No 9 Lafayette Street",
+      "original_brand": "Bond No 9",
+      "status": "known",
+      "source": "user",
+      "notes": "user answered: Lafayette Street Bond No 9"
+    },
+    "900002": {
+      "original": "Paco Rabanne Invictus",
+      "original_brand": "Paco Rabanne",
+      "status": "known",
+      "source": "user",
+      "notes": "user confirmed same as Nitro Red"
+    },
+    "2838": {
+      "original": "Giorgio Armani Stronger With You Intensely",
+      "original_brand": "Giorgio Armani",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل يو انتنسلي"
+    },
+    "3001": {
+      "original": "Thomas Kosmala No. 4 Apres L'Amour",
+      "original_brand": "Thomas Kosmala",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل توماس كوزمالا رقم 4 (After love no 4)"
+    },
+    "3490": {
+      "original": "Valentino Uomo Born in Roma Intense",
+      "original_brand": "Valentino",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل فالنتينو روما انتنس"
+    },
+    "2563": {
+      "original": "Nishane Shem",
+      "status": "known",
+      "source": "web",
+      "notes": "multiple sources 74-83% | user confirmed probable list",
+      "original_brand": "Nishane"
+    },
+    "2566": {
+      "original": "YSL Tuxedo",
+      "status": "known",
+      "source": "web",
+      "notes": "90% match, multiple sources | user confirmed probable list",
+      "original_brand": "Yves Saint Laurent"
+    },
+    "2568": {
+      "original": "Maison Margiela Replica Jazz Club",
+      "status": "known",
+      "source": "web",
+      "notes": "notes (rum/vetiver/leather) match Jazz Club; one source said Music Festival | user confirmed probable list",
+      "original_brand": "Maison Margiela"
+    },
+    "2570": {
+      "original": "Parfums de Marly Althair",
+      "status": "known",
+      "source": "web",
+      "notes": "94% match consensus | user confirmed probable list",
+      "original_brand": "Parfums de Marly"
+    },
+    "2571": {
+      "original": "Penhaligons Halfeti Cedar",
+      "original_brand": "Penhaligons",
+      "status": "known",
+      "source": "user",
+      "notes": "user answered: Halfeti Cedar"
+    },
+    "2573": {
+      "original": "Parfums de Marly Layton",
+      "status": "known",
+      "source": "web",
+      "notes": "82% (2 sources); conflicting claim YSL L'Homme Ultime - confirm | user confirmed probable list",
+      "original_brand": "Parfums de Marly"
+    },
+    "2764": {
+      "original": "Orto Parisi Megamare",
+      "original_brand": "Orto Parisi",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل ميجا ماري من اورتو باريسي"
+    },
+    "3010": {
+      "original": "Jean Paul Gaultier Le Male Le Parfum",
+      "original_brand": "Jean Paul Gaultier",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: مستوحى من Le Male Le Parfum"
+    },
+    "3011": {
+      "original": "Jean Paul Gaultier Le Male Le Beau",
+      "original_brand": "Jean Paul Gaultier",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: مستوحى من Le Male Le Beau"
+    },
+    "3012": {
+      "original": "Jean Paul Gaultier Le Male Elixir",
+      "original_brand": "Jean Paul Gaultier",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: مستوحى من Le Male Elixir"
+    },
+    "3164": {
+      "status": "skip-set",
+      "source": "user",
+      "notes": "Set - user said leave sets alone"
+    },
+    "3199": {
+      "original": "YSL Y",
+      "original_brand": "Yves Saint Laurent",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل عطر Y ysl"
+    },
+    "3513": {
+      "original": "Argos Triumph of Bacchus",
+      "original_brand": "Argos",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل ترايمف اوف باكوس"
+    },
+    "2558": {
+      "original": "Bvlgari Le Gemme Gyan",
+      "status": "known",
+      "source": "web",
+      "notes": "PickMyClone 78% dupe; 'Kashmir sapphire' notes match | user confirmed probable list",
+      "original_brand": "Bvlgari"
+    },
+    "2559": {
+      "original": "Bvlgari Le Gemme Azaran",
+      "status": "known",
+      "source": "web",
+      "notes": "PickMyClone 72% dupe | user confirmed probable list",
+      "original_brand": "Bvlgari"
+    },
+    "2560": {
+      "original": "Bvlgari Le Gemme Onekh",
+      "status": "known",
+      "source": "web",
+      "notes": "PickMyClone 72% dupe | user confirmed probable list",
+      "original_brand": "Bvlgari"
+    },
+    "2561": {
+      "original": "Bvlgari Le Gemme Kobraa",
+      "status": "known",
+      "source": "web",
+      "notes": "PickMyClone/Perfumeo 78-85% dupe | user confirmed probable list",
+      "original_brand": "Bvlgari"
+    },
+    "2677": {
+      "original": "Kilian Angels' Share",
+      "original_brand": "Kilian",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل انجل شير"
+    },
+    "2689": {
+      "original": "Louis Vuitton Stellar Times",
+      "original_brand": "Louis Vuitton",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل ستيلر تايمز من لويس فيتون"
+    },
+    "2691": {
+      "original": "Marc-Antoine Barrois Ganymede",
+      "original_brand": "Marc-Antoine Barrois",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل غانيميد | corrected: Ganymede is by Marc-Antoine Barrois, not Margiela"
+    },
+    "2799": {
+      "original": "Dolce & Gabbana The One Luminous Night",
+      "original_brand": "Dolce & Gabbana",
+      "status": "known",
+      "source": "user",
+      "notes": "user confirmed"
+    },
+    "2818": {
+      "original": "Roja Elysium",
+      "original_brand": "Roja Parfums",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل روجا اسيلوم"
+    },
+    "2821": {
+      "status": "skip",
+      "source": "user",
+      "notes": "Royal Blend Bourbon - user answered N/A, no badge"
+    },
+    "2957": {
+      "original": "Kilian Smoking Hot",
+      "original_brand": "Kilian",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: مستوحى من Smoking Hot من كيليان"
+    },
+    "2960": {
+      "original": "Creed Centaurus",
+      "original_brand": "Creed",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: مستوحى من Creed Centarus"
+    },
+    "2961": {
+      "original": "Lorenzo Pazzaglia Van Py Rhum",
+      "status": "known",
+      "source": "web",
+      "notes": "desc 'Van by Ruhm' = Van Py Rhum, comparison video found | user confirmed probable list",
+      "original_brand": "Lorenzo Pazzaglia"
+    },
+    "2962": {
+      "original": "Parfums de Marly Perseus",
+      "status": "known",
+      "source": "web",
+      "notes": "desc said 'Perseus' = PdM Perseus, 78% | user confirmed probable list",
+      "original_brand": "Parfums de Marly"
+    },
+    "3009": {
+      "status": "skip",
+      "source": "user",
+      "notes": "Royal Blend Bourbon Extrait - user answered N/A, no badge"
+    },
+    "3030": {
+      "original": "Xerjoff Torino21",
+      "original_brand": "Xerjoff",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل تورينو 21"
+    },
+    "3037": {
+      "original": "Stephane Humbert Lucas Sand Dance",
+      "original_brand": "Stéphane Humbert Lucas",
+      "status": "known",
+      "source": "description",
+      "notes": "desc names 'ساند دانس من ستيفن لوكاس' | user confirmed probable list"
+    },
+    "3041": {
+      "original": "Stephane Humbert Lucas God of Fire",
+      "original_brand": "Stéphane Humbert Lucas",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل جود اوف فاير من ستيفن لوكاس"
+    },
+    "3042": {
+      "original": "Guerlain L'Homme Idéal Platine Privé",
+      "status": "known",
+      "source": "web",
+      "notes": "88% match, decodes 'لوم ايديال بلاتين' | user confirmed probable list",
+      "original_brand": "Guerlain"
+    },
+    "3251": {
+      "status": "skip",
+      "source": "user",
+      "notes": "French Avenue Royal Blend Nero - user answered N/A, no badge"
+    },
+    "3348": {
+      "original": "Clive Christian Blonde Amber",
+      "status": "known",
+      "source": "web",
+      "notes": "76%, three sources; 'بلوند عمبر' = Blonde Amber | user confirmed probable list",
+      "original_brand": "Clive Christian"
+    },
+    "3452": {
+      "original": "Room 1015 Wavechild",
+      "status": "known",
+      "source": "web",
+      "notes": "93% match, 'ويڤ تشايلد' = Wavechild | user confirmed probable list",
+      "original_brand": "Room 1015"
+    },
+    "3457": {
+      "original": "Chanel Bleu de Chanel",
+      "original_brand": "Chanel",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل شانيل بلو"
+    },
+    "3460": {
+      "original": "Giorgio Armani Stronger With You Sandalwood",
+      "original_brand": "Giorgio Armani",
+      "status": "known",
+      "source": "user",
+      "notes": "user correction: SWY Sandalwood; badge uses the green SWY bottle image until exact bottle fetched"
+    },
+    "3465": {
+      "original": "Kilian Angels' Share On The Rocks",
+      "original_brand": "Kilian",
+      "status": "known",
+      "source": "web",
+      "notes": "78%, multiple sources | user confirmed probable list"
+    },
+    "3473": {
+      "original": "Maison Margiela Replica Never Ending Summer",
+      "original_brand": "Maison Margiela",
+      "status": "known",
+      "source": "user",
+      "notes": "user answered: Replica Never Ending Summer"
+    },
+    "3494": {
+      "original": "YSL Y Elixir",
+      "original_brand": "Yves Saint Laurent",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل واي اس ال الكسير inspired by ysl y elixir"
+    },
+    "3496": {
+      "original": "Goldfield & Banks Pacific Moss",
+      "original_brand": "Goldfield & Banks",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل باسيفك روك موس"
+    },
+    "3498": {
+      "original": "Goldfield & Banks Ingenious Ginger",
+      "original_brand": "Goldfield & Banks",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل انجينيوس جينجر"
+    },
+    "3503": {
+      "original": "YSL MYSLF",
+      "status": "known",
+      "source": "web",
+      "notes": "Aromatix Magnetiq -> YSL MYSLF community match | user confirmed probable list",
+      "original_brand": "Yves Saint Laurent"
+    },
+    "3506": {
+      "original": "Orto Parisi Megamare",
+      "original_brand": "Orto Parisi",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: شبيه فانيلا باودر وميجامير"
+    },
+    "3508": {
+      "status": "skip",
+      "source": "user",
+      "notes": "Western Shisha - user answered N/A, no badge"
+    },
+    "3523": {
+      "original": "Parfums de Marly Althair",
+      "status": "known",
+      "source": "web",
+      "notes": "Liquid Brun Limited Edition, same original | user confirmed probable list",
+      "original_brand": "Parfums de Marly"
+    },
+    "3545": {
+      "original": "Memoirs of a Perfume Collector Tales from Zanzibar",
+      "status": "known",
+      "source": "web",
+      "notes": "medium confidence - confirm | user confirmed probable list",
+      "original_brand": "Memoirs of a Perfume Collector"
+    },
+    "3547": {
+      "original": "Issey Miyake Le Sel d'Issey",
+      "status": "known",
+      "source": "web",
+      "notes": "85% match | user confirmed probable list",
+      "original_brand": "Issey Miyake"
+    },
+    "3562": {
+      "status": "skip",
+      "source": "user",
+      "notes": "French Avenue Grow - user answered N/A, no badge"
+    },
+    "3564": {
+      "status": "skip",
+      "source": "user",
+      "notes": "French Avenue Nabatieh - user answered N/A, no badge"
+    },
+    "900003": {
+      "original": "Kilian Angels' Share Paradis",
+      "original_brand": "Kilian",
+      "status": "known",
+      "source": "web",
+      "notes": "86% match (updated from plain Angels' Share) | user confirmed probable list"
+    },
+    "3145": {
+      "original": "Amouage Reflection",
+      "original_brand": "Amouage",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل ريفلكشن امواج"
+    },
+    "3327": {
+      "original": "Xerjoff 40 Knots",
+      "original_brand": "Xerjoff",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل زيرجوف 40 نوتس"
+    },
+    "142": {
+      "status": "skip-designer",
+      "source": "brand",
+      "notes": "Armani Stronger With You Tobacco"
+    },
+    "2694": {
+      "status": "skip-designer",
+      "source": "brand",
+      "notes": "Gucci Oud Intense"
+    },
+    "2061": {
+      "status": "skip-designer",
+      "source": "brand",
+      "notes": "Guerlain Santal Royal"
+    },
+    "2955": {
+      "original": "Orto Parisi Megamare",
+      "original_brand": "Orto Parisi",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: مستوحى من ميغاماري أوروتو باريس"
+    },
+    "3572": {
+      "status": "skip-set",
+      "source": "user",
+      "notes": "Set - user said leave sets alone"
+    },
+    "3529": {
+      "status": "skip-designer",
+      "source": "brand",
+      "notes": "JPG Scandal Le Parfum"
+    },
+    "2692": {
+      "original": "Amouage Reflection",
+      "original_brand": "Amouage",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل امواج ريفلكشن"
+    },
+    "3211": {
+      "status": "skip-designer",
+      "source": "brand",
+      "notes": "Kilian Angels' Share"
+    },
+    "2067": {
+      "status": "skip-original",
+      "source": "description",
+      "notes": "Kinetic Aura - described as unique original"
+    },
+    "3531": {
+      "status": "skip-designer",
+      "source": "brand",
+      "notes": "Lorenzo Pazzaglia"
+    },
+    "2905": {
+      "original": "Xerjoff Opera",
+      "original_brand": "Xerjoff",
+      "status": "known",
+      "source": "user",
+      "notes": "user correction Nov 14: Opera (was Acqua di Gio Profumo)"
+    },
+    "2963": {
+      "original": "Giorgio Armani Stronger With You Parfum",
+      "original_brand": "Giorgio Armani",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: مستوحى من Stronger With You Parfum"
+    },
+    "3135": {
+      "original": "Bvlgari Tygar",
+      "original_brand": "Bvlgari",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل بفالغاري تايغار"
+    },
+    "3139": {
+      "original": "YSL Myself",
+      "original_brand": "Yves Saint Laurent",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل ماي سلف واي اس ال"
+    },
+    "3142": {
+      "original": "Louis Vuitton Afternoon Swim",
+      "original_brand": "Louis Vuitton",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل افتر نون سويم"
+    },
+    "3244": {
+      "original": "Xerjoff Naxos",
+      "original_brand": "Xerjoff",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل زيرجوف ناكسوس"
+    },
+    "3330": {
+      "original": "Tom Ford Ombré Leather",
+      "original_brand": "Tom Ford",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل توم فورد اومبريه ليذر"
+    },
+    "3351": {
+      "original": "Jean Paul Gaultier Le Beau Paradise Garden",
+      "original_brand": "Jean Paul Gaultier",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل جون بول لو بو براديس | user confirmed probable list"
+    },
+    "2922": {
+      "status": "skip-set",
+      "source": "user",
+      "notes": "Set - user said leave sets alone"
+    },
+    "3481": {
+      "status": "skip-designer",
+      "source": "brand",
+      "notes": "Nishane Hacivat"
+    },
+    "2060": {
+      "status": "skip-designer",
+      "source": "brand",
+      "notes": "Orto Parisi Terroni"
+    },
+    "2877": {
+      "status": "skip-designer",
+      "source": "brand",
+      "notes": "Orto Parisi Megamare"
+    },
+    "2382": {
+      "original": "Xerjoff Naxos",
+      "original_brand": "Xerjoff",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: محاكي لعطر ناكسوس"
+    },
+    "2385": {
+      "original": "Xerjoff Erba Pura",
+      "original_brand": "Xerjoff",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: محاكي لعطر ايربا بورا"
+    },
+    "2589": {
+      "original": "Frederic Malle Rose & Cuir",
+      "original_brand": "Editions de Parfums Frédéric Malle",
+      "status": "known",
+      "source": "user",
+      "notes": "user answered ('Fredric Mal, Rose & Cur')"
+    },
+    "2670": {
+      "original": "Parfums de Marly Greenley",
+      "original_brand": "Parfums de Marly",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل ديمارلي غرينلي"
+    },
+    "2673": {
+      "original": "Tom Ford Ombré Leather",
+      "original_brand": "Tom Ford",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل توم فورد اومبريه ليذر"
+    },
+    "2674": {
+      "original": "Givenchy Gentleman Boisée",
+      "original_brand": "Givenchy",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل جفنشي جنتلمان بوازيه | user confirmed probable list"
+    },
+    "2690": {
+      "status": "skip",
+      "source": "user",
+      "notes": "بين الاسرار - user said ignore, no badge"
+    },
+    "2812": {
+      "original": "Maison Crivelli Hibiscus Mahajád",
+      "original_brand": "Maison Crivelli",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل هبسكس مهجاد (Hibiscus Mahajád) | user confirmed probable list"
+    },
+    "2857": {
+      "original": "Louis Vuitton Ombre Nomade",
+      "original_brand": "Louis Vuitton",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل اومبريه نو ماد"
+    },
+    "2863": {
+      "original": "Xerjoff Torino21",
+      "original_brand": "Xerjoff",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل تورينو 21 من زيرجوف"
+    },
+    "2866": {
+      "original": "Versace Eros",
+      "original_brand": "Versace",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل فرزاتشي ايروس"
+    },
+    "2897": {
+      "original": "Nasomatto Black Afgano",
+      "original_brand": "Nasomatto",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل بلاك افغانو | user confirmed probable list"
+    },
+    "2903": {
+      "original": "Dolce & Gabbana The One EDP",
+      "original_brand": "Dolce & Gabbana",
+      "status": "known",
+      "source": "user",
+      "notes": "user correction: The One EDP (was plain The One/EDT image)"
+    },
+    "2904": {
+      "original": "Dior Homme Intense",
+      "original_brand": "Dior",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل ديور هوم انتنس"
+    },
+    "2959": {
+      "original": "Xerjoff Alexandria II",
+      "original_brand": "Xerjoff",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: مستوحى من Alexandria II"
+    },
+    "2302": {
+      "status": "skip-designer",
+      "source": "brand",
+      "notes": "PdM Layton"
+    },
+    "2303": {
+      "status": "skip-designer",
+      "source": "brand",
+      "notes": "PdM Greenly"
+    },
+    "2987": {
+      "status": "skip-designer",
+      "source": "brand",
+      "notes": "PdM Pegasus"
+    },
+    "2988": {
+      "status": "skip-designer",
+      "source": "brand",
+      "notes": "PdM Pegasus (dup)"
+    },
+    "3021": {
+      "status": "skip-original",
+      "source": "brand",
+      "notes": "Reine de Saba - original niche composition"
+    },
+    "2886": {
+      "original": "Nishane Hacivat",
+      "original_brand": "Nishane",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل نيشان هاشيفات"
+    },
+    "2964": {
+      "original": "Paco Rabanne Invictus",
+      "original_brand": "Paco Rabanne",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: مستوحى من Invictus"
+    },
+    "3476": {
+      "original": "Paco Rabanne Invictus",
+      "original_brand": "Paco Rabanne",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: شبيه انفكتوس"
+    },
+    "2584": {
+      "status": "skip",
+      "source": "user",
+      "notes": "Nexa Immortal - user answered N/A, no badge"
+    },
+    "2586": {
+      "original": "Bvlgari Tygar",
+      "status": "known",
+      "source": "web",
+      "notes": "78%, two sources | user confirmed probable list",
+      "original_brand": "Bvlgari"
+    },
+    "2785": {
+      "original": "Jean Paul Gaultier Scandal Pour Homme",
+      "original_brand": "Jean Paul Gaultier",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل سكاندال رجالي"
+    },
+    "2860": {
+      "original": "Rosendo Mateu No. 5",
+      "original_brand": "Rosendo Mateu",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل روزندو ماتيو 5"
+    },
+    "3470": {
+      "original": "Giorgio Armani Stronger With You Intensely",
+      "original_brand": "Giorgio Armani",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل يو انتنسلي و ازارو موست وانتد (secondary: Azzaro Most Wanted)"
+    },
+    "3131": {
+      "original": "Initio Side Effect",
+      "original_brand": "Initio",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل انيشيو سايد ايفكت"
+    },
+    "3521": {
+      "original": "Chanel Bleu de Chanel L'Exclusive",
+      "original_brand": "Chanel",
+      "status": "known",
+      "source": "user",
+      "notes": "user confirmed: inspired by Bleu de Chanel l'Exclusive"
+    },
+    "2870": {
+      "original": "BDK Gris Charnel",
+      "original_brand": "BDK Parfums",
+      "status": "known",
+      "source": "user",
+      "notes": "user identified 'جريس شارنيل' = Gris Charnel"
+    },
+    "2773": {
+      "status": "skip-designer",
+      "source": "brand",
+      "notes": "Sospiro Vibrato"
+    },
+    "3533": {
+      "status": "skip-designer",
+      "source": "brand",
+      "notes": "Sospiro discovery set"
+    },
+    "2063": {
+      "status": "skip-designer",
+      "source": "brand",
+      "notes": "Tiziana Terenzi"
+    },
+    "2662": {
+      "original": "Parfums de Marly Layton",
+      "original_brand": "Parfums de Marly",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل لايتون من ديمارلي"
+    },
+    "3293": {
+      "original": "Penhaligon's Halfeti",
+      "original_brand": "Penhaligon's",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل هالفيتي من بنهاليچونز"
+    },
+    "2064": {
+      "status": "skip-designer",
+      "source": "brand",
+      "notes": "Xerjoff Erba Gold"
+    },
+    "2065": {
+      "status": "skip-designer",
+      "source": "brand",
+      "notes": "Xerjoff Erba Pura"
+    },
+    "2801": {
+      "status": "skip-designer",
+      "source": "brand",
+      "notes": "Xerjoff Opera"
+    },
+    "2806": {
+      "status": "skip-designer",
+      "source": "brand",
+      "notes": "Xerjoff Torino21"
+    },
+    "3463": {
+      "original": "Kilian Angels' Share Paradis",
+      "original_brand": "Kilian",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل انجل شير براديس"
+    },
+    "3492": {
+      "original": "Givenchy Gentleman Reserve Privée",
+      "original_brand": "Givenchy",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل جفنشي جنتلمان ريزيرف بريفبه"
+    },
+    "3345": {
+      "original": "Essential Parfums Bois Impérial",
+      "original_brand": "Essential Parfums",
+      "status": "known",
+      "source": "user",
+      "notes": "user confirmed"
+    },
+    "3516": {
+      "original": "Louis Vuitton Imagination",
+      "original_brand": "Louis Vuitton",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل ايماجنيشن"
+    },
+    "2925": {
+      "status": "skip",
+      "source": "user",
+      "notes": "God of Fire - user said don't worry about it"
+    },
+    "2927": {
+      "status": "skip",
+      "source": "user",
+      "notes": "God of Fire - user said don't worry about it"
+    },
+    "3003": {
+      "status": "skip",
+      "source": "user",
+      "notes": "God of Fire - user said don't worry about it"
+    },
+    "3291": {
+      "original": "Tom Ford Tuscan Leather",
+      "original_brand": "Tom Ford",
+      "status": "known",
+      "source": "user",
+      "notes": "user answered"
+    },
+    "3557": {
+      "status": "skip-designer",
+      "source": "brand",
+      "notes": "Kilian Angels' Share Paradis"
+    },
+    "3558": {
+      "status": "skip-designer",
+      "source": "brand",
+      "notes": "Armani SWY Parfum"
+    },
+    "3559": {
+      "status": "skip-designer",
+      "source": "brand",
+      "notes": "Armani SWY Intensely"
+    },
+    "2555": {
+      "status": "skip",
+      "source": "user",
+      "notes": "Iijazi - user answered N/A, no badge"
+    },
+    "2656": {
+      "status": "skip",
+      "source": "user",
+      "notes": "Khamrah - user answered N/A, no badge"
+    },
+    "2681": {
+      "original": "Paco Rabanne Invictus",
+      "original_brand": "Paco Rabanne",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل انفكتس"
+    },
+    "2682": {
+      "original": "Xerjoff Erba Pura",
+      "original_brand": "Xerjoff",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل ايربا بورا"
+    },
+    "2683": {
+      "original": "Chanel Allure Homme Sport",
+      "original_brand": "Chanel",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل شانيل الور سبورت"
+    },
+    "2684": {
+      "original": "Dior Sauvage Elixir",
+      "original_brand": "Dior",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل سوفاج الكسير"
+    },
+    "2808": {
+      "original": "YSL Y",
+      "original_brand": "Yves Saint Laurent",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: بديل واي من ايف سانت لوران"
+    },
+    "2966": {
+      "original": "Paco Rabanne Invictus",
+      "original_brand": "Paco Rabanne",
+      "status": "known",
+      "source": "description",
+      "notes": "desc: مستوحى من Invictus"
+    },
+    "3535": {
+      "status": "skip",
+      "source": "user",
+      "notes": "Khamrah Dukhan - user answered N/A, no badge"
+    }
+  }
+}
