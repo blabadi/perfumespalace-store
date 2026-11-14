@@ -38,7 +38,6 @@ def find_original(names):
         'YSL Myself': 'YSL MYSLF',
         'Gucci Guilty Elixir de Parfum Pour Homme': 'Gucci Guilty Elixir Pour Homme',
         'Jean Paul Gaultier Le Male Elixir Absolu': 'Le Male Elixir Absolu',
-        'Giorgio Armani Stronger With You Sandalwood': 'Giorgio Armani Stronger With You Intensely',
     }
     for n in names:
         n = aliases.get(n, n)
