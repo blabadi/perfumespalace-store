@@ -51,7 +51,14 @@ def find_original(names):
     return None
 
 def compose(product_path, badge_paths, out_path, size=None):
-    img = Image.open(product_path).convert('RGB')
+    img = Image.open(product_path)
+    img = ImageOps.exif_transpose(img)
+    if img.mode in ('RGBA', 'LA', 'P') or (img.mode == 'RGB' and 'transparency' in img.info):
+        img = img.convert('RGBA')
+        bg = Image.new('RGB', img.size, (255, 255, 255))
+        bg.paste(img, mask=img.getchannel('A'))
+        img = bg
+    img = img.convert('RGB')
     img = ImageOps.exif_transpose(img)
     if PAD_TO_SQUARE:
         w, h = img.size
