@@ -293,11 +293,11 @@
       "notes": "Set - user said leave sets alone"
     },
     "3201": {
-      "original": "Gucci Guilty Elixir de Parfum",
-      "original_brand": "Gucci",
+      "original": "YSL Y Elixir",
+      "original_brand": "Yves Saint Laurent",
       "status": "known",
       "source": "user",
-      "notes": "user: Defender + Gritty -> Gucci Guilty Elixir"
+      "notes": "user re-correction Nov 14: Defender Voille -> YSL Y Elixir (reverts Gucci Guilty Elixir mix-up)"
     },
     "2678": {
       "original": "Paco Rabanne Invictus",
