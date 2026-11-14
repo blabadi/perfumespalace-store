@@ -7,6 +7,8 @@ import compose as C
 raw = subprocess.run(['git', 'show', 'main:products.json'], capture_output=True)
 old = json.loads(raw.stdout.decode('utf-8'))
 old_by_id = {str(p['id']): p for p in old['products']}
+overrides = json.load(open('alternative-pictures/source-overrides.json', encoding='utf-8')) \
+    if os.path.exists('alternative-pictures/source-overrides.json') else {}
 
 m = json.load(open('alternative-pictures/inspired-map.json', encoding='utf-8'))['entries']
 by_id = {str(p['id']): p for p in json.load(open('products.json', encoding='utf-8'))['products']}
@@ -27,7 +29,8 @@ for pid, entry in m.items():
     bps = [b for b in (C.find_original([nm]) for nm in names) if b]
     if not bps:
         failed.append((pid, 'no badge images')); continue
-    src = os.path.join(C.ROOT, o['images'][0].replace('/', os.sep))
+    src_rel = overrides.get(pid) or o['images'][0]
+    src = os.path.join(C.ROOT, src_rel.replace('/', os.sep))
     out_rel = outputs.get(pid) or (f"{pid}-{C.slug(p['name'][:24])}-alt.jpg")
     try:
         C.compose(src, bps, os.path.join(C.OUT, out_rel))
