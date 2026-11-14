@@ -760,11 +760,11 @@
       "notes": "Lorenzo Pazzaglia"
     },
     "2905": {
-      "original": "Giorgio Armani Acqua di Gio Profumo",
-      "original_brand": "Giorgio Armani",
+      "original": "Xerjoff Opera",
+      "original_brand": "Xerjoff",
       "status": "known",
-      "source": "description",
-      "notes": "desc: بديل اكوا دي جيو بروفومو"
+      "source": "user",
+      "notes": "user correction Nov 14: Opera (was Acqua di Gio Profumo)"
     },
     "2963": {
       "original": "Giorgio Armani Stronger With You Parfum",
@@ -918,11 +918,11 @@
       "notes": "desc: بديل بلاك افغانو | user confirmed probable list"
     },
     "2903": {
-      "original": "Dolce & Gabbana The One",
+      "original": "Dolce & Gabbana The One EDP",
       "original_brand": "Dolce & Gabbana",
       "status": "known",
-      "source": "description",
-      "notes": "desc: بديل دولتشي غابانا ذا ون"
+      "source": "user",
+      "notes": "user correction: The One EDP (was plain The One/EDT image)"
     },
     "2904": {
       "original": "Dior Homme Intense",
