@@ -22,6 +22,8 @@ WATERMARK_RATIO = 0.19  # watermark width as fraction of canvas edge
 WATERMARK_OPACITY = 0.85
 WATERMARK_MARGIN = 0.03 # fraction of canvas edge
 LOGO_PATH = os.path.join(AP, 'assets', 'logo-full.png')
+PAD_TO_SQUARE = True    # white-pad non-square product photos to a square
+MAX_SIDE = 1600         # cap longest side before compositing (file size)
 # ------------------------------------------------------
 
 def slug(s):
@@ -50,8 +52,17 @@ def find_original(names):
 def compose(product_path, badge_paths, out_path, size=None):
     img = Image.open(product_path).convert('RGB')
     img = ImageOps.exif_transpose(img)
+    if PAD_TO_SQUARE:
+        w, h = img.size
+        side = max(w, h)
+        sq = Image.new('RGB', (side, side), (255, 255, 255))
+        sq.paste(img, ((side - w) // 2, (side - h) // 2))
+        img = sq
     if size:
         img = img.resize((size, size), Image.LANCZOS)
+    elif max(img.size) > MAX_SIDE:
+        f = MAX_SIDE / max(img.size)
+        img = img.resize((round(img.width * f), round(img.height * f)), Image.LANCZOS)
     W, H = img.size
     edge = min(W, H)
     box = int(edge * BADGE_RATIO)
