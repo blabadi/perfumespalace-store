@@ -274,11 +274,11 @@
       "notes": "Dior Sauvage Parfum"
     },
     "3057": {
-      "original": "Gucci Guilty Elixir de Parfum",
+      "original": "Gucci Guilty Elixir de Parfum Pour Homme",
       "original_brand": "Gucci",
       "status": "known",
-      "source": "description",
-      "notes": "desc: بديل چوتشي الكسير"
+      "source": "user",
+      "notes": "user confirmed Pour Homme (green); badge was Pour Femme purple - being replaced"
     },
     "3062": {
       "original": "Giorgio Armani Stronger With You Intensely",

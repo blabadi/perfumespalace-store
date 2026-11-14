@@ -36,6 +36,7 @@ def find_original(names):
     aliases = {
         'Maison Francis Kurkdjian Baccarat Rouge 540': 'MFK Baccarat Rouge 540',
         'YSL Myself': 'YSL MYSLF',
+        'Gucci Guilty Elixir de Parfum Pour Homme': 'Gucci Guilty Elixir Pour Homme',
         'Jean Paul Gaultier Le Male Elixir Absolu': 'Le Male Elixir Absolu',
         'Giorgio Armani Stronger With You Sandalwood': 'Giorgio Armani Stronger With You Intensely',
     }
