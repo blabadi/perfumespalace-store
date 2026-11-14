@@ -95,7 +95,7 @@
     sale: false,
     inStock: false,
     minRating: 0,
-    sort: 'featured',
+    sort: 'newest',
     view: 'grid',
   };
 
@@ -786,7 +786,7 @@
     state.sale = q.get('sale') === '1';
     state.inStock = q.get('stock') === '1';
     state.minRating = Number(q.get('rating') || 0);
-    state.sort = q.get('sort') || 'featured';
+    state.sort = q.get('sort') || 'newest';
     state.view = q.get('view') || 'grid';
   }
 
