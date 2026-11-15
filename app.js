@@ -546,15 +546,32 @@
   }
 
   /* ---------- نافذة التفاصيل ---------- */
-  function openModal(id) {
+  // الرابط دائماً قابل للمشاركة: عند فتح نافذة منتج يُضاف p=<id> إلى الهاش،
+  // وزر الرجوع في المتصفح يغلق النافذة، وفتح رابط منتج يفتح النافذة مباشرة.
+  function pFromHash() {
+    const q = new URLSearchParams(location.hash.replace(/^#/, ''));
+    const id = Number(q.get('p'));
+    return Number.isInteger(id) && id > 0 ? id : null;
+  }
+
+  function storeName() {
+    return (DATA && DATA.meta && DATA.meta.store) || 'قصر العطور';
+  }
+
+  // معرّف المنتج المعروض حالياً في النافذة (أو null).
+  let openProductId = null;
+
+  function openModal(id, push = true) {
     const p = DATA.products.find((x) => x.id === Number(id));
     if (!p) return;
+    openProductId = Number(p.id);
     const images = p.images && p.images.length ? p.images : [null];
     const rows = Object.keys(p.attributes || {})
       .map((k) => `<tr><th>${esc(label(k))}</th><td>${esc(attrDisplay(p, k))}</td></tr>`).join('');
     const meta = DATA.meta || {};
     const links = [];
     if (meta.whatsapp) links.push(`<a class="text-link" href="https://wa.me/${esc(String(meta.whatsapp).replace(/\D/g, ''))}" target="_blank" rel="noopener noreferrer">اطلب عبر واتساب</a>`);
+    links.push(`<button type="button" class="text-link" data-share-url>نسخ رابط المنتج</button>`);
 
     $('#modal-body').innerHTML = `<div class="modal-grid">
       <div class="gallery">
@@ -588,6 +605,15 @@
     syncAddButtons();
     lockScroll();
 
+    // رابط المشاركة: الهاش الحالي بعد إضافة p=<id> (يدخل سجل الرجوع كي يغلقه زر الرجوع).
+    if (push) {
+      const q = new URLSearchParams(location.hash.replace(/^#/, ''));
+      q.set('p', String(openProductId));
+      try { history.pushState(null, '', '#' + q.toString()); }
+      catch { location.hash = 'p=' + openProductId; }
+    }
+    document.title = `${p.name} — ${storeName()}`;
+
     $$('#modal .thumbs button').forEach((btn) => {
       btn.addEventListener('click', () => {
         const src = images[Number(btn.dataset.thumb)];
@@ -599,10 +625,27 @@
     });
   }
 
-  function closeModal() {
+  function closeModal(fromPop) {
+    const wasOpen = !$('#modal').hidden;
     $('#modal').hidden = true;
+    openProductId = null;
     lockScroll();
+    if (wasOpen && !fromPop) {
+      document.title = `${storeName()} — الكتالوج`;
+      // الرجوع بخطوة واحدة كي يستهلك سجل الرجوع الذي أنشأه فتح النافذة.
+      if (pFromHash() != null) history.back();
+    }
   }
+
+  // زر الرجوع / زر التقدّم: اقرأ الهاش وافتح أو أغلق النافذة تبعاً له.
+  addEventListener('popstate', () => {
+    const id = pFromHash();
+    if (id != null && DATA && DATA.products.some((x) => x.id === id)) {
+      openModal(id, false);
+    } else {
+      closeModal(true);
+    }
+  });
 
   /* ---------- السلة ---------- */
   const cartUnits = () => [...cart.values()].reduce((a, b) => a + b, 0);
@@ -747,6 +790,31 @@
     toastTimer = setTimeout(() => { el.hidden = true; }, 2400);
   }
 
+  function legacyCopy(text) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    let ok = false;
+    try { ok = document.execCommand('copy'); } catch { ok = false; }
+    ta.remove();
+    return ok;
+  }
+
+  function copyProductLink() {
+    // رابط نظيف للمنتج فقط: الصفحة + p=<id> بلا فلاتر.
+    const base = location.href.split('#')[0];
+    const url = openProductId ? `${base}#p=${openProductId}` : base;
+    const done = () => toast('تم نسخ رابط المنتج');
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(done, () => { if (legacyCopy(url)) done(); });
+    } else if (legacyCopy(url)) {
+      done();
+    }
+  }
+
   /* ---------- حالة الرابط ---------- */
   function persistState() {
     const q = new URLSearchParams();
@@ -763,6 +831,9 @@
     if (state.minRating) q.set('rating', state.minRating);
     if (state.sort !== 'featured') q.set('sort', state.sort);
     if (state.view !== 'grid') q.set('view', state.view);
+    // رابط المنتج المفتوح يبقى في الهاش كي لا تكسره تغييرات الفلاتر.
+    const pid = openProductId ?? pFromHash();
+    if (pid) q.set('p', String(pid));
 
     const s = q.toString();
     const base = location.href.split('#')[0];
@@ -1125,6 +1196,9 @@
       const add = e.target.closest('[data-add]');
       if (add) { addToCart(add.dataset.add); return; }
 
+      const share = e.target.closest('[data-share-url]');
+      if (share) { copyProductLink(); return; }
+
       const inc = e.target.closest('[data-cart-inc]');
       if (inc) { addToCart(inc.dataset.cartInc); return; }
 
@@ -1291,6 +1365,13 @@
     renderHero();
     bindHeroParallax();
     syncStickyOffset();
+
+    // رابط مشاركة منتج (#p=<id>) يفتح النافذة مباشرة بعد تحميل الكتالوج.
+    const sharedId = pFromHash();
+    if (sharedId != null && DATA.products.some((x) => x.id === sharedId)) {
+      openModal(sharedId, false);
+      jumpToResults();
+    }
   }
 
   init();

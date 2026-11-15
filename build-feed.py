@@ -47,7 +47,7 @@ from webp_to_jpeg import twin_path            # noqa: E402  (needs the path twea
 
 SRC_JSON = "products.json"
 SETS_JSON = "sets.json"
-DEFAULT_BASE = "https://catalog.perfumespalace.store/"
+DEFAULT_BASE = "https://www.perfumespalace.store/"
 MAX_TITLE = 200           # Meta's limit
 MAX_DESC = 5000           # Meta's limit
 MAX_IMAGES = 10           # image_link + additional_image_link
@@ -116,7 +116,7 @@ def row_for(product, base, currency, with_gpc=True):
         "availability": "out of stock" if product.get("stock") == 0 else "in stock",
         "condition": "new",
         "price": money(was_price if on_sale else price, currency),
-        "link": base,
+        "link": "%s#p=%s" % (base, product.get("id")),
         "image_link": images[0],
         "brand": text(canonical_brand(product.get("brand")), MAX_TITLE),
     }
