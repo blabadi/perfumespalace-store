@@ -3392,7 +3392,8 @@
       "description": "بديل امواج جايدانس",
       "categories": [
         "نسائي"
-      ]
+      ],
+      "visible": false
     },
     {
       "id": 2689,
@@ -3417,7 +3418,8 @@
       "description": "بديل ستيلر تايمز من لويس فيتون مشابه ل : Louis Vuitton Stellar Times",
       "categories": [
         "نسائي"
-      ]
+      ],
+      "visible": false
     },
     {
       "id": 2684,

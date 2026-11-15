@@ -1,6 +1,6 @@
 {
   "catalog_feed": "https://catalog.perfumespalace.store/feed.xml",
-  "generated_from": "قصر العطور (2026-11-07)",
+  "generated_from": "قصر العطور (2026-11-14)",
   "note": "Rule-based Meta product sets. Push with: python create-sets.py --apply",
   "sets": [
     {
@@ -11,7 +11,7 @@
           "eq": "French Avenue"
         }
       },
-      "items": 36,
+      "items": 35,
       "ids": [
         "3564",
         "3562",
@@ -42,7 +42,6 @@
         "2821",
         "2799",
         "2691",
-        "2689",
         "2677",
         "2561",
         "2560",
@@ -51,7 +50,7 @@
         "900003"
       ],
       "metadata": {
-        "description": "French Avenue — 36 منتج",
+        "description": "French Avenue — 35 منتج",
         "external_url": "https://catalog.perfumespalace.store/#brand=French+Avenue",
         "cover_image_url": "https://catalog.perfumespalace.store/images/2026/08/parfum-nabatieh-french-avenue.jpg"
       }
@@ -64,7 +63,7 @@
           "eq": "Paris Corner"
         }
       },
-      "items": 14,
+      "items": 13,
       "ids": [
         "2904",
         "2903",
@@ -73,7 +72,6 @@
         "2863",
         "2857",
         "2812",
-        "2690",
         "2674",
         "2673",
         "2670",
@@ -82,7 +80,7 @@
         "2382"
       ],
       "metadata": {
-        "description": "Paris Corner — 14 منتج",
+        "description": "Paris Corner — 13 منتج",
         "external_url": "https://catalog.perfumespalace.store/#brand=Paris+Corner",
         "cover_image_url": "https://catalog.perfumespalace.store/images/2026/11/2904-camaro-homme-intense-alt.jpg"
       }
@@ -124,8 +122,9 @@
           "eq": "Afnan"
         }
       },
-      "items": 9,
+      "items": 10,
       "ids": [
+        "3573",
         "3511",
         "3147",
         "3128",
@@ -137,9 +136,9 @@
         "2376"
       ],
       "metadata": {
-        "description": "Afnan — 9 منتج",
+        "description": "Afnan — 10 منتج",
         "external_url": "https://catalog.perfumespalace.store/#brand=Afnan",
-        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/11/3511-af-alt.jpg"
+        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/11/3573-9pm-night-out-tester.jpg"
       }
     },
     {
