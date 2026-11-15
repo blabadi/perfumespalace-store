@@ -89,3 +89,4 @@ jean-paul-gaultier-ultra-male|https://www.perfumenz.co.nz/products/ultra-male-by
 kilian-angels-share|https://www.myperfumeshop.com.au/products/kilian-angels-share-edp
 kilian-angels-share-on-the-rocks|https://www.almaycasa.com/products/kilian-angels-share-on-the-rocks-eau-de-parfum
 kilian-angels-share-paradis|https://www.parfumo.com/Parfums/Kilian/angels-share-paradis
+matiere-premiere-vanilla-powder|https://matiere-premiere.com/en/products/vanilla-powder

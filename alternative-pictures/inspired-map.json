@@ -642,11 +642,11 @@
       "original_brand": "Yves Saint Laurent"
     },
     "3506": {
-      "original": "Orto Parisi Megamare",
-      "original_brand": "Orto Parisi",
+      "original": "Matiere Premiere Vanilla Powder",
+      "original_brand": "Matiere Premiere",
       "status": "known",
-      "source": "description",
-      "notes": "desc: شبيه فانيلا باودر وميجامير"
+      "source": "user",
+      "notes": "user: Nomad is inspired by Vanilla Powder (was Orto Parisi Megamare)"
     },
     "3508": {
       "status": "skip",

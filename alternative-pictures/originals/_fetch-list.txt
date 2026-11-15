@@ -88,4 +88,4 @@ xerjoff-torino21|Xerjoff Torino21
 ysl-myslf|YSL MYSLF
 ysl-tuxedo|YSL Tuxedo
 ysl-y|YSL Y
-ysl-y-elixir|YSL Y Elixir
+ysl-y-elixir|YSL Y Elixirmatiere-premiere-vanilla-powder|Matiere Premiere Vanilla Powder
