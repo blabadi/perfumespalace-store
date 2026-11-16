@@ -488,17 +488,20 @@ svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width:
 .price .was { font-size: 13px; color: var(--ink-3); text-decoration: line-through; }
 .price .now.on-request { font-size: 14px; font-weight: 600; color: var(--ink-2); }
 .add {
-  border: 1px solid var(--line); background: var(--surface); border-radius: 8px;
-  padding: 7px 13px; font-size: 13px; font-weight: 700; transition: background .18s, color .18s, border-color .18s;
+  width: 36px; height: 36px; min-width: 36px; max-width: 36px; flex: none;
+  padding: 0; border-radius: 50%; display: grid; place-items: center;
+  border: 1px solid var(--accent); background: var(--accent); color: var(--surface);
+  font-size: 13px; font-weight: 700; transition: background .18s, color .18s, border-color .18s;
 }
-.add:hover:not(:disabled) { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+.add:hover:not(:disabled) { border-color: color-mix(in srgb, var(--accent) 80%, #000); background: color-mix(in srgb, var(--accent) 80%, #000); }
 .add:disabled { opacity: .45; cursor: not-allowed; }
+.add .add-label { display: none; }
+.add .add-ico { display: block; width: 17px; height: 17px; }
 .add.has-qty {
-  background: var(--accent-soft); border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
-  color: var(--accent);
+  background: var(--accent); border-color: var(--accent); color: var(--surface);
 }
-/* أيقونة السلة داخل زر الإضافة: تظهر فقط في الشاشات الصغيرة */
-.add .add-ico { display: none; width: 17px; height: 17px; }
+.add.has-qty .add-ico { display: none; }
+.add.has-qty .add-qty { display: block; }
 
 /* list view */
 .list-view .card { flex-direction: row; align-items: stretch; }
@@ -662,17 +665,6 @@ button.text-link { background: none; border: 0; padding: 0; font: inherit; curso
   .gallery { order: 1; }
 }
 @media (max-width: 620px) {
-  /* زر الإضافة يصبح دائرة خضراء بأيقونة سلة؛ وإن كان المنتج في السلة يظهر العدد بدل الأيقونة */
-  .add { width: 36px; height: 36px; min-width: 36px; max-width: 36px; flex: none; padding: 0; border-radius: 50%; display: grid; place-items: center;
-         background: var(--accent); border-color: var(--accent); color: var(--surface); }
-  .add .add-label { display: none; }
-  .add .add-ico { display: block; }
-  .add.has-qty { background: var(--accent); border-color: var(--accent); color: var(--surface); }
-  .add.has-qty .add-label { display: none; }
-  .add.has-qty .add-ico { display: none; }
-  .add.has-qty .add-qty { display: block; font-size: 13px; font-weight: 700; }
-  .add:disabled .add-label { display: block; font-size: 10.5px; }
-  .add:disabled .add-ico { display: none; }
   .topbar-inner { flex-wrap: wrap; gap: 10px; padding: 12px 16px; }
   .search { order: 3; max-width: none; flex-basis: 100%; }
   .search kbd { display: none; }
