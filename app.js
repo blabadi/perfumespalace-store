@@ -460,7 +460,8 @@
             ${isSale(p) ? `<span class="was">${money(p.compare_at_price)}</span>` : ''}
           </div>
           <button class="add" type="button" data-add="${p.id}" ${soldOut(p) ? 'disabled' : ''}>
-            ${soldOut(p) ? 'نفدت الكمية' : 'أضف'}
+            <svg class="add-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="20" r="1.6"/><circle cx="17.5" cy="20" r="1.6"/><path d="M3 3h2.6l2.5 11.2a1.8 1.8 0 0 0 1.8 1.4h7.6a1.8 1.8 0 0 0 1.8-1.4L20.8 7H6.2"/></svg>
+            <span class="add-label">${soldOut(p) ? 'نفدت الكمية' : 'أضف'}</span>
           </button>
         </div>
       </div>
@@ -700,7 +701,9 @@
       btn.classList.toggle('has-qty', inCart);
       if (btn.disabled) return;
       const base = btn.closest('.card') ? 'أضف' : 'أضف إلى السلة';
-      btn.textContent = inCart ? `في السلة (${qty})` : base;
+      const text = inCart ? `في السلة (${qty})` : base;
+      const label = btn.querySelector('.add-label');
+      if (label) label.textContent = text; else btn.textContent = text;
     });
   }
 

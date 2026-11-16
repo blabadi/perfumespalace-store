@@ -496,6 +496,8 @@ svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width:
   background: var(--accent-soft); border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
   color: var(--accent);
 }
+/* أيقونة السلة داخل زر الإضافة: تظهر فقط في الشاشات الصغيرة */
+.add .add-ico { display: none; width: 17px; height: 17px; }
 
 /* list view */
 .list-view .card { flex-direction: row; align-items: stretch; }
@@ -659,6 +661,16 @@ button.text-link { background: none; border: 0; padding: 0; font: inherit; curso
   .gallery { order: 1; }
 }
 @media (max-width: 620px) {
+  /* زر الإضافة يصبح دائرة خضراء بأيقونة سلة؛ وإن كان المنتج في السلة يظهر العدد بدل الأيقونة */
+  .add { width: 36px; height: 36px; padding: 0; border-radius: 50%; display: grid; place-items: center;
+         background: var(--accent); border-color: var(--accent); color: var(--surface); }
+  .add .add-label { display: none; }
+  .add .add-ico { display: block; }
+  .add.has-qty { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+  .add.has-qty .add-label { display: block; font-size: 12.5px; }
+  .add.has-qty .add-ico { display: none; }
+  .add:disabled .add-label { display: block; font-size: 10.5px; }
+  .add:disabled .add-ico { display: none; }
   .topbar-inner { flex-wrap: wrap; gap: 10px; padding: 12px 16px; }
   .search { order: 3; max-width: none; flex-basis: 100%; }
   .search kbd { display: none; }
