@@ -667,8 +667,9 @@ button.text-link { background: none; border: 0; padding: 0; font: inherit; curso
   .add .add-label { display: none; }
   .add .add-ico { display: block; }
   .add.has-qty { background: var(--accent); border-color: var(--accent); color: var(--surface); }
-  .add.has-qty .add-label { display: block; font-size: 12.5px; }
+  .add.has-qty .add-label { display: none; }
   .add.has-qty .add-ico { display: none; }
+  .add.has-qty .add-qty { display: block; font-size: 13px; font-weight: 700; }
   .add:disabled .add-label { display: block; font-size: 10.5px; }
   .add:disabled .add-ico { display: none; }
   .topbar-inner { flex-wrap: wrap; gap: 10px; padding: 12px 16px; }
