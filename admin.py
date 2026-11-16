@@ -449,18 +449,23 @@ img.thumb{width:54px;height:54px;object-fit:contain;background:#fff;border-radiu
 .acts{display:flex;gap:6px;align-items:center;white-space:nowrap}
 a{color:var(--gold)}
 .empty{padding:40px;text-align:center;color:var(--muted)}
-tr.attrs-row td{background:#161310;border-bottom:1px solid var(--line);padding:10px 8px 12px}
+tr.attrs-row td{background:#161310;border-bottom:1px solid var(--line);padding:10px 14px 12px}
 tr.main-row{cursor:pointer}
-tr.main-row td{cursor:pointer}
-tr.main-row td:has(input){cursor:auto}
+.panel{display:flex;flex-direction:column;gap:8px;max-width:860px}
 .attr{display:flex;gap:6px;margin-bottom:6px;align-items:center}
 .attr input{min-width:0}
 .attr .attr-k{width:170px;flex:none}
 .attr .attr-v{flex:1}
 .attr button{flex:none;padding:4px 10px}
-.attr-head{color:var(--muted);font-size:12px;margin-bottom:6px}
+.attr .name{flex:1}
+.attr-lab{width:64px;flex:none;color:var(--muted);font-size:13px}
+.attr-head{color:var(--muted);font-size:12px;margin:2px 0 6px}
 .attr-add{margin-top:2px}
 button.chev{padding:4px 10px;font-weight:400}
+.name-text{font-weight:600}
+.price-cell{direction:ltr;text-align:left;font-weight:600}
+.muted{color:var(--hide)}
+tr.main-row:hover td{background:#1a1712}
 </style>
 </head>
 <body>
@@ -571,6 +576,14 @@ function rowsHtml(p) {
   return rowHtml(p) + (openRows.has(String(p.id)) ? attrsHtml(p) : '');
 }
 
+// replace a product's main row and any expanded panel row with fresh markup
+function refreshRows(p) {
+  const id = String(p.id);
+  document.querySelectorAll('tr.attrs-row[data-id="' + CSS.escape(id) + '"]').forEach(el => el.remove());
+  const main = document.querySelector('tr.main-row[data-id="' + CSS.escape(id) + '"]');
+  if (main) main.outerHTML = rowsHtml(p);
+}
+
 function rowHtml(p) {
   const d = current(p), dirty = isDirty(p);
   const price = d.price === null || d.price === undefined ? '' : d.price;
@@ -584,10 +597,10 @@ function rowHtml(p) {
   return '<tr data-id="' + p.id + '" class="main-row ' + (dirty ? 'dirty' : '') +
     (d.shown ? '' : ' hidden-row') + '">' +
     '<td>' + (p.image ? '<img class=thumb src=/' + esc(p.image) + ' loading=lazy>' : '') + '</td>' +
-    '<td><input type=text class=name data-f=name value="' + esc(d.name) + '">' +
+    '<td class=name-cell><span class=name-text>' + esc(d.name) + '</span>' +
       '<div class=id>' + esc(p.id) + (p.sku ? ' · ' + esc(p.sku) : '') + '</div>' + attrs + '</td>' +
     '<td class=brand>' + esc(p.brand) + '</td>' +
-    '<td><input type=text class=price data-f=price value="' + esc(price) + '"></td>' +
+    '<td class=price-cell>' + (price === '' ? '<span class=muted>—</span>' : esc(price)) + '</td>' +
     '<td>' + status + '</td>' +
     '<td><label class=shown><input type=checkbox data-f=visible ' + (d.shown ? 'checked' : '') +
       '> ظاهرة</label></td>' +
@@ -611,6 +624,8 @@ function pairsOf(p) {
 
 function attrsHtml(p) {
   const pairs = pairsOf(p);
+  const d = current(p);
+  const price = d.price === null || d.price === undefined ? '' : d.price;
   const rows = pairs.map((pair, i) =>
     '<div class=attr>' +
       '<input type=text class=attr-k data-attr-i=' + i + ' value="' + esc(pair.k) +
@@ -619,11 +634,17 @@ function attrsHtml(p) {
         '" list=attr-vals placeholder="القيمة">' +
       '<button class=ghost data-act=delattr data-attr-i=' + i + ' title="احذف الخاصية">✕</button>' +
     '</div>').join('');
-  return '<tr class=attrs-row data-id="' + p.id + '"><td></td>' +
-    '<td colspan=6>' +
-      '<div class=attr-head>خصائص المنتج — تظهر في صفحة المتجر كجدول مواصفات. اترك المفتاح فارغاً لحذف الخاصية.</div>' +
-      (rows || '<div class=attr-head>لا خصائص بعد.</div>') +
-      '<div class=attr-add><button class=ghost data-act=addattr>+ أضف خاصية</button></div>' +
+  return '<tr class=attrs-row data-id="' + p.id + '">' +
+    '<td colspan=7>' +
+      '<div class=panel>' +
+        '<div class=attr><span class=attr-lab>الاسم</span>' +
+          '<input type=text class=name data-f=name value="' + esc(d.name) + '"></div>' +
+        '<div class=attr><span class=attr-lab>السعر ₪</span>' +
+          '<input type=text class=price data-f=price value="' + esc(price) + '"></div>' +
+        '<div class=attr-head>خصائص المنتج — تظهر في صفحة المتجر كجدول مواصفات. اترك المفتاح فارغاً لحذف الخاصية.</div>' +
+        (rows || '<div class=attr-head>لا خصائص بعد.</div>') +
+        '<div class=attr-add><button class=ghost data-act=addattr>+ أضف خاصية</button></div>' +
+      '</div>' +
     '</td></tr>';
 }
 
@@ -705,7 +726,7 @@ document.addEventListener('change', ev => {
   const tr = ev.target.closest && ev.target.closest('tr');
   if (tr && ev.target.dataset && ev.target.dataset.f === 'visible') {
     const p = state.products.find(x => String(x.id) === tr.dataset.id);
-    tr.outerHTML = rowsHtml(p);
+    refreshRows(p);
     tally();
     return;
   }
@@ -724,7 +745,7 @@ document.addEventListener('click', async ev => {
     if (btn.dataset.act === 'attrs') {
       const id = String(p.id);
       openRows.has(id) ? openRows.delete(id) : openRows.add(id);
-      tr.outerHTML = rowsHtml(p);
+      refreshRows(p);
       return;
     }
     if (btn.dataset.act === 'addattr') {
@@ -753,7 +774,7 @@ document.addEventListener('click', async ev => {
   if (ev.target.closest('input,button,label,a,select,option')) return;
   const id = String(p.id);
   openRows.has(id) ? openRows.delete(id) : openRows.add(id);
-  tr.outerHTML = rowsHtml(p);
+  refreshRows(p);
 });
 
 $('#saveall').addEventListener('click', () => commit(state.products.filter(isDirty).map(editOf)));
