@@ -1,5 +1,5 @@
 {
-  "catalog_feed": "https://catalog.perfumespalace.store/feed.xml",
+  "catalog_feed": "https://www.perfumespalace.store/feed.xml",
   "generated_from": "قصر العطور (2026-11-14)",
   "note": "Rule-based Meta product sets. Push with: python create-sets.py --apply",
   "sets": [
@@ -51,8 +51,8 @@
       ],
       "metadata": {
         "description": "French Avenue — 35 منتج",
-        "external_url": "https://catalog.perfumespalace.store/#brand=French+Avenue",
-        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/08/parfum-nabatieh-french-avenue.jpg"
+        "external_url": "https://www.perfumespalace.store/#brand=French+Avenue",
+        "cover_image_url": "https://www.perfumespalace.store/images/2026/08/parfum-nabatieh-french-avenue.jpg"
       }
     },
     {
@@ -81,8 +81,8 @@
       ],
       "metadata": {
         "description": "Paris Corner — 13 منتج",
-        "external_url": "https://catalog.perfumespalace.store/#brand=Paris+Corner",
-        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/11/2904-camaro-homme-intense-alt.jpg"
+        "external_url": "https://www.perfumespalace.store/#brand=Paris+Corner",
+        "cover_image_url": "https://www.perfumespalace.store/images/2026/11/2904-camaro-homme-intense-alt.jpg"
       }
     },
     {
@@ -110,8 +110,8 @@
       ],
       "metadata": {
         "description": "Fragrance world — 12 منتج",
-        "external_url": "https://catalog.perfumespalace.store/#brand=Fragrance+world",
-        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/11/3513-colosseum-alt.jpg"
+        "external_url": "https://www.perfumespalace.store/#brand=Fragrance+world",
+        "cover_image_url": "https://www.perfumespalace.store/images/2026/11/3513-colosseum-alt.jpg"
       }
     },
     {
@@ -137,8 +137,8 @@
       ],
       "metadata": {
         "description": "Afnan — 10 منتج",
-        "external_url": "https://catalog.perfumespalace.store/#brand=Afnan",
-        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/11/3573-9pm-night-out-tester.jpg"
+        "external_url": "https://www.perfumespalace.store/#brand=Afnan",
+        "cover_image_url": "https://www.perfumespalace.store/images/2026/11/3573-9pm-night-out-tester.jpg"
       }
     },
     {
@@ -163,8 +163,8 @@
       ],
       "metadata": {
         "description": "Alharamin — 9 منتج",
-        "external_url": "https://catalog.perfumespalace.store/#brand=Alharamin",
-        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/11/3568-al-haramin-aqua-dubai-t-alt.jpg"
+        "external_url": "https://www.perfumespalace.store/#brand=Alharamin",
+        "cover_image_url": "https://www.perfumespalace.store/images/2026/11/3568-al-haramin-aqua-dubai-t-alt.jpg"
       }
     },
     {
@@ -187,8 +187,8 @@
       ],
       "metadata": {
         "description": "لطافة Lattafa — 7 منتج",
-        "external_url": "https://catalog.perfumespalace.store/#brand=%D9%84%D8%B7%D8%A7%D9%81%D8%A9+Lattafa",
-        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/08/Khamrah-Dukhan-1_a62cb1af-0737-4709-86c2-f275a5f5b023.png"
+        "external_url": "https://www.perfumespalace.store/#brand=%D9%84%D8%B7%D8%A7%D9%81%D8%A9+Lattafa",
+        "cover_image_url": "https://www.perfumespalace.store/images/2026/08/Khamrah-Dukhan-1_a62cb1af-0737-4709-86c2-f275a5f5b023.png"
       }
     },
     {
@@ -210,8 +210,8 @@
       ],
       "metadata": {
         "description": "Masion Asrar — 6 منتج",
-        "external_url": "https://catalog.perfumespalace.store/#brand=Masion+Asrar",
-        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/11/3351-wadi-masion-asrar-alt.jpg"
+        "external_url": "https://www.perfumespalace.store/#brand=Masion+Asrar",
+        "cover_image_url": "https://www.perfumespalace.store/images/2026/11/3351-wadi-masion-asrar-alt.jpg"
       }
     },
     {
@@ -232,8 +232,8 @@
       ],
       "metadata": {
         "description": "Armaf — 5 منتج",
-        "external_url": "https://catalog.perfumespalace.store/#brand=Armaf",
-        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/11/3488-club-de-nuit-alt.jpg"
+        "external_url": "https://www.perfumespalace.store/#brand=Armaf",
+        "cover_image_url": "https://www.perfumespalace.store/images/2026/11/3488-club-de-nuit-alt.jpg"
       }
     },
     {
@@ -254,8 +254,8 @@
       ],
       "metadata": {
         "description": "Creed — 5 منتج",
-        "external_url": "https://catalog.perfumespalace.store/#brand=Creed",
-        "cover_image_url": "https://catalog.perfumespalace.store/images/2025/08/GIT-4821CR.jpg"
+        "external_url": "https://www.perfumespalace.store/#brand=Creed",
+        "cover_image_url": "https://www.perfumespalace.store/images/2025/08/GIT-4821CR.jpg"
       }
     },
     {
@@ -276,8 +276,8 @@
       ],
       "metadata": {
         "description": "Rue Broca — 5 منتج",
-        "external_url": "https://catalog.perfumespalace.store/#brand=Rue+Broca",
-        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/11/3470-hooked-intensely-alt.jpg"
+        "external_url": "https://www.perfumespalace.store/#brand=Rue+Broca",
+        "cover_image_url": "https://www.perfumespalace.store/images/2026/11/3470-hooked-intensely-alt.jpg"
       }
     },
     {
@@ -297,8 +297,8 @@
       ],
       "metadata": {
         "description": "Dumont Paris — 4 منتج",
-        "external_url": "https://catalog.perfumespalace.store/#brand=Dumont+Paris",
-        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/11/900002-nitr-alt.jpg"
+        "external_url": "https://www.perfumespalace.store/#brand=Dumont+Paris",
+        "cover_image_url": "https://www.perfumespalace.store/images/2026/11/900002-nitr-alt.jpg"
       }
     },
     {
@@ -318,8 +318,8 @@
       ],
       "metadata": {
         "description": "Xerjoff — 4 منتج",
-        "external_url": "https://catalog.perfumespalace.store/#brand=Xerjoff",
-        "cover_image_url": "https://catalog.perfumespalace.store/images/jpg/2025/03/8054320903062-2_jpg_grande.jpg"
+        "external_url": "https://www.perfumespalace.store/#brand=Xerjoff",
+        "cover_image_url": "https://www.perfumespalace.store/images/jpg/2025/03/8054320903062-2_jpg_grande.jpg"
       }
     },
     {
@@ -338,8 +338,8 @@
       ],
       "metadata": {
         "description": "Assaf — 3 منتج",
-        "external_url": "https://catalog.perfumespalace.store/#brand=Assaf",
-        "cover_image_url": "https://catalog.perfumespalace.store/images/jpg/2026/08/assaf-frankel-set-cover.jpg"
+        "external_url": "https://www.perfumespalace.store/#brand=Assaf",
+        "cover_image_url": "https://www.perfumespalace.store/images/jpg/2026/08/assaf-frankel-set-cover.jpg"
       }
     },
     {
@@ -358,8 +358,8 @@
       ],
       "metadata": {
         "description": "Dumel Paris — 3 منتج",
-        "external_url": "https://catalog.perfumespalace.store/#brand=Dumel+Paris",
-        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/11/3201-defender-voille-alt.jpg"
+        "external_url": "https://www.perfumespalace.store/#brand=Dumel+Paris",
+        "cover_image_url": "https://www.perfumespalace.store/images/2026/11/3201-defender-voille-alt.jpg"
       }
     },
     {
@@ -378,8 +378,8 @@
       ],
       "metadata": {
         "description": "Fragrance Delux — 3 منتج",
-        "external_url": "https://catalog.perfumespalace.store/#brand=Fragrance+Delux",
-        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/11/3490-valentine-fragrance-delu-alt.jpg"
+        "external_url": "https://www.perfumespalace.store/#brand=Fragrance+Delux",
+        "cover_image_url": "https://www.perfumespalace.store/images/2026/11/3490-valentine-fragrance-delu-alt.jpg"
       }
     },
     {
@@ -398,8 +398,8 @@
       ],
       "metadata": {
         "description": "Rasasi — 3 منتج",
-        "external_url": "https://catalog.perfumespalace.store/#brand=Rasasi",
-        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/11/3476-hawas-alt.jpg"
+        "external_url": "https://www.perfumespalace.store/#brand=Rasasi",
+        "cover_image_url": "https://www.perfumespalace.store/images/2026/11/3476-hawas-alt.jpg"
       }
     },
     {
@@ -417,8 +417,8 @@
       ],
       "metadata": {
         "description": "BOIS 1920 — 2 منتج",
-        "external_url": "https://catalog.perfumespalace.store/#brand=BOIS+1920",
-        "cover_image_url": "https://catalog.perfumespalace.store/images/2024/06/classic-bois-1920-1.jpg"
+        "external_url": "https://www.perfumespalace.store/#brand=BOIS+1920",
+        "cover_image_url": "https://www.perfumespalace.store/images/2024/06/classic-bois-1920-1.jpg"
       }
     },
     {
@@ -436,8 +436,8 @@
       ],
       "metadata": {
         "description": "GULF ORCHID — 2 منتج",
-        "external_url": "https://catalog.perfumespalace.store/#brand=GULF+ORCHID",
-        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/11/3327-yacht-club-alt.jpg"
+        "external_url": "https://www.perfumespalace.store/#brand=GULF+ORCHID",
+        "cover_image_url": "https://www.perfumespalace.store/images/2026/11/3327-yacht-club-alt.jpg"
       }
     },
     {
@@ -455,8 +455,8 @@
       ],
       "metadata": {
         "description": "Ibraheem Al Qurashi — 2 منتج",
-        "external_url": "https://catalog.perfumespalace.store/#brand=Ibraheem+Al+Qurashi",
-        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/09/yclzhj.jpg"
+        "external_url": "https://www.perfumespalace.store/#brand=Ibraheem+Al+Qurashi",
+        "cover_image_url": "https://www.perfumespalace.store/images/2026/09/yclzhj.jpg"
       }
     },
     {
@@ -474,8 +474,8 @@
       ],
       "metadata": {
         "description": "Maison Alhambra — 2 منتج",
-        "external_url": "https://catalog.perfumespalace.store/#brand=Maison+Alhambra",
-        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/11/2963-your-touch-extrait-eau-alt.jpg"
+        "external_url": "https://www.perfumespalace.store/#brand=Maison+Alhambra",
+        "cover_image_url": "https://www.perfumespalace.store/images/2026/11/2963-your-touch-extrait-eau-alt.jpg"
       }
     },
     {
@@ -493,8 +493,8 @@
       ],
       "metadata": {
         "description": "Orto Parisi — 2 منتج",
-        "external_url": "https://catalog.perfumespalace.store/#brand=Orto+Parisi",
-        "cover_image_url": "https://catalog.perfumespalace.store/images/2025/05/megamare1.jpg"
+        "external_url": "https://www.perfumespalace.store/#brand=Orto+Parisi",
+        "cover_image_url": "https://www.perfumespalace.store/images/2025/05/megamare1.jpg"
       }
     },
     {
@@ -512,8 +512,8 @@
       ],
       "metadata": {
         "description": "Sospiro — 2 منتج",
-        "external_url": "https://catalog.perfumespalace.store/#brand=Sospiro",
-        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/08/DSC02074copy_22043d3e-3c67-43ab-baa2-8efd06c0f899.jpg"
+        "external_url": "https://www.perfumespalace.store/#brand=Sospiro",
+        "cover_image_url": "https://www.perfumespalace.store/images/2026/08/DSC02074copy_22043d3e-3c67-43ab-baa2-8efd06c0f899.jpg"
       }
     },
     {
@@ -531,8 +531,8 @@
       ],
       "metadata": {
         "description": "Woods Collection — 2 منتج",
-        "external_url": "https://catalog.perfumespalace.store/#brand=Woods+Collection",
-        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/11/3293-essence-woods-alt.jpg"
+        "external_url": "https://www.perfumespalace.store/#brand=Woods+Collection",
+        "cover_image_url": "https://www.perfumespalace.store/images/2026/11/3293-essence-woods-alt.jpg"
       }
     },
     {
@@ -550,8 +550,8 @@
       ],
       "metadata": {
         "description": "Zimaya — 2 منتج",
-        "external_url": "https://catalog.perfumespalace.store/#brand=Zimaya",
-        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/11/3492-zimaya-inekas-luna-alt.jpg"
+        "external_url": "https://www.perfumespalace.store/#brand=Zimaya",
+        "cover_image_url": "https://www.perfumespalace.store/images/2026/11/3492-zimaya-inekas-luna-alt.jpg"
       }
     },
     {
@@ -569,8 +569,8 @@
       ],
       "metadata": {
         "description": "العز للعود — 2 منتج",
-        "external_url": "https://catalog.perfumespalace.store/#brand=%D8%A7%D9%84%D8%B9%D8%B2+%D9%84%D9%84%D8%B9%D9%88%D8%AF",
-        "cover_image_url": "https://catalog.perfumespalace.store/images/2026/11/3516-2-alt.jpg"
+        "external_url": "https://www.perfumespalace.store/#brand=%D8%A7%D9%84%D8%B9%D8%B2+%D9%84%D9%84%D8%B9%D9%88%D8%AF",
+        "cover_image_url": "https://www.perfumespalace.store/images/2026/11/3516-2-alt.jpg"
       }
     }
   ]

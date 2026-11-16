@@ -135,6 +135,7 @@ def rows_for_page():
             "sold_out": sold_out(p),
             "reason": why_hidden(p, meta),
             "image": images[0] if images else "",
+            "attributes": p.get("attributes") or {},
         })
     return out, meta
 
@@ -221,6 +222,33 @@ def apply_edit(products, meta, payload):
             elif row.get(FLAG) is None or truthy(row[FLAG]) != want:
                 row[FLAG] = want
                 changes.append("visibility: %s" % ("shown" if want else "hidden"))
+
+    if "attributes" in payload:
+        raw = payload.get("attributes")
+        if not isinstance(raw, dict):
+            raise ValueError("attributes must be an object of key: value")
+        clean = {}
+        for key, value in raw.items():
+            key = str(key).strip()
+            if not key:
+                continue                     # a pair with no key is dropped
+            if key in clean:
+                raise ValueError("duplicate attribute key: %s" % key)
+            clean[key] = str(value).strip()
+        current = row.get("attributes") or {}
+        if clean != current:
+            for key in sorted(set(current) | set(clean)):
+                old, new = current.get(key), clean.get(key)
+                if old == new:
+                    continue
+                changes.append("خاصية %s: %s -> %s" % (
+                    key,
+                    old if old not in (None, "") else "(لا شيء)",
+                    new if new else "(حُذفت)"))
+            if clean:
+                row["attributes"] = clean
+            elif "attributes" in row:
+                del row["attributes"]
 
     return changes
 
@@ -421,6 +449,18 @@ img.thumb{width:54px;height:54px;object-fit:contain;background:#fff;border-radiu
 .acts{display:flex;gap:6px;align-items:center;white-space:nowrap}
 a{color:var(--gold)}
 .empty{padding:40px;text-align:center;color:var(--muted)}
+tr.attrs-row td{background:#161310;border-bottom:1px solid var(--line);padding:10px 8px 12px}
+tr.main-row{cursor:pointer}
+tr.main-row td{cursor:pointer}
+tr.main-row td:has(input){cursor:auto}
+.attr{display:flex;gap:6px;margin-bottom:6px;align-items:center}
+.attr input{min-width:0}
+.attr .attr-k{width:170px;flex:none}
+.attr .attr-v{flex:1}
+.attr button{flex:none;padding:4px 10px}
+.attr-head{color:var(--muted);font-size:12px;margin-bottom:6px}
+.attr-add{margin-top:2px}
+button.chev{padding:4px 10px;font-weight:400}
 </style>
 </head>
 <body>
@@ -462,6 +502,7 @@ a{color:var(--gold)}
 const $ = s => document.querySelector(s);
 let state = {products: [], rev: '', counts: {}};
 const draft = new Map();
+const openRows = new Set();   // product ids whose attribute editor is expanded
 
 async function api(url, body) {
   const opt = body ? {method: 'POST', headers: {'content-type': 'application/json'},
@@ -510,7 +551,13 @@ function current(p) { return draft.has(p.id) ? draft.get(p.id) : p; }
 function isDirty(p) {
   const d = draft.get(p.id);
   return !!d && (d.name !== p.name || String(d.price) !== String(p.price) ||
-                 d.visible !== p.visible);
+                 d.visible !== p.visible || !sameAttrs(d.attrs, p.attributes));
+}
+
+function sameAttrs(pairs, obj) {
+  const original = Object.entries(obj || {}).map(e => ({k: e[0], v: String(e[1] == null ? '' : e[1])}));
+  if (pairs.length !== original.length) return false;
+  return pairs.every((pair, i) => pair.k === original[i].k && pair.v === original[i].v);
 }
 
 function visibleWanted(p, checked) {
@@ -518,6 +565,10 @@ function visibleWanted(p, checked) {
   // sold-out row that the bulk switch would hide, which needs an explicit true
   if (!checked) return false;
   return p.sold_out ? true : null;
+}
+
+function rowsHtml(p) {
+  return rowHtml(p) + (openRows.has(String(p.id)) ? attrsHtml(p) : '');
 }
 
 function rowHtml(p) {
@@ -528,19 +579,51 @@ function rowHtml(p) {
   else if (p.sold_out) status = '<span class=tag oos>نفدت الكمية</span>';
   if (!d.shown) status += ' <span class=tag off>مخفية' + (p.reason ? ': ' + esc(p.reason) : '') + '</span>';
   else if (p.visible !== null && p.visible !== undefined) status += ' <span class=tag off>علامة يدوية</span>';
-  return '<tr data-id="' + p.id + '" class="' + (dirty ? 'dirty' : '') +
+  const attrs = p.attributes && Object.keys(p.attributes).length
+    ? ' <span class=tag>' + esc(Object.keys(p.attributes).join(' · ')) + '</span>' : '';
+  return '<tr data-id="' + p.id + '" class="main-row ' + (dirty ? 'dirty' : '') +
     (d.shown ? '' : ' hidden-row') + '">' +
     '<td>' + (p.image ? '<img class=thumb src=/' + esc(p.image) + ' loading=lazy>' : '') + '</td>' +
     '<td><input type=text class=name data-f=name value="' + esc(d.name) + '">' +
-      '<div class=id>' + esc(p.id) + (p.sku ? ' · ' + esc(p.sku) : '') + '</div></td>' +
+      '<div class=id>' + esc(p.id) + (p.sku ? ' · ' + esc(p.sku) : '') + '</div>' + attrs + '</td>' +
     '<td class=brand>' + esc(p.brand) + '</td>' +
     '<td><input type=text class=price data-f=price value="' + esc(price) + '"></td>' +
     '<td>' + status + '</td>' +
     '<td><label class=shown><input type=checkbox data-f=visible ' + (d.shown ? 'checked' : '') +
       '> ظاهرة</label></td>' +
     '<td class=acts><button data-act=save ' + (dirty ? '' : 'disabled') + '>حفظ</button>' +
+      '<button class=ghost chev data-act=attrs title="خصائص إضافية: الحجم والتصنيف">' +
+      (openRows.has(String(p.id)) ? 'خواص ▴' : 'خواص ▾') + '</button>' +
       (p.visible === null || p.visible === undefined ? '' :
        '<button class=ghost data-act=clear title="أزل العلامة اليدوية وارجع للقاعدة العامة">أزل</button>') +
+    '</td></tr>';
+}
+
+const ATTR_KEYS = ['التصنيف', 'الحجم'];
+const ATTR_VALUES = ['بدائل', 'ديزاينر', 'نيش', 'علبة اصلية كاملة (100 مل)', 'علبة كاملة اصلية', 'تقسيمة 10 مل', 'تقسيمة 5 مل', '75 ml', '60 ml', '50 ml'];
+
+function pairsOf(p) {
+  // the pairs being edited: the draft if one exists, else the saved attributes
+  const d = draft.get(p.id);
+  if (d && d.attrs) return d.attrs;
+  return Object.entries(p.attributes || {}).map(e => ({k: e[0], v: String(e[1] == null ? '' : e[1])}));
+}
+
+function attrsHtml(p) {
+  const pairs = pairsOf(p);
+  const rows = pairs.map((pair, i) =>
+    '<div class=attr>' +
+      '<input type=text class=attr-k data-attr-i=' + i + ' value="' + esc(pair.k) +
+        '" list=attr-keys placeholder="الخاصية">' +
+      '<input type=text class=attr-v data-attr-i=' + i + ' value="' + esc(pair.v) +
+        '" list=attr-vals placeholder="القيمة">' +
+      '<button class=ghost data-act=delattr data-attr-i=' + i + ' title="احذف الخاصية">✕</button>' +
+    '</div>').join('');
+  return '<tr class=attrs-row data-id="' + p.id + '"><td></td>' +
+    '<td colspan=6>' +
+      '<div class=attr-head>خصائص المنتج — تظهر في صفحة المتجر كجدول مواصفات. اترك المفتاح فارغاً لحذف الخاصية.</div>' +
+      (rows || '<div class=attr-head>لا خصائص بعد.</div>') +
+      '<div class=attr-add><button class=ghost data-act=addattr>+ أضف خاصية</button></div>' +
     '</td></tr>';
 }
 
@@ -568,20 +651,41 @@ function render() {
     if (filter === 'dirty' && !isDirty(p)) return false;
     return true;
   });
-  $('#rows').innerHTML = list.map(rowHtml).join('');
+  $('#rows').innerHTML = list.map(rowsHtml).join('');
   $('#empty').style.display = list.length ? 'none' : 'block';
   tally();
 }
 
 function editOf(p) {
-  return draft.get(p.id) || {id: p.id, name: p.name, price: p.price, visible: p.visible,
-                             shown: p.shown, sold_out: p.sold_out};
+  if (draft.has(p.id)) return draft.get(p.id);
+  return {id: p.id, name: p.name, price: p.price, visible: p.visible,
+          shown: p.shown, sold_out: p.sold_out,
+          attrs: Object.entries(p.attributes || {}).map(e => ({k: e[0], v: String(e[1] == null ? '' : e[1])}))};
 }
 
 document.addEventListener('input', ev => {
   const tr = ev.target.closest('tr');
-  if (!tr || !ev.target.dataset.f) return;
+  if (!tr) return;
   const p = state.products.find(x => String(x.id) === tr.dataset.id);
+  if (!p) return;
+
+  // attribute key/value fields inside the expanded row
+  if (ev.target.dataset && ev.target.dataset.attrI !== undefined) {
+    const d = editOf(p);
+    const i = Number(ev.target.dataset.attrI);
+    if (!d.attrs[i]) d.attrs[i] = {k: '', v: ''};
+    if (ev.target.classList.contains('attr-k')) d.attrs[i].k = ev.target.value;
+    else d.attrs[i].v = ev.target.value;
+    draft.set(p.id, d);
+    const dirty = isDirty(p);
+    tr.classList.toggle('dirty', dirty);
+    const main = document.querySelector('tr.main-row[data-id="' + p.id + '"]');
+    if (main) main.querySelector('button[data-act=save]').disabled = !dirty;
+    tally();
+    return;
+  }
+
+  if (!ev.target.dataset.f) return;
   const d = editOf(p);
   if (ev.target.dataset.f === 'visible') d.shown = ev.target.checked;
   else if (ev.target.dataset.f === 'price') d.price = ev.target.value.trim() === '' ? null : ev.target.value.trim();
@@ -601,7 +705,7 @@ document.addEventListener('change', ev => {
   const tr = ev.target.closest && ev.target.closest('tr');
   if (tr && ev.target.dataset && ev.target.dataset.f === 'visible') {
     const p = state.products.find(x => String(x.id) === tr.dataset.id);
-    tr.outerHTML = rowHtml(p);
+    tr.outerHTML = rowsHtml(p);
     tally();
     return;
   }
@@ -610,19 +714,55 @@ document.addEventListener('change', ev => {
 
 document.addEventListener('click', async ev => {
   const btn = ev.target.closest('button[data-act]');
-  if (!btn) return;
   const tr = ev.target.closest('tr');
-  const p = state.products.find(x => String(x.id) === tr.dataset.id);
-  if (btn.dataset.act === 'save') return commit([editOf(p)]);
-  if (btn.dataset.act === 'clear') {
-    return commit([{id: p.id, visible: null}]);
+  const p = tr && state.products.find(x => String(x.id) === tr.dataset.id);
+
+  if (btn) {
+    if (!p) return;
+    if (btn.dataset.act === 'save') return commit([editOf(p)]);
+    if (btn.dataset.act === 'clear') return commit([{id: p.id, visible: null}]);
+    if (btn.dataset.act === 'attrs') {
+      const id = String(p.id);
+      openRows.has(id) ? openRows.delete(id) : openRows.add(id);
+      tr.outerHTML = rowsHtml(p);
+      return;
+    }
+    if (btn.dataset.act === 'addattr') {
+      const d = editOf(p);
+      d.attrs.push({k: '', v: ''});
+      draft.set(p.id, d);
+      tr.outerHTML = attrsHtml(p);   // replace only the attribute row, not the pair
+      // focus the new key input
+      const fresh = document.querySelectorAll('tr.attrs-row[data-id="' + p.id + '"] .attr-k');
+      if (fresh.length) fresh[fresh.length - 1].focus();
+      return;
+    }
+    if (btn.dataset.act === 'delattr') {
+      const d = editOf(p);
+      d.attrs.splice(Number(btn.dataset.attrI), 1);
+      draft.set(p.id, d);
+      tr.outerHTML = attrsHtml(p);
+      tally();
+      return;
+    }
+    return;
   }
+
+  // clicking anywhere else on the main row expands/collapses the attribute editor
+  if (!p || tr.classList.contains('attrs-row')) return;
+  if (ev.target.closest('input,button,label,a,select,option')) return;
+  const id = String(p.id);
+  openRows.has(id) ? openRows.delete(id) : openRows.add(id);
+  tr.outerHTML = rowsHtml(p);
 });
 
 $('#saveall').addEventListener('click', () => commit(state.products.filter(isDirty).map(editOf)));
 
 async function commit(edits) {
-  const body = edits.map(e => ({id: e.id, name: e.name, price: e.price, visible: e.visible}));
+  const body = edits.map(e => ({id: e.id, name: e.name, price: e.price, visible: e.visible,
+    attributes: Object.fromEntries((e.attrs || [])
+      .filter(pair => pair.k.trim())
+      .map(pair => [pair.k.trim(), pair.v.trim()]))}));
   try {
     const out = await api('/api/save', {rev: state.rev, edits: body});
     if (out.saved) {
@@ -640,6 +780,9 @@ async function commit(edits) {
       if (e.name !== undefined) p.name = e.name;
       if (e.price !== undefined) p.price = e.price;
       if ('visible' in e) { p.visible = e.visible; p.shown = e.visible === null ? !p.sold_out || state.counts.show_out_of_stock : !!e.visible; }
+      if (e.attrs) p.attributes = Object.fromEntries(e.attrs
+        .filter(pair => pair.k.trim())
+        .map(pair => [pair.k.trim(), pair.v.trim()]));
     });
     render();
   } catch (e) {
@@ -684,6 +827,22 @@ $('#publish').addEventListener('click', async () => {
 $('#q').addEventListener('input', () => render());
 load();
 </script>
+<datalist id=attr-keys>
+  <option>التصنيف</option>
+  <option>الحجم</option>
+</datalist>
+<datalist id=attr-vals>
+  <option>بدائل</option>
+  <option>ديزاينر</option>
+  <option>نيش</option>
+  <option>علبة اصلية كاملة (100 مل)</option>
+  <option>علبة كاملة اصلية</option>
+  <option>تقسيمة 10 مل</option>
+  <option>تقسيمة 5 مل</option>
+  <option>75 ml</option>
+  <option>60 ml</option>
+  <option>50 ml</option>
+</datalist>
 </body>
 </html>
 """
