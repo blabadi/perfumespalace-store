@@ -661,11 +661,19 @@
     return lines;
   }
 
+  function updateCartBadge() {
+    // لا تظهر الشارة إلا عندما يوجد منتجات في السلة.
+    const n = cartUnits();
+    const el = $('#cart-count');
+    el.textContent = String(n);
+    el.classList.toggle('is-empty', n === 0);
+  }
+
   function saveCart() {
     const obj = {};
     cart.forEach((qty, id) => { obj[id] = qty; });
     localStorage.setItem(CART_KEY, JSON.stringify(obj));
-    $('#cart-count').textContent = cartUnits();
+    updateCartBadge();
     syncAddButtons();
     renderCart();
   }
@@ -1332,7 +1340,7 @@
   async function init() {
     const savedTheme = localStorage.getItem('northline_theme');
     if (savedTheme) document.documentElement.dataset.theme = savedTheme;
-    $('#cart-count').textContent = cartUnits();
+    updateCartBadge();
     $('#grid').innerHTML = skeleton().repeat(8);
 
     try {
