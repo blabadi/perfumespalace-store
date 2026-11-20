@@ -65,10 +65,10 @@
       },
       "items": 13,
       "ids": [
+        "2959",
         "2904",
         "2903",
         "2897",
-        "2866",
         "2863",
         "2857",
         "2812",
@@ -82,7 +82,35 @@
       "metadata": {
         "description": "Paris Corner — 13 منتج",
         "external_url": "https://www.perfumespalace.store/#brand=Paris+Corner",
-        "cover_image_url": "https://www.perfumespalace.store/images/2026/11/2904-camaro-homme-intense-alt.jpg"
+        "cover_image_url": "https://www.perfumespalace.store/images/2026/11/2959-prodigy-eau-de-parfum-alt.jpg"
+      }
+    },
+    {
+      "name": "Afnan",
+      "retailer_id": "set_afnan",
+      "filter": {
+        "brand": {
+          "eq": "Afnan"
+        }
+      },
+      "items": 11,
+      "ids": [
+        "3573",
+        "3511",
+        "3147",
+        "3128",
+        "2854",
+        "2845",
+        "2841",
+        "2581",
+        "2579",
+        "2381",
+        "2376"
+      ],
+      "metadata": {
+        "description": "Afnan — 11 منتج",
+        "external_url": "https://www.perfumespalace.store/#brand=Afnan",
+        "cover_image_url": "https://www.perfumespalace.store/images/2026/11/3573-9pm-night-out-tester.jpg"
       }
     },
     {
@@ -93,7 +121,7 @@
           "eq": "Fragrance world"
         }
       },
-      "items": 12,
+      "items": 11,
       "ids": [
         "3513",
         "3199",
@@ -105,40 +133,12 @@
         "2573",
         "2571",
         "2568",
-        "2566",
         "2563"
       ],
       "metadata": {
-        "description": "Fragrance world — 12 منتج",
+        "description": "Fragrance world — 11 منتج",
         "external_url": "https://www.perfumespalace.store/#brand=Fragrance+world",
         "cover_image_url": "https://www.perfumespalace.store/images/2026/11/3513-colosseum-alt.jpg"
-      }
-    },
-    {
-      "name": "Afnan",
-      "retailer_id": "set_afnan",
-      "filter": {
-        "brand": {
-          "eq": "Afnan"
-        }
-      },
-      "items": 10,
-      "ids": [
-        "3573",
-        "3511",
-        "3147",
-        "3128",
-        "2854",
-        "2845",
-        "2841",
-        "2579",
-        "2381",
-        "2376"
-      ],
-      "metadata": {
-        "description": "Afnan — 10 منتج",
-        "external_url": "https://www.perfumespalace.store/#brand=Afnan",
-        "cover_image_url": "https://www.perfumespalace.store/images/2026/11/3573-9pm-night-out-tester.jpg"
       }
     },
     {
@@ -168,30 +168,6 @@
       }
     },
     {
-      "name": "لطافة Lattafa",
-      "retailer_id": "set_lattafa",
-      "filter": {
-        "brand": {
-          "eq": "لطافة Lattafa"
-        }
-      },
-      "items": 7,
-      "ids": [
-        "3535",
-        "2966",
-        "2808",
-        "2683",
-        "2682",
-        "2656",
-        "2555"
-      ],
-      "metadata": {
-        "description": "لطافة Lattafa — 7 منتج",
-        "external_url": "https://www.perfumespalace.store/#brand=%D9%84%D8%B7%D8%A7%D9%81%D8%A9+Lattafa",
-        "cover_image_url": "https://www.perfumespalace.store/images/2026/08/Khamrah-Dukhan-1_a62cb1af-0737-4709-86c2-f275a5f5b023.png"
-      }
-    },
-    {
       "name": "Masion Asrar",
       "retailer_id": "set_masion_asrar",
       "filter": {
@@ -212,6 +188,29 @@
         "description": "Masion Asrar — 6 منتج",
         "external_url": "https://www.perfumespalace.store/#brand=Masion+Asrar",
         "cover_image_url": "https://www.perfumespalace.store/images/2026/11/3351-wadi-masion-asrar-alt.jpg"
+      }
+    },
+    {
+      "name": "لطافة Lattafa",
+      "retailer_id": "set_lattafa",
+      "filter": {
+        "brand": {
+          "eq": "لطافة Lattafa"
+        }
+      },
+      "items": 6,
+      "ids": [
+        "3535",
+        "2966",
+        "2808",
+        "2682",
+        "2656",
+        "2555"
+      ],
+      "metadata": {
+        "description": "لطافة Lattafa — 6 منتج",
+        "external_url": "https://www.perfumespalace.store/#brand=%D9%84%D8%B7%D8%A7%D9%81%D8%A9+Lattafa",
+        "cover_image_url": "https://www.perfumespalace.store/images/2026/08/Khamrah-Dukhan-1_a62cb1af-0737-4709-86c2-f275a5f5b023.png"
       }
     },
     {
@@ -343,26 +342,6 @@
       }
     },
     {
-      "name": "Dumel Paris",
-      "retailer_id": "set_dumel_paris",
-      "filter": {
-        "brand": {
-          "eq": "Dumel Paris"
-        }
-      },
-      "items": 3,
-      "ids": [
-        "3201",
-        "3062",
-        "3057"
-      ],
-      "metadata": {
-        "description": "Dumel Paris — 3 منتج",
-        "external_url": "https://www.perfumespalace.store/#brand=Dumel+Paris",
-        "cover_image_url": "https://www.perfumespalace.store/images/2026/11/3201-defender-voille-alt.jpg"
-      }
-    },
-    {
       "name": "Fragrance Delux",
       "retailer_id": "set_fragrance_delux",
       "filter": {
@@ -419,6 +398,25 @@
         "description": "BOIS 1920 — 2 منتج",
         "external_url": "https://www.perfumespalace.store/#brand=BOIS+1920",
         "cover_image_url": "https://www.perfumespalace.store/images/2024/06/classic-bois-1920-1.jpg"
+      }
+    },
+    {
+      "name": "Dumel Paris",
+      "retailer_id": "set_dumel_paris",
+      "filter": {
+        "brand": {
+          "eq": "Dumel Paris"
+        }
+      },
+      "items": 2,
+      "ids": [
+        "3062",
+        "3057"
+      ],
+      "metadata": {
+        "description": "Dumel Paris — 2 منتج",
+        "external_url": "https://www.perfumespalace.store/#brand=Dumel+Paris",
+        "cover_image_url": "https://www.perfumespalace.store/images/2026/11/3062-dangerous-alt.jpg"
       }
     },
     {

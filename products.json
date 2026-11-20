@@ -1362,7 +1362,8 @@
       },
       "tags": [],
       "description": "بديل واي – واي اس ال الكسير مشابه ل : YSL Y Elixir",
-      "categories": []
+      "categories": [],
+      "visible": false
     },
     {
       "id": 3199,
@@ -2300,7 +2301,7 @@
       "name": "Prodigy – Eau de Parfum بروديجي",
       "brand": "Paris Corner",
       "category": "للجنسين",
-      "price": 139.0,
+      "price": 100.0,
       "compare_at_price": 170.0,
       "rating": 0.0,
       "reviews": 0,
@@ -2317,8 +2318,7 @@
       "description": "مستوحى من Alexandria II – مزيج فاخر من البرتقال، التونكا، والمسك مشابه ل : Xerjoff Alexandria II",
       "categories": [
         "للجنسين"
-      ],
-      "visible": false
+      ]
     },
     {
       "id": 2957,
@@ -2400,7 +2400,7 @@
       "name": "Club de nuit Iconic كلوب دي نويت ايكونيك",
       "brand": "Armaf",
       "category": "رجالي",
-      "price": 149.0,
+      "price": 140.0,
       "compare_at_price": 220.0,
       "rating": 0.0,
       "reviews": 0,
@@ -2731,7 +2731,8 @@
       "description": "بديل فرزاتشي ايروس مشابه ل : Versace Eros",
       "categories": [
         "رجالي"
-      ]
+      ],
+      "visible": false
     },
     {
       "id": 2863,
@@ -3505,7 +3506,8 @@
       "description": "بديل شانيل الور سبورت مشابه ل : Chanel Allure Homme Sport",
       "categories": [
         "رجالي"
-      ]
+      ],
+      "visible": false
     },
     {
       "id": 2682,
@@ -3858,8 +3860,7 @@
       "description": "",
       "categories": [
         "نسائي"
-      ],
-      "visible": false
+      ]
     },
     {
       "id": 2579,
@@ -4010,7 +4011,8 @@
       "description": "بديل توكسيدو من واي اس ال مشابه ل : YSL Tuxedo",
       "categories": [
         "رجالي"
-      ]
+      ],
+      "visible": false
     },
     {
       "id": 2563,
