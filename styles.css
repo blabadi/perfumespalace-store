@@ -1,5 +1,6 @@
 /* ============ tokens ============ */
 :root {
+  --gutter: 24px;
   --bg: #f6f4f0;
   --surface: #ffffff;
   --surface-2: #fbfaf8;
@@ -46,7 +47,7 @@
 * { box-sizing: border-box; }
 /* Author display rules beat the UA [hidden] rule — enforce it so hidden overlays stay hidden. */
 [hidden] { display: none !important; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: clip; }
 body {
   margin: 0;
   background: var(--bg);
@@ -286,7 +287,7 @@ svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width:
 
 /* ============ layout ============ */
 .layout {
-  max-width: var(--maxw); margin: 0 auto; padding: 28px 24px 60px;
+  max-width: var(--maxw); margin: 0 auto; padding: 28px var(--gutter) 60px;
   display: grid; grid-template-columns: 272px minmax(0, 1fr); gap: 32px;
   align-items: start;
 }
@@ -394,7 +395,11 @@ svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width:
   padding: 10px 0 12px; margin: -2px 0 16px;
   border-bottom: 1px solid transparent; transition: border-color .2s, box-shadow .2s;
 }
-.results-head.is-stuck { border-bottom-color: var(--line); box-shadow: 0 12px 22px -20px rgba(27,26,23,.6); }
+.results-head.is-stuck {
+  /* شريط بعرض الشاشة: الامتداد نفسه يحسبه app.js في watchStuck */
+  background: var(--bg);
+  border-bottom-color: var(--line); box-shadow: 0 12px 22px -20px rgba(27,26,23,.6);
+}
 .results-bar { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 .count { margin: 0; font-size: 14px; color: var(--ink-2); }
 .count b { color: var(--ink); }
@@ -668,7 +673,8 @@ button.text-link { background: none; border: 0; padding: 0; font: inherit; curso
   .topbar-inner { flex-wrap: wrap; gap: 10px; padding: 12px 16px; }
   .search { order: 3; max-width: none; flex-basis: 100%; }
   .search kbd { display: none; }
-  .hero-inner, .layout, .footer p { padding-inline: 16px; }
+  .hero-inner, .footer p { padding-inline: 16px; }
+  .layout { --gutter: 16px; }
   .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
   .list-view .card { flex-direction: column; }
   .list-view .card-media { width: 100%; }

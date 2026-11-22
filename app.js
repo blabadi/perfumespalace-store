@@ -891,7 +891,27 @@
     const head = $('#results-head'), sentinel = $('.stuck-sentinel');
     if (!head || !sentinel) return;
     const limit = parseFloat(getComputedStyle(head).top) || 0;
-    head.classList.toggle('is-stuck', sentinel.getBoundingClientRect().top < limit - 1);
+    const stuck = sentinel.getBoundingClientRect().top < limit - 1;
+    head.classList.toggle('is-stuck', stuck);
+    // عند التصاقه يمتد الشريط من حافة الشاشة إلى الأخرى، ويبقى المحتوى
+    // محاذياً لعمود النتائج: الامتداد يُحسب من موضع العمود الفعلي
+    // (الشريط يلتصق رأسياً فقط، فالموضع الأفقي ثابت).
+    if (stuck) {
+      const col = head.parentElement.getBoundingClientRect();
+      const W = document.documentElement.clientWidth;
+      const rtl = document.documentElement.dir === 'rtl';
+      const extStart = Math.max(0, rtl ? W - col.right : col.left);
+      const extEnd = Math.max(0, rtl ? col.left : W - col.right);
+      head.style.marginInlineStart = -extStart + 'px';
+      head.style.marginInlineEnd = -extEnd + 'px';
+      head.style.paddingInlineStart = extStart + 'px';
+      head.style.paddingInlineEnd = extEnd + 'px';
+    } else {
+      head.style.marginInlineStart = '';
+      head.style.marginInlineEnd = '';
+      head.style.paddingInlineStart = '';
+      head.style.paddingInlineEnd = '';
+    }
   }
 
   /* ---------- الواجهة العلوية المتحركة ---------- */
