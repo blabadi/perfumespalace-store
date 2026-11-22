@@ -43,6 +43,27 @@
   const isSale = (p) => p.compare_at_price != null && p.price != null && p.compare_at_price > p.price;
   const discount = (p) => isSale(p) ? Math.round((1 - p.price / p.compare_at_price) * 100) : 0;
 
+  // الحزم: منتج يضم عدة منتجات بسعر واحد. BY_ID يُبنى بعد تحميل الكتالوج.
+  let BY_ID = new Map();
+  const isBundle = (p) => Array.isArray(p.bundle) && p.bundle.length > 0;
+  const bundleMembers = (p) => (p.bundle || []).map((id) => BY_ID.get(String(id))).filter(Boolean);
+
+  // صورة الحزمة: كولاج من صور المنتجات داخلها، يتغير التصميم حسب العدد.
+  function collageHtml(p) {
+    const imgs = bundleMembers(p).map((m) => m.images && m.images[0]).filter(Boolean).slice(0, 6);
+    const n = imgs.length;
+    if (!n) return imgTag(p);
+    const cell = (src) => `<div class="cell"><img src="${esc(src)}" alt="" loading="lazy"></div>`;
+    let inner;
+    if (n === 1) inner = cell(imgs[0]);
+    else if (n === 2) inner = imgs.map(cell).join('');
+    else if (n === 3) inner = `<div class="big">${cell(imgs[0])}</div>` + imgs.slice(1).map(cell).join('');
+    else if (n === 5) inner = imgs.slice(0, 3).map(cell).join('')
+      + `<div class="col2">${imgs.slice(3, 5).map(cell).join('')}</div>`;
+    else inner = imgs.map(cell).join('');
+    return `<div class="collage c${Math.min(Math.max(n, 2), 6)}">${inner}</div>`;
+  }
+
   // الكمية: 0 = نفدت، null = متوفرة بكمية غير معلنة.
   const soldOut = (p) => p.stock === 0 || p.stock === '0';
   const lowStock = (p) => typeof p.stock === 'number' && p.stock > 0 && p.stock <= 8;
@@ -185,8 +206,10 @@
   /* ---------- التصفية ---------- */
   function textMatch(p) {
     const attrs = Object.keys(p.attributes || {}).flatMap((k) => attrValues(p, k));
-    const hay = norm([p.name, p.brand, p.category, p.sku, p.description,
-      ...(p.tags || []), ...attrs].join(' '));
+    const parts = [p.name, p.brand, p.category, p.sku, p.description, ...(p.tags || []), ...attrs];
+    // الحزمة تُوجد بالبحث عن أي منتج داخلها.
+    if (isBundle(p)) for (const m of bundleMembers(p)) parts.push(m.name, m.brand);
+    const hay = norm(parts.join(' '));
     return norm(state.q).split(/\s+/).filter(Boolean).every((w) => hay.includes(w));
   }
 
@@ -434,16 +457,17 @@
     const specs = Object.keys(p.attributes || {}).slice(0, 3)
       .map((k) => `<li>${esc(label(k))}: ${esc(attrDisplay(p, k))}</li>`).join('');
     const badges = [];
+    if (isBundle(p)) badges.push(`<span class="badge bundle">حزمة من ${bundleMembers(p).length}</span>`);
     if (isSale(p)) badges.push(`<span class="badge sale">خصم ${discount(p)}%</span>`);
     if (isNew(p)) badges.push('<span class="badge new">جديد</span>');
     if (soldOut(p)) badges.push('<span class="badge sold">نفدت الكمية</span>');
     else if (lowStock(p)) badges.push(`<span class="badge low">بقي ${p.stock} فقط</span>`);
 
-    return `<article class="card${isSale(p) ? ' onsale' : ''}" data-id="${p.id}">
+    return `<article class="card${isBundle(p) ? ' bundle' : ''}${isSale(p) ? ' onsale' : ''}" data-id="${p.id}">
       <div class="card-media">
         <button class="media-open" type="button" data-quick="${p.id}"
                 aria-label="عرض تفاصيل «${esc(p.name)}»">
-          ${p.images && p.images.length > 1 ? rotThumb(p) : imgTag(p)}
+          ${isBundle(p) ? collageHtml(p) : (p.images && p.images.length > 1 ? rotThumb(p) : imgTag(p))}
           <span class="quick" aria-hidden="true">عرض تفاصيل المنتج</span>
         </button>
         <div class="badges">${badges.join('')}</div>
@@ -566,6 +590,7 @@
   function openModal(id, push = true) {
     const p = DATA.products.find((x) => x.id === Number(id));
     if (!p) return;
+    if (isBundle(p)) return openBundleModal(p, push);
     openProductId = Number(p.id);
     const images = p.images && p.images.length ? p.images : [null];
     const rows = Object.keys(p.attributes || {})
@@ -625,6 +650,53 @@
         $$('#modal .thumbs button').forEach((b) => b.classList.toggle('is-active', b === btn));
       });
     });
+  }
+
+  function openBundleModal(p, push) {
+    const members = bundleMembers(p);
+    const sum = members.reduce((a, m) => a + (m.price ?? 0), 0);
+    const rows = members.map((m) => `
+      <div class="bundle-row">
+        <img src="${esc(m.images && m.images[0] || placeholder(m))}" alt="" loading="lazy">
+        <span class="bundle-row-name">${esc(m.name)}</span>
+        ${m.price != null ? `<span class="bundle-row-price">${money(m.price)}</span>` : ''}
+      </div>`).join('');
+    const wa = String((DATA.meta || {}).whatsapp || '').replace(/\D/g, '');
+    const waLink = wa ? `<a class="text-link" href="https://wa.me/${esc(wa)}" target="_blank" rel="noopener noreferrer">اطلب عبر واتساب</a>` : '';
+
+    $('#modal-body').innerHTML = `<div class="modal-grid">
+      <div class="gallery">
+        <div class="main bundle-main">${collageHtml(p)}</div>
+      </div>
+      <div class="detail">
+        <p class="brand">${esc(p.brand)} · <span class="sku">${esc(p.sku || '')}</span></p>
+        <h2 id="modal-title">${esc(p.name)}</h2>
+        <p class="desc">حزمة تضم ${members.length} منتجات أصلية بسعر واحد:</p>
+        <div class="bundle-rows">${rows}</div>
+        <div class="price">
+          <span class="now">${priceText(p)}</span>
+          ${sum > 0 && p.price != null && sum > p.price ? `<span class="was">${money(sum)}</span>
+            <span class="badge sale">وفّر ${money(sum - p.price)}</span>` : ''}
+        </div>
+        <p class="stock-line ${soldOut(p) ? 'out' : ''}"><span class="dot"></span>${
+          soldOut(p) ? 'نفدت الكمية' : 'الحزمة متوفرة'}</p>
+        <button class="btn" type="button" data-add="${p.id}" ${soldOut(p) ? 'disabled' : ''}>
+          ${soldOut(p) ? 'نفدت الكمية' : 'أضف الحزمة إلى السلة'}</button>
+        ${waLink ? `<p class="modal-links">${waLink}</p>` : ''}
+      </div>
+    </div>`;
+
+    $('#modal').hidden = false;
+    openProductId = Number(p.id);
+    syncAddButtons();
+    lockScroll();
+    if (push) {
+      const q = new URLSearchParams(location.hash.replace(/^#/, ''));
+      q.set('p', String(p.id));
+      try { history.pushState(null, '', '#' + q.toString()); }
+      catch { location.hash = 'p=' + p.id; }
+    }
+    document.title = `${p.name} — ${storeName()}`;
   }
 
   function closeModal(fromPop) {
@@ -739,7 +811,9 @@
                 aria-label="عرض تفاصيل «${esc(p.name)}»">${imgTag(p)}</button>
         <div class="cart-info">
           <p class="name">${esc(p.name)}</p>
-          <p class="meta">${esc(p.brand)} · <span class="sku">${esc(p.sku)}</span></p>
+          <p class="meta">${esc(p.brand)}${isBundle(p)
+            ? ` · حزمة من ${bundleMembers(p).length}`
+            : ` · <span class="sku">${esc(p.sku)}</span>`}</p>
           <p class="unit">${priceText(p)}${isSale(p) ? ` <span class="was">${money(p.compare_at_price)}</span>` : ''}</p>
         </div>
         <div class="cart-side">
@@ -1438,6 +1512,7 @@
     const known = new Set(DATA.products.map((p) => p.id));
     [...cart.keys()].forEach((id) => { if (!known.has(id)) cart.delete(id); });
     saveCart();
+    BY_ID = new Map(DATA.products.map((x) => [String(x.id), x]));
 
     // اسم المتجر يبقى موصولاً بالبيانات: عنوان الصفحة + الوصف الصوتي للشعار.
     const storeName = meta.store || 'قصر العطور';

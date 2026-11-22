@@ -276,6 +276,42 @@ def apply_edit(products, meta, payload):
                 row[FLAG] = want
                 changes.append("visibility: %s" % ("shown" if want else "hidden"))
 
+    # الحزمة: قائمة معرفات المنتجات المضمّنة. قائمة فارغة تُلغي الحزمة.
+    if "bundle" in payload:
+        raw = payload.get("bundle")
+        if not isinstance(raw, list):
+            raise ValueError("bundle must be a list of product ids")
+        ids, seen = [], set()
+        for one in raw:
+            wanted = str(one).strip()
+            if not wanted:
+                continue
+            if wanted == str(row.get("id")):
+                raise ValueError("a bundle cannot contain itself")
+            if not any(str(x.get("id")) == wanted for x in products):
+                raise ValueError("no product with id %s for the bundle" % wanted)
+            if wanted in seen:
+                continue
+            seen.add(wanted)
+            ids.append(wanted)
+        if ids != row.get("bundle"):
+            old = len(row.get("bundle") or [])
+            if ids:
+                row["bundle"] = ids
+            else:
+                row.pop("bundle", None)
+            changes.append("bundle: %d -> %d items" % (old, len(ids)))
+        # صور الحزمة تُشتق من صور المنتجات داخلها حتى تعمل الصور في كل مكان
+        if ids:
+            member_images = []
+            for bid in ids:
+                m = next((x for x in products if str(x.get("id")) == bid), None)
+                mi = (m.get("images") or [None])[0] if m else None
+                if mi:
+                    member_images.append(mi)
+            if member_images and row.get("images") != member_images:
+                row["images"] = member_images
+
     if "attributes" in payload:
         raw = payload.get("attributes")
         if not isinstance(raw, dict):
@@ -383,6 +419,8 @@ class Handler(BaseHTTPRequestHandler):
             return self.publish()
         if route == "/api/sale-theme":
             return self.sale_theme(payload)
+        if route == "/api/bundle-create":
+            return self.bundle_create(payload)
         return self.send(404, {"error": "not found: %s" % route})
 
     def save(self, payload):
@@ -481,6 +519,52 @@ class Handler(BaseHTTPRequestHandler):
                                    "changes": ["sale theme: %s" % state],
                                    "edits": len(EDITS)})
 
+    def bundle_create(self, payload):
+        """أنشئ منتجاً جديداً من نوع حزمة: اسم + سعر + قائمة معرفات المنتجات."""
+        with LOCK:
+            name = str(payload.get("name") or "").strip()
+            if not name:
+                return self.send(400, {"error": "the bundle needs a name"})
+            members = [str(m).strip() for m in (payload.get("members") or []) if str(m).strip()]
+            if len(members) < 2:
+                return self.send(400, {"error": "a bundle needs at least 2 products"})
+            data = read_json(SRC)
+            products = data.get("products") or []
+            lookup = {str(x.get("id")): x for x in products}
+            missing = [m for m in members if m not in lookup]
+            if missing:
+                return self.send(400, {"error": "no product with id: %s" % ", ".join(missing)})
+            try:
+                price = float(str(payload.get("price") or "").replace(",", ""))
+            except ValueError:
+                return self.send(400, {"error": "price must be a number"})
+            if price < 0:
+                return self.send(400, {"error": "price cannot be negative"})
+            numeric_ids = [int(x["id"]) for x in products if str(x.get("id")).isdigit()]
+            new_id = max(numeric_ids or [0]) + 1
+            images = []
+            for m in members:
+                mi = (lookup[m].get("images") or [None])[0]
+                if mi and mi not in images:
+                    images.append(mi)
+            row = {
+                "id": new_id, "name": name, "brand": "حزمة", "price": price,
+                "compare_at_price": None, "rating": 0.0, "reviews": 0, "stock": None,
+                "images": images, "description": "حزمة تضم %d منتجات أصلية بسعر واحد" % len(members),
+                "attributes": {}, "visible": True, "bundle": members,
+            }
+            products.append(row)
+            write_json(data)
+            EDITS.append("new bundle: %s (%d items)" % (name, len(members)))
+            try:
+                rebuild_feed()
+            except RuntimeError as exc:
+                return self.send(500, {"error": "the bundle was saved, but the feed rebuild "
+                                                "failed: %s" % exc})
+            return self.send(200, {"ok": True, "id": new_id, "name": name,
+                                   "changes": ["bundle: %s (%d items)" % (name, len(members))],
+                                   "counts": counts(), "edits": len(EDITS)})
+
     def publish(self):
         with LOCK:
             pending, err = git_pending()
@@ -554,6 +638,10 @@ tr.main-row{cursor:pointer}
 .attr button{flex:none;padding:4px 10px}
 .attr .name{flex:1}
 .attr-lab{width:64px;flex:none;color:var(--muted);font-size:13px}
+.attr .badd{flex:1}
+.bchip{display:inline-flex;align-items:center;gap:6px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:2px 10px;font-size:12.5px;margin-inline-end:6px;margin-bottom:4px}
+.bchip button{border:0;background:none;color:var(--bad);cursor:pointer;font-size:12px;padding:0}
+.bmatches{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px}
 .attr-head{color:var(--muted);font-size:12px;margin:2px 0 6px}
 .attr-add{margin-top:2px}
 button.chev{padding:4px 10px;font-weight:400}
@@ -587,6 +675,16 @@ tr.main-row:hover td{background:#1a1712}
     <button id=saveall disabled>احفظ التعديلات</button>
     <button id=publish class=ghost>نشر على الموقع</button>
     <button id=saletheme class=ghost>ثيم التخفيضات: مغلق</button>
+    <button id=newbundle class=ghost>حزمة جديدة +</button>
+  </div>
+  <div id=bundleform style="display:none;border:1px solid var(--line);border-radius:9px;padding:10px;margin-top:8px">
+    <div class=attr><span class=attr-lab>اسم الحزمة</span><input id=bname placeholder="مثال: حزمة افنتوس + كمره + 9 بي ام" style="flex:1"></div>
+    <div class=attr><span class=attr-lab>سعر الحزمة ₪</span><input id=bprice placeholder="سعر واحد للحزمة كلها" style="flex:1"></div>
+    <div class=attr><span class=attr-lab>أضف منتجات (اكتب حرفين على الأقل)</span><input id=bsearch style="flex:1"></div>
+    <div id=bmatches class=bmatches></div>
+    <div id=bmembers class=bmembers></div>
+    <button id=bsave class=ghost>احفظ الحزمة كمنتج جديد</button>
+  </div>
     <span id=counts class=brand></span>
   </div>
   <div id=status></div>
@@ -653,6 +751,7 @@ function isDirty(p) {
   const d = draft.get(p.id);
   return !!d && (d.name !== p.name || String(d.price) !== String(p.price) ||
                  String(d.compare_at_price) !== String(p.compare_at_price) ||
+                 JSON.stringify(d.bundle || []) !== JSON.stringify(p.bundle || []) ||
                  d.visible !== p.visible || !sameAttrs(d.attrs, p.attributes));
 }
 
@@ -743,6 +842,14 @@ function attrsHtml(p) {
         '<div class=attr><span class=attr-lab>السعر الأصلي ₪ (قبل الخصم — اتركه فارغاً إن لا يوجد)</span>' +
           '<input type=text class=price data-f=compare_at_price value="' +
           esc(d.compare_at_price === null || d.compare_at_price === undefined ? '' : d.compare_at_price) + '"></div>' +
+        '<div class=attr-head>الحزمة — اختر منتجات ليُعرض هذا المنتج كحزمة بسعر واحد (اختياري)</div>' +
+        '<div class=bmembers>' + ((d.bundle || []).map(id => {
+          const m = state.products.find(x => String(x.id) === String(id));
+          return '<span class=bchip>' + esc(m ? m.name : id) +
+            ' <button data-act=delbund data-bid=' + JSON.stringify(id) + '>✕</button></span>';
+        }).join('') || '<span class=muted>ليست حزمة</span>') + '</div>' +
+        '<div class=attr><span class=attr-lab style="width:auto">أضف منتج</span><input class=badd placeholder="اكتب اسم منتج">' +
+        '<div class=bmatches></div></div>' +
         '<div class=attr-head>خصائص المنتج — تظهر في صفحة المتجر كجدول مواصفات. اترك المفتاح فارغاً لحذف الخاصية.</div>' +
         (rows || '<div class=attr-head>لا خصائص بعد.</div>') +
         '<div class=attr-add><button class=ghost data-act=addattr>+ أضف خاصية</button></div>' +
@@ -772,6 +879,55 @@ $('#saletheme').addEventListener('click', async () => {
   } catch (e) { say('تعذّر التبديل: ' + e.message, 'bad'); }
 });
 
+// ------- إنشاء الحزم -------
+let bundleDraft = [];
+$('#newbundle').addEventListener('click', () => {
+  const f = $('#bundleform');
+  const open = f.style.display === 'none';
+  f.style.display = open ? 'block' : 'none';
+  if (open) { bundleDraft = []; $('#bname').value = ''; $('#bprice').value = ''; $('#bsearch').value = ''; $('#bmatches').innerHTML = ''; drawMembers(); $('#bname').focus(); }
+});
+$('#bsearch').addEventListener('input', () => {
+  const q = $('#bsearch').value.trim().toLowerCase();
+  const box = $('#bmatches');
+  if (q.length < 2) { box.innerHTML = ''; return; }
+  box.innerHTML = state.products
+    .filter(p => !p.bundle && (p.name + ' ' + (p.brand || '') + ' ' + String(p.id)).toLowerCase().includes(q) &&
+                 !bundleDraft.some(b => String(b.id) === String(p.id)))
+    .slice(0, 6)
+    .map(p => '<button class=ghost data-bid=' + JSON.stringify(p.id) + ' data-bname=' + JSON.stringify(p.name) + '>+ ' + esc(p.name) + ' (' + esc(String(p.price || '؟')) + ')</button>')
+    .join('') || '<span class=muted>لا نتائج</span>';
+});
+$('#bmatches').addEventListener('click', ev => {
+  const btn = ev.target.closest('[data-bid]');
+  if (!btn) return;
+  bundleDraft.push({id: btn.dataset.bid, name: btn.dataset.bname});
+  $('#bsearch').value = ''; $('#bmatches').innerHTML = '';
+  drawMembers();
+});
+function drawMembers() {
+  $('#bmembers').innerHTML = bundleDraft.length
+    ? bundleDraft.map((b, i) => '<span class=bchip>' + esc(b.name) +
+        ' <button data-act=rmb data-i=' + i + '>✕</button></span>').join('')
+    : '<span class=muted>لم تختر منتجات بعد</span>';
+}
+$('#bmembers').addEventListener('click', ev => {
+  const btn = ev.target.closest('[data-act=rmb]');
+  if (!btn) return;
+  bundleDraft.splice(Number(btn.dataset.i), 1);
+  drawMembers();
+});
+$('#bsave').addEventListener('click', async () => {
+  try {
+    const res = await api('/api/bundle-create', {name: $('#bname').value, price: $('#bprice').value, members: bundleDraft.map(b => b.id)});
+    say('أُنشئت الحزمة: ' + res.name + ' — اضغط «نشر على الموقع» ليصل الموقع.', 'ok');
+    bundleDraft = [];
+    $('#bname').value = ''; $('#bprice').value = '';
+    $('#bundleform').style.display = 'none';
+    await load();
+  } catch (e) { say('لم تُحفظ الحزمة: ' + e.message, 'bad'); }
+});
+
 function render() {
   const q = $('#q').value.trim().toLowerCase();
   const brand = $('#brand').value, filter = $('#filter').value;
@@ -794,12 +950,30 @@ function render() {
 
 function editOf(p) {
   if (draft.has(p.id)) return draft.get(p.id);
-  return {id: p.id, name: p.name, price: p.price, compare_at_price: p.compare_at_price, visible: p.visible,
+  return {id: p.id, name: p.name, price: p.price, compare_at_price: p.compare_at_price,
+          bundle: (p.bundle || []).slice(), visible: p.visible,
           shown: p.shown, sold_out: p.sold_out,
           attrs: Object.entries(p.attributes || {}).map(e => ({k: e[0], v: String(e[1] == null ? '' : e[1])}))};
 }
 
 document.addEventListener('input', ev => {
+  // حقل البحث داخل محرر الحزمة يعرض نتائج مطابقة للإضافة
+  if (ev.target.classList && ev.target.classList.contains('badd')) {
+    const tr = ev.target.closest('tr');
+    const p = tr && state.products.find(x => String(x.id) === tr.dataset.id);
+    if (!p) return;
+    const q = ev.target.value.trim().toLowerCase();
+    const box = ev.target.closest('.attr').querySelector('.bmatches');
+    const options = q.length < 2 ? [] : state.products
+      .filter(x => String(x.id) !== String(p.id) && !x.bundle &&
+                   (x.name + ' ' + (x.brand || '')).toLowerCase().includes(q))
+      .slice(0, 6);
+    box.innerHTML = options.map(x =>
+      '<button class=ghost data-act=badditem data-xid=' + JSON.stringify(x.id) +
+      ' data-xname=' + JSON.stringify(x.name) + '>+ ' + esc(x.name) + '</button>').join('') ||
+      (q.length < 2 ? '' : '<span class=muted>لا نتائج</span>');
+    return;
+  }
   const tr = ev.target.closest('tr');
   if (!tr) return;
   const p = state.products.find(x => String(x.id) === tr.dataset.id);
@@ -821,8 +995,7 @@ document.addEventListener('input', ev => {
     return;
   }
 
-  if (!ev.target.dataset.f) return;
-  const d = editOf(p);
+  if (!ev.target.dataset.f) return;  const d = editOf(p);
   if (ev.target.dataset.f === 'visible') d.shown = ev.target.checked;
   else if (ev.target.dataset.f === 'price') d.price = ev.target.value.trim() === '' ? null : ev.target.value.trim();
   else if (ev.target.dataset.f === 'compare_at_price') d.compare_at_price = ev.target.value.trim() === '' ? null : ev.target.value.trim();
@@ -874,6 +1047,23 @@ document.addEventListener('click', async ev => {
       if (fresh.length) fresh[fresh.length - 1].focus();
       return;
     }
+    if (btn.dataset.act === 'badditem') {
+      const d = editOf(p);
+      d.bundle = d.bundle || [];
+      if (!d.bundle.some(x => String(x) === String(btn.dataset.xid))) d.bundle.push(String(btn.dataset.xid));
+      draft.set(p.id, d);
+      refreshRows(p);
+      tally();
+      return;
+    }
+    if (btn.dataset.act === 'delbund') {
+      const d = editOf(p);
+      d.bundle = (d.bundle || []).filter(x => String(x) !== String(btn.dataset.bid));
+      draft.set(p.id, d);
+      refreshRows(p);
+      tally();
+      return;
+    }
     if (btn.dataset.act === 'delattr') {
       const d = editOf(p);
       d.attrs.splice(Number(btn.dataset.attrI), 1);
@@ -897,7 +1087,7 @@ $('#saveall').addEventListener('click', () => commit(state.products.filter(isDir
 
 async function commit(edits) {
   const body = edits.map(e => ({id: e.id, name: e.name, price: e.price,
-    compare_at_price: e.compare_at_price, visible: e.visible,
+    compare_at_price: e.compare_at_price, bundle: e.bundle, visible: e.visible,
     attributes: Object.fromEntries((e.attrs || [])
       .filter(pair => pair.k.trim())
       .map(pair => [pair.k.trim(), pair.v.trim()]))}));
@@ -917,6 +1107,8 @@ async function commit(edits) {
       if (!p) return;
       if (e.name !== undefined) p.name = e.name;
       if (e.price !== undefined) p.price = e.price;
+      if (e.compare_at_price !== undefined) p.compare_at_price = e.compare_at_price;
+      if (e.bundle !== undefined) p.bundle = e.bundle;
       if (e.compare_at_price !== undefined) p.compare_at_price = e.compare_at_price;
       if ('visible' in e) { p.visible = e.visible; p.shown = e.visible === null ? !p.sold_out || state.counts.show_out_of_stock : !!e.visible; }
       if (e.attrs) p.attributes = Object.fromEntries(e.attrs
