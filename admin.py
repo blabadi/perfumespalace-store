@@ -688,7 +688,7 @@ function rowHtml(p) {
   if (price === '') status = '<span class=tag no>السعر عند الطلب</span>';
   else if (p.sold_out) status = '<span class=tag oos>نفدت الكمية</span>';
   if (price !== '' && d.compare_at_price != null && +d.compare_at_price > +d.price)
-    status += ' <span class=tag sale>خصم ' + Math.round((1 - d.price / d.compare_at_price) * 100) + '%</span>';
+    status += ' <span class="tag sale">خصم ' + Math.round((1 - d.price / d.compare_at_price) * 100) + '%</span>';
   if (!d.shown) status += ' <span class=tag off>مخفية' + (p.reason ? ': ' + esc(p.reason) : '') + '</span>';
   else if (p.visible !== null && p.visible !== undefined) status += ' <span class=tag off>علامة يدوية</span>';
   const attrs = p.attributes && Object.keys(p.attributes).length
