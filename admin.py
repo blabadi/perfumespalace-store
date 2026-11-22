@@ -239,6 +239,29 @@ def apply_edit(products, meta, payload):
             changes.append("price: %s -> %s" % (old if old is not None else "no price",
                                                 price if price is not None else "no price"))
 
+    # the "was" price that makes the product show as discounted. Empty removes it.
+    if "compare_at_price" in payload:
+        raw = payload.get("compare_at_price")
+        raw = "" if raw is None else str(raw).strip().replace(",", "")
+        if raw == "":
+            cap = None
+        else:
+            try:
+                cap = float(raw)
+            except ValueError:
+                raise ValueError("original price must be a number or empty: %r" % raw)
+            if cap < 0:
+                raise ValueError("original price cannot be negative")
+        if cap != row.get("compare_at_price"):
+            old = row.get("compare_at_price")
+            if cap is None:
+                row.pop("compare_at_price", None)
+            else:
+                row["compare_at_price"] = cap
+            changes.append("original price: %s -> %s" % (
+                old if old is not None else "none",
+                cap if cap is not None else "none"))
+
     if FLAG in payload:
         flag = payload.get(FLAG)
         if flag is None:
@@ -376,7 +399,10 @@ class Handler(BaseHTTPRequestHandler):
             meta = data.setdefault("meta", {})
             applied = []
             for item in edits:
-                changes = apply_edit(products, meta, item)
+                try:
+                    changes = apply_edit(products, meta, item)
+                except ValueError as exc:
+                    return self.send(400, {"error": str(exc), "rev": rev})
                 if changes:
                     name = next((p.get("name") for p in products
                                  if str(p.get("id")) == str(item.get("id"))), item.get("id"))
@@ -511,6 +537,7 @@ img.thumb{width:54px;height:54px;object-fit:contain;background:#fff;border-radiu
 .id{color:#6f6857;font-size:11px;direction:ltr;text-align:right}
 .tag{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:1px 8px;font-size:12px;color:var(--muted)}
 .tag.oos{color:#e9b38c;border-color:#5d452c}
+.tag.sale{color:#ff8f7a;border-color:#6e352c}
 .tag.no{color:var(--bad);border-color:#5d2c28}
 .tag.off{color:var(--hide)}
 .shown{display:flex;align-items:center;gap:6px}
@@ -625,6 +652,7 @@ function current(p) { return draft.has(p.id) ? draft.get(p.id) : p; }
 function isDirty(p) {
   const d = draft.get(p.id);
   return !!d && (d.name !== p.name || String(d.price) !== String(p.price) ||
+                 String(d.compare_at_price) !== String(p.compare_at_price) ||
                  d.visible !== p.visible || !sameAttrs(d.attrs, p.attributes));
 }
 
@@ -659,6 +687,8 @@ function rowHtml(p) {
   let status = '<span class=tag>متوفر</span>';
   if (price === '') status = '<span class=tag no>السعر عند الطلب</span>';
   else if (p.sold_out) status = '<span class=tag oos>نفدت الكمية</span>';
+  if (price !== '' && d.compare_at_price != null && +d.compare_at_price > +d.price)
+    status += ' <span class=tag sale>خصم ' + Math.round((1 - d.price / d.compare_at_price) * 100) + '%</span>';
   if (!d.shown) status += ' <span class=tag off>مخفية' + (p.reason ? ': ' + esc(p.reason) : '') + '</span>';
   else if (p.visible !== null && p.visible !== undefined) status += ' <span class=tag off>علامة يدوية</span>';
   const attrs = p.attributes && Object.keys(p.attributes).length
@@ -710,6 +740,9 @@ function attrsHtml(p) {
           '<input type=text class=name data-f=name value="' + esc(d.name) + '"></div>' +
         '<div class=attr><span class=attr-lab>السعر ₪</span>' +
           '<input type=text class=price data-f=price value="' + esc(price) + '"></div>' +
+        '<div class=attr><span class=attr-lab>السعر الأصلي ₪ (قبل الخصم — اتركه فارغاً إن لا يوجد)</span>' +
+          '<input type=text class=price data-f=compare_at_price value="' +
+          esc(d.compare_at_price === null || d.compare_at_price === undefined ? '' : d.compare_at_price) + '"></div>' +
         '<div class=attr-head>خصائص المنتج — تظهر في صفحة المتجر كجدول مواصفات. اترك المفتاح فارغاً لحذف الخاصية.</div>' +
         (rows || '<div class=attr-head>لا خصائص بعد.</div>') +
         '<div class=attr-add><button class=ghost data-act=addattr>+ أضف خاصية</button></div>' +
@@ -761,7 +794,7 @@ function render() {
 
 function editOf(p) {
   if (draft.has(p.id)) return draft.get(p.id);
-  return {id: p.id, name: p.name, price: p.price, visible: p.visible,
+  return {id: p.id, name: p.name, price: p.price, compare_at_price: p.compare_at_price, visible: p.visible,
           shown: p.shown, sold_out: p.sold_out,
           attrs: Object.entries(p.attributes || {}).map(e => ({k: e[0], v: String(e[1] == null ? '' : e[1])}))};
 }
@@ -792,6 +825,7 @@ document.addEventListener('input', ev => {
   const d = editOf(p);
   if (ev.target.dataset.f === 'visible') d.shown = ev.target.checked;
   else if (ev.target.dataset.f === 'price') d.price = ev.target.value.trim() === '' ? null : ev.target.value.trim();
+  else if (ev.target.dataset.f === 'compare_at_price') d.compare_at_price = ev.target.value.trim() === '' ? null : ev.target.value.trim();
   else d[ev.target.dataset.f] = ev.target.value;
   d.visible = visibleWanted(p, d.shown);
   draft.set(p.id, d);
@@ -862,7 +896,8 @@ document.addEventListener('click', async ev => {
 $('#saveall').addEventListener('click', () => commit(state.products.filter(isDirty).map(editOf)));
 
 async function commit(edits) {
-  const body = edits.map(e => ({id: e.id, name: e.name, price: e.price, visible: e.visible,
+  const body = edits.map(e => ({id: e.id, name: e.name, price: e.price,
+    compare_at_price: e.compare_at_price, visible: e.visible,
     attributes: Object.fromEntries((e.attrs || [])
       .filter(pair => pair.k.trim())
       .map(pair => [pair.k.trim(), pair.v.trim()]))}));
@@ -882,6 +917,7 @@ async function commit(edits) {
       if (!p) return;
       if (e.name !== undefined) p.name = e.name;
       if (e.price !== undefined) p.price = e.price;
+      if (e.compare_at_price !== undefined) p.compare_at_price = e.compare_at_price;
       if ('visible' in e) { p.visible = e.visible; p.shown = e.visible === null ? !p.sold_out || state.counts.show_out_of_stock : !!e.visible; }
       if (e.attrs) p.attributes = Object.fromEntries(e.attrs
         .filter(pair => pair.k.trim())
