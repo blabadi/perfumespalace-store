@@ -879,7 +879,10 @@
   // ارتفاع الشريط العلوي يتغيّر عند التفافه في الشاشات الضيقة، فيُحسب ويُمرَّر إلى CSS.
   function syncStickyOffset() {
     const bar = $('.topbar');
-    if (bar) document.documentElement.style.setProperty('--stick', Math.round(bar.getBoundingClientRect().height) + 'px');
+    const strip = $('#sale-strip');
+    const stripH = strip && !strip.hidden ? strip.getBoundingClientRect().height : 0;
+    document.documentElement.style.setProperty('--sale-h', Math.round(stripH) + 'px');
+    if (bar) document.documentElement.style.setProperty('--stick', Math.round(bar.getBoundingClientRect().height + stripH) + 'px');
     watchStuck();
   }
 
@@ -1369,7 +1372,10 @@
       strip.querySelector('.sale-close').addEventListener('click', () => {
         sessionStorage.setItem('sale_strip_dismissed', '1');
         strip.hidden = true;
+        syncStickyOffset();
       });
+
+      syncStickyOffset();
     }
   }
 
