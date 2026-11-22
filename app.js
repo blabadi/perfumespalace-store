@@ -233,16 +233,17 @@
   }
 
   function sortProducts(list) {
+    const added = (p) => String(p.added || '');
     const by = {
       'price-asc': (a, b) => (a.price ?? Infinity) - (b.price ?? Infinity),
       'price-desc': (a, b) => (b.price ?? -Infinity) - (a.price ?? -Infinity),
-      rating: (a, b) => b.rating - a.rating || b.reviews - a.reviews,
-      newest: (a, b) => b.added.localeCompare(a.added),
+      rating: (a, b) => (b.rating || 0) - (a.rating || 0) || (b.reviews || 0) - (a.reviews || 0),
+      newest: (a, b) => added(b).localeCompare(added(a)),
       name: (a, b) => String(a.name).localeCompare(String(b.name), locale()),
       featured: (a, b) =>
         (Number(isSale(b)) - Number(isSale(a))) ||
-        (b.rating * Math.log10(b.reviews + 1) - a.rating * Math.log10(a.reviews + 1)) ||
-        b.added.localeCompare(a.added),
+        ((b.rating || 0) * Math.log10((b.reviews || 0) + 1) - (a.rating || 0) * Math.log10((a.reviews || 0) + 1)) ||
+        added(b).localeCompare(added(a)),
     };
     return list.sort(by[state.sort] || by.featured);
   }

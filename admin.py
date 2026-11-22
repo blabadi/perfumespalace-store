@@ -30,6 +30,7 @@ flag always wins over the bulk switch.
 
 import json
 import mimetypes
+from datetime import datetime
 import os
 import re
 import subprocess
@@ -492,7 +493,6 @@ class Handler(BaseHTTPRequestHandler):
                 cfg["enabled"] = truthy(payload.get("enabled"))
             # turning the theme on with a date already passed would hide it silently
             if cfg["enabled"] and cfg.get("endsAt"):
-                from datetime import datetime
                 try:
                     if datetime.fromisoformat(str(cfg["endsAt"])) < datetime.now():
                         cfg["endsAt"] = None
@@ -504,7 +504,6 @@ class Handler(BaseHTTPRequestHandler):
                 raw = str(payload.get("endsAt") or "").strip()
                 if raw:
                     try:
-                        from datetime import datetime
                         datetime.fromisoformat(raw)
                         cfg["endsAt"] = raw
                     except ValueError:
@@ -550,6 +549,7 @@ class Handler(BaseHTTPRequestHandler):
             row = {
                 "id": new_id, "name": name, "brand": "حزمة", "price": price,
                 "compare_at_price": None, "rating": 0.0, "reviews": 0, "stock": None,
+                "added": datetime.now().strftime("%Y-%m-%d"),
                 "images": images, "description": "حزمة تضم %d منتجات أصلية بسعر واحد" % len(members),
                 "attributes": {}, "visible": True, "bundle": members,
             }
