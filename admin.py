@@ -48,11 +48,17 @@ BACKUP = "products.json.bak"
 SETS = "sets.json"
 FEED_XML = "feed.xml"
 # the only files the publish button is allowed to commit
-PUBLISH_PATHS = [SRC, FEED_XML, "feed.csv", SETS]
+PUBLISH_PATHS = [SRC, FEED_XML, "feed.csv", SETS, "sale-theme.json"]
 DEFAULT_PORT = 8123
+
+# ثيم حملة التخفيضات: ملف صغير تقرأه الصفحة العامة، وتكتبه صفحة التحرير هنا.
+SALE_THEME = "sale-theme.json"
+SALE_DEFAULT = {"enabled": False, "theme": "neon",
+                "strip": "⚡ FLASH SALE — تخفيضات 48 ساعة فقط", "endsAt": None}
 
 LOCK = threading.Lock()
 EDITS = []            # what this session changed, used as the commit message body
+THEME_EDITS = []      # sale-theme.json changes this session, separate commit wording
 
 
 def path(name):
@@ -87,6 +93,26 @@ def rebuild_feed():
     if done.returncode != 0:
         raise RuntimeError((done.stderr or done.stdout or "build-feed.py failed").strip())
     return (done.stdout or "").strip()
+
+
+def read_sale_theme():
+    """sale-theme.json or the all-off default when the file is missing or broken."""
+    try:
+        cfg = read_json(SALE_THEME)
+    except (OSError, ValueError):
+        return dict(SALE_DEFAULT)
+    if not isinstance(cfg, dict):
+        return dict(SALE_DEFAULT)
+    out = dict(SALE_DEFAULT)
+    out.update({k: cfg[k] for k in out if k in cfg})
+    out["enabled"] = truthy(out.get("enabled"))
+    return out
+
+
+def write_sale_theme(cfg):
+    with open(path(SALE_THEME), "w", encoding="utf-8") as fh:
+        json.dump(cfg, fh, ensure_ascii=False, indent=2)
+        fh.write("\n")
 
 
 def counts():
@@ -150,10 +176,13 @@ def git_pending():
 
 def git_publish():
     """Commit and push only the catalogue data files."""
-    subject = "Update %d product(s) from the admin page" % len(EDITS)
-    if not EDITS:
+    if EDITS:
+        subject = "Update %d product(s) from the admin page" % len(EDITS)
+    elif THEME_EDITS:
+        subject = "Update sale theme from the admin page"
+    else:
         subject = "Update catalogue data from the admin page"
-    body = "\n".join("- " + line for line in EDITS)
+    body = "\n".join("- " + line for line in EDITS + THEME_EDITS)
     steps = [
         ["git", "add", "--"] + PUBLISH_PATHS,
         # naming the files again keeps the commit to the catalogue data, even if this
@@ -172,6 +201,7 @@ def git_publish():
                 continue
             return False, "\n\n".join(log)
     EDITS[:] = []
+    THEME_EDITS[:] = []
     return True, "\n\n".join(log)
 
 
@@ -293,6 +323,7 @@ class Handler(BaseHTTPRequestHandler):
                     "products": rows,
                     "meta": meta,
                     "counts": counts(),
+                    "saleTheme": read_sale_theme(),
                     "pending": pending,
                     "gitError": err,
                     "edits": len(EDITS),
@@ -327,6 +358,8 @@ class Handler(BaseHTTPRequestHandler):
             return self.bulk(payload)
         if route == "/api/publish":
             return self.publish()
+        if route == "/api/sale-theme":
+            return self.sale_theme(payload)
         return self.send(404, {"error": "not found: %s" % route})
 
     def save(self, payload):
@@ -386,6 +419,41 @@ class Handler(BaseHTTPRequestHandler):
             return self.send(200, {"rev": file_rev(), "counts": counts(),
                                    "edits": len(EDITS),
                                    "changes": ["meta.%s = %s" % (BULK_KEY, off)]})
+
+    def sale_theme(self, payload):
+        """شغّل/أطفئ ثيم حملة التخفيضات. يحتاج النشر كي يصل الملف للموقع."""
+        with LOCK:
+            cfg = read_sale_theme()
+            if "enabled" in payload:
+                cfg["enabled"] = truthy(payload.get("enabled"))
+            # turning the theme on with a date already passed would hide it silently
+            if cfg["enabled"] and cfg.get("endsAt"):
+                from datetime import datetime
+                try:
+                    if datetime.fromisoformat(str(cfg["endsAt"])) < datetime.now():
+                        cfg["endsAt"] = None
+                except (ValueError, TypeError):
+                    cfg["endsAt"] = None
+            if "strip" in payload:
+                cfg["strip"] = str(payload.get("strip") or "").strip() or SALE_DEFAULT["strip"]
+            if "endsAt" in payload:
+                raw = str(payload.get("endsAt") or "").strip()
+                if raw:
+                    try:
+                        from datetime import datetime
+                        datetime.fromisoformat(raw)
+                        cfg["endsAt"] = raw
+                    except ValueError:
+                        return self.send(400, {"error": "endsAt must be an ISO date-time "
+                                                        "like 2026-11-28T22:00"})
+                else:
+                    cfg["endsAt"] = None
+            write_sale_theme(cfg)
+            state = "مفعّل" if cfg["enabled"] else "مطفأ"
+            THEME_EDITS.append("sale theme: %s" % state)
+            return self.send(200, {"ok": True, "saleTheme": cfg,
+                                   "changes": ["sale theme: %s" % state],
+                                   "edits": len(EDITS)})
 
     def publish(self):
         with LOCK:
@@ -491,6 +559,7 @@ tr.main-row:hover td{background:#1a1712}
     <label class=sw><input type=checkbox id=oos> إظهار المنتجات التي نفدت كميتها</label>
     <button id=saveall disabled>احفظ التعديلات</button>
     <button id=publish class=ghost>نشر على الموقع</button>
+    <button id=saletheme class=ghost>ثيم التخفيضات: مغلق</button>
     <span id=counts class=brand></span>
   </div>
   <div id=status></div>
@@ -655,7 +724,20 @@ function tally() {
   const files = state.pending || [];
   $('#publish').textContent = state.edits ? 'نشر على الموقع (' + state.edits + ' تعديل)'
     : (files.length ? 'نشر على الموقع (' + files.length + ' ملف)' : 'نشر على الموقع');
+  const st = state.saleTheme || {};
+  $('#saletheme').textContent = 'ثيم التخفيضات: ' + (st.enabled ? 'مفعّل ✓' : 'مطفأ');
 }
+
+$('#saletheme').addEventListener('click', async () => {
+  const cur = (state.saleTheme || {}).enabled;
+  try {
+    const res = await api('/api/sale-theme', {enabled: !cur});
+    state.saleTheme = res.saleTheme;
+    say('ثيم التخفيضات أصبح ' + (res.saleTheme.enabled ? 'مفعّلاً' : 'مطفأً') +
+        '. اضغط «نشر على الموقع» ليصل الموقع.', 'ok');
+    tally();
+  } catch (e) { say('تعذّر التبديل: ' + e.message, 'bad'); }
+});
 
 function render() {
   const q = $('#q').value.trim().toLowerCase();

@@ -439,7 +439,7 @@
     if (soldOut(p)) badges.push('<span class="badge sold">نفدت الكمية</span>');
     else if (lowStock(p)) badges.push(`<span class="badge low">بقي ${p.stock} فقط</span>`);
 
-    return `<article class="card" data-id="${p.id}">
+    return `<article class="card${isSale(p) ? ' onsale' : ''}" data-id="${p.id}">
       <div class="card-media">
         <button class="media-open" type="button" data-quick="${p.id}"
                 aria-label="عرض تفاصيل «${esc(p.name)}»">
@@ -1321,6 +1321,58 @@
   }
 
   /* ---------- التشغيل ---------- */
+  // ثيم حملة التخفيضات: sale-theme.json يقرر إن كان مفعّلاً. لا ملف أو خطأ = لا شيء يظهر.
+  async function applySaleTheme() {
+    let cfg = null;
+    try {
+      const res = await fetch('sale-theme.json', { cache: 'no-store' });
+      if (res.ok) cfg = await res.json();
+    } catch (e) { /* الملف اختياري */ }
+    if (!cfg || !cfg.enabled) return;
+
+    const endsAt = cfg.endsAt ? new Date(cfg.endsAt) : null;
+    if (endsAt && isNaN(endsAt)) return;
+    if (endsAt && endsAt.getTime() < Date.now()) return;   // الحملة انتهت
+
+    const root = document.documentElement;
+    root.dataset.saleTheme = cfg.theme || 'neon';
+
+    const strip = $('#sale-strip');
+    if (strip && cfg.strip && sessionStorage.getItem('sale_strip_dismissed') !== '1') {
+      strip.innerHTML = `
+        <span class="sale-text">${esc(cfg.strip)}</span>
+        ${endsAt ? `<span class="sale-count" aria-hidden="true"></span>` : ''}
+        <button class="sale-link" type="button">شوف العروض</button>
+        <button class="sale-close" type="button" aria-label="إخفاء شريط التخفيضات">✕</button>`;
+      strip.hidden = false;
+
+      if (endsAt) {
+        const tick = () => {
+          const left = endsAt.getTime() - Date.now();
+          const box = strip.querySelector('.sale-count');
+          if (!box) return;
+          if (left <= 0) { location.reload(); return; }
+          const s = Math.floor(left / 1000);
+          const pad = (n) => String(n).padStart(2, '0');
+          box.textContent = `⏱ تنتهي بعد ${pad(Math.floor(s / 3600))}:${pad(Math.floor(s / 60) % 60)}:${pad(s % 60)}`;
+        };
+        tick();
+        setInterval(tick, 1000);
+      }
+
+      strip.querySelector('.sale-link').addEventListener('click', () => {
+        state.sale = true;
+        update();
+        jumpToResults();
+        toast('طبّقت التصفية: منتجات عليها تخفيضات');
+      });
+      strip.querySelector('.sale-close').addEventListener('click', () => {
+        sessionStorage.setItem('sale_strip_dismissed', '1');
+        strip.hidden = true;
+      });
+    }
+  }
+
   async function load() {
     const res = await fetch('products.json', { cache: 'no-store' });
     if (!res.ok) throw new Error('products.json أعاد الخطأ ' + res.status);
@@ -1340,6 +1392,7 @@
   async function init() {
     const savedTheme = localStorage.getItem('northline_theme');
     if (savedTheme) document.documentElement.dataset.theme = savedTheme;
+    applySaleTheme();
     updateCartBadge();
     $('#grid').innerHTML = skeleton().repeat(8);
 

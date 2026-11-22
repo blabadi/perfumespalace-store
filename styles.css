@@ -680,3 +680,76 @@ button.text-link { background: none; border: 0; padding: 0; font: inherit; curso
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
 }
+
+
+/* ============ ثيم حملة التخفيضات (الوميض) ============
+   يُفعَّل من sale-theme.json عبر صفحة التحرير: html[data-sale-theme="neon"].
+   بلا وسم = الموقع بهيئته العادية تماماً. */
+.sale-strip{
+  --n1:#7b2ff7; --n2:#f107a3;
+  position:relative; z-index:60;
+  display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap;
+  padding:9px 46px; text-align:center;
+  font-size:13.5px; font-weight:800; color:#fff;
+  background:linear-gradient(90deg,var(--n1),var(--n2));
+  text-shadow:0 0 12px rgba(241,7,163,.6);
+}
+.sale-strip .sale-count{
+  display:inline-flex; align-items:center; gap:6px;
+  background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.22);
+  border-radius:999px; padding:2px 13px;
+  font-size:12px; font-weight:700; text-shadow:none; color:#ffd6f0;
+  font-variant-numeric:tabular-nums; direction:ltr;
+}
+.sale-strip .sale-link{
+  border:0; cursor:pointer; font:inherit; font-size:12.5px; font-weight:800;
+  background:#fff; color:#a1076b; border-radius:999px; padding:4px 15px;
+  text-shadow:none; transition:transform .15s;
+}
+.sale-strip .sale-link:hover{ transform:translateY(-1px); }
+.sale-strip .sale-close{
+  position:absolute; inset-inline-end:12px; top:50%; transform:translateY(-50%);
+  border:0; cursor:pointer; background:rgba(255,255,255,.14); color:#fff;
+  width:24px; height:24px; border-radius:50%; font-size:11px; line-height:1;
+}
+.sale-strip .sale-close:hover{ background:rgba(255,255,255,.28); }
+
+/* الوضع الليلي يشتغل مع الحملة حتى لو جهاز الزائر فاتح */
+html[data-sale-theme="neon"]{
+  --bg:#14151a; --surface:#1b1d23; --surface-2:#21242b;
+  --ink:#f1efea; --ink-2:#b8b6b0; --ink-3:#86878f;
+  --line:#2c2f37; --line-2:#262931;
+  --accent:#7fc9a4; --accent-soft:#1f2c27;
+  --sale:#ef8b78; --sale-soft:#2c1f1d;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px -14px rgba(0,0,0,.6);
+  --shadow-lg:0 30px 70px -30px rgba(0,0,0,.8);
+  --n1:#7b2ff7; --n2:#f107a3;
+  color-scheme:dark;
+}
+html[data-sale-theme="neon"] body{
+  background:
+    radial-gradient(90% 50% at 50% -10%, color-mix(in srgb, var(--n1) 14%, transparent), transparent 70%),
+    var(--bg);
+}
+/* بطاقات منتجات العرض فقط: إطار متدرج + توهّج نيون */
+html[data-sale-theme="neon"] .card.onsale{
+  border-color:transparent;
+  background:linear-gradient(var(--surface),var(--surface)) padding-box,
+             linear-gradient(135deg,var(--n1),var(--n2)) border-box;
+  border:1.5px solid transparent;
+  box-shadow:0 0 18px -4px rgba(123,47,247,.45);
+}
+html[data-sale-theme="neon"] .card.onsale:hover{
+  box-shadow:0 0 26px -4px rgba(241,7,163,.55);
+}
+html[data-sale-theme="neon"] .card.onsale .badge.sale{
+  background:linear-gradient(135deg,var(--n1),var(--n2));
+  color:#fff; font-weight:900;
+  transform:rotate(-4deg);
+  box-shadow:0 0 14px rgba(241,7,163,.55);
+}
+html[data-sale-theme="neon"] .price .now{ color:#ff7ad1; }
+html[data-sale-theme="neon"] .hero-slide .badge.sale,
+html[data-sale-theme="neon"] .detail .badge.sale{
+  background:linear-gradient(135deg,var(--n1),var(--n2)); color:#fff;
+}
