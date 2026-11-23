@@ -156,6 +156,7 @@ def rows_for_page():
             "brand": p.get("brand") or "",
             "price": p.get("price"),
             "compare_at_price": p.get("compare_at_price"),
+            "bundle": list(p.get("bundle") or []),
             "stock": p.get("stock"),
             "visible": p.get(FLAG),
             "shown": is_visible(p, meta),
@@ -422,6 +423,8 @@ class Handler(BaseHTTPRequestHandler):
             return self.sale_theme(payload)
         if route == "/api/bundle-create":
             return self.bundle_create(payload)
+        if route == "/api/delete-product":
+            return self.delete_product(payload)
         return self.send(404, {"error": "not found: %s" % route})
 
     def save(self, payload):
@@ -565,6 +568,35 @@ class Handler(BaseHTTPRequestHandler):
                                    "changes": ["bundle: %s (%d items)" % (name, len(members))],
                                    "counts": counts(), "edits": len(EDITS)})
 
+    def delete_product(self, payload):
+        """احذف المنتج نهائياً من الكتالوج، ونظّفه من أي حزمة تضمه."""
+        with LOCK:
+            wanted = str(payload.get("id"))
+            data = read_json(SRC)
+            products = data.get("products") or []
+            row = next((x for x in products if str(x.get("id")) == wanted), None)
+            if row is None:
+                return self.send(404, {"error": "no product with id %s" % wanted})
+            name = row.get("name") or wanted
+            was_bundle = isinstance(row.get("bundle"), list) and bool(row["bundle"])
+            data["products"] = [x for x in products if str(x.get("id")) != wanted]
+            # نظّف الحزم الأخرى التي تضم هذا المنتج
+            for other in data["products"]:
+                if isinstance(other.get("bundle"), list) and wanted in other["bundle"]:
+                    other["bundle"] = [m for m in other["bundle"] if m != wanted]
+                    if not other["bundle"]:
+                        del other["bundle"]
+            write_json(data)
+            EDITS.append("deleted: %s" % name)
+            try:
+                rebuild_feed()
+            except RuntimeError as exc:
+                return self.send(500, {"error": "the product was deleted, but the feed "
+                                                "rebuild failed: %s" % exc})
+            return self.send(200, {"ok": True, "deleted": str(row.get("id")),
+                                   "changes": ["deleted: %s" % name],
+                                   "counts": counts(), "edits": len(EDITS)})
+
     def publish(self):
         with LOCK:
             pending, err = git_pending()
@@ -600,6 +632,8 @@ button{background:var(--gold);color:#1a160d;border:0;border-radius:8px;padding:8
   font-weight:600;cursor:pointer}
 button:disabled{opacity:.35;cursor:default}
 button.ghost{background:transparent;color:var(--muted);border:1px solid var(--line);font-weight:400;padding:4px 8px}
+button.ghost.danger{color:var(--bad);border-color:#5d2c28}
+button.ghost.danger:disabled{opacity:.35}
 button.warn{background:#3a2419;color:#f0c8a8;border:1px solid #6b3f27}
 label.sw{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:13px}
 #status{margin-top:8px;font-size:13px;color:var(--muted);white-space:pre-wrap}
@@ -803,6 +837,7 @@ function rowHtml(p) {
     '<td><label class=shown><input type=checkbox data-f=visible ' + (d.shown ? 'checked' : '') +
       '> ظاهرة</label></td>' +
     '<td class=acts><button data-act=save ' + (dirty ? '' : 'disabled') + '>حفظ</button>' +
+      '<button class="ghost danger" data-act=delete title="احذف المنتج نهائياً من الكتالوج">حذف</button>' +
       '<button class=ghost chev data-act=attrs title="خصائص إضافية: الحجم والتصنيف">' +
       (openRows.has(String(p.id)) ? 'خواص ▴' : 'خواص ▾') + '</button>' +
       (p.visible === null || p.visible === undefined ? '' :
@@ -1030,6 +1065,23 @@ document.addEventListener('click', async ev => {
   if (btn) {
     if (!p) return;
     if (btn.dataset.act === 'save') return commit([editOf(p)]);
+    if (btn.dataset.act === 'delete') {
+      // تأكيد من خطوتين: أول ضغطة تحوّل الزر لـ«متأكد؟»، والثانية تحذف
+      if (btn.dataset.armed !== '1') {
+        btn.dataset.armed = '1';
+        btn.textContent = 'متأكد؟';
+        setTimeout(() => { btn.dataset.armed = ''; btn.textContent = 'حذف'; }, 3000);
+        return;
+      }
+      try {
+        const res = await api('/api/delete-product', {id: p.id});
+        draft.delete(String(p.id));
+        openRows.delete(String(p.id));
+        say('حُذف: ' + (res.changes || []).join(' | '), 'ok');
+        await load();
+      } catch (e) { say('لم يُحذف: ' + e.message, 'bad'); }
+      return;
+    }
     if (btn.dataset.act === 'clear') return commit([{id: p.id, visible: null}]);
     if (btn.dataset.act === 'attrs') {
       const id = String(p.id);
