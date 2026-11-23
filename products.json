@@ -38,8 +38,8 @@
       "name": "نايترو ريد انتينسلي Nitro Red Intensely",
       "brand": "Dumont Paris",
       "category": "رجالي",
-      "price": 150.0,
-      "compare_at_price": 125.0,
+      "price": 120.0,
+      "compare_at_price": 150.0,
       "rating": 0.0,
       "reviews": 0,
       "stock": null,
@@ -4710,6 +4710,29 @@
       "categories": [
         "للجنسين"
       ]
+    },
+    {
+      "id": 900005,
+      "name": "مجموعة 9pm",
+      "brand": "حزمة",
+      "price": 299.0,
+      "compare_at_price": 400.0,
+      "rating": 0.0,
+      "reviews": 0,
+      "stock": null,
+      "images": [
+        "images/2026/11/3511-af-alt.jpg",
+        "images/2026/11/3128-9pm-elixir-afnan-9-alt.jpg",
+        "images/2026/11/3573-9pm-night-out-tester.jpg"
+      ],
+      "description": "حزمة تضم 4 منتجات أصلية بسعر واحد",
+      "attributes": {},
+      "bundle": [
+        "3511",
+        "3128",
+        "3573"
+      ],
+      "added": "2026-11-22"
     }
   ]
 }
