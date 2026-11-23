@@ -296,13 +296,13 @@ def apply_edit(products, meta, payload):
                 continue
             seen.add(wanted)
             ids.append(wanted)
-        if ids != row.get("bundle"):
-            old = len(row.get("bundle") or [])
+        old = row.get("bundle") or []
+        if ids != old and (ids or old):
             if ids:
                 row["bundle"] = ids
             else:
                 row.pop("bundle", None)
-            changes.append("bundle: %d -> %d items" % (old, len(ids)))
+            changes.append("bundle: %d -> %d items" % (len(old), len(ids)))
         # صور الحزمة تُشتق من صور المنتجات داخلها حتى تعمل الصور في كل مكان
         if ids:
             member_images = []
@@ -927,7 +927,7 @@ $('#bsearch').addEventListener('input', () => {
   const box = $('#bmatches');
   if (q.length < 2) { box.innerHTML = ''; return; }
   box.innerHTML = state.products
-    .filter(p => !p.bundle && (p.name + ' ' + (p.brand || '') + ' ' + String(p.id)).toLowerCase().includes(q) &&
+    .filter(p => !(p.bundle && p.bundle.length) && (p.name + ' ' + (p.brand || '') + ' ' + String(p.id)).toLowerCase().includes(q) &&
                  !bundleDraft.some(b => String(b.id) === String(p.id)))
     .slice(0, 6)
     .map(p => '<button class=ghost data-bid=' + JSON.stringify(p.id) + ' data-bname=' + JSON.stringify(p.name) + '>+ ' + esc(p.name) + ' (' + esc(String(p.price || '؟')) + ')</button>')
@@ -1000,7 +1000,7 @@ document.addEventListener('input', ev => {
     const q = ev.target.value.trim().toLowerCase();
     const box = ev.target.closest('.attr').querySelector('.bmatches');
     const options = q.length < 2 ? [] : state.products
-      .filter(x => String(x.id) !== String(p.id) && !x.bundle &&
+      .filter(x => String(x.id) !== String(p.id) && !(x.bundle && x.bundle.length) &&
                    (x.name + ' ' + (x.brand || '')).toLowerCase().includes(q))
       .slice(0, 6);
     box.innerHTML = options.map(x =>
