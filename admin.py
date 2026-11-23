@@ -676,6 +676,10 @@ tr.main-row{cursor:pointer}
 .bchip{display:inline-flex;align-items:center;gap:6px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:2px 10px;font-size:12.5px;margin-inline-end:6px;margin-bottom:4px}
 .bchip button{border:0;background:none;color:var(--bad);cursor:pointer;font-size:12px;padding:0}
 .bmatches{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px}
+.thumb-collage{width:56px;height:56px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px;overflow:hidden;border-radius:8px;background:var(--panel)}
+.thumb-collage.n2{grid-template-rows:minmax(0,1fr)}
+.thumb-collage.n3,.thumb-collage.n4{grid-template-rows:repeat(2,minmax(0,1fr))}
+.thumb-collage img{width:100%;height:100%;object-fit:cover;display:block}
 .attr-head{color:var(--muted);font-size:12px;margin:2px 0 6px}
 .attr-add{margin-top:2px}
 button.chev{padding:4px 10px;font-weight:400}
@@ -826,9 +830,19 @@ function rowHtml(p) {
   else if (p.visible !== null && p.visible !== undefined) status += ' <span class=tag off>علامة يدوية</span>';
   const attrs = p.attributes && Object.keys(p.attributes).length
     ? ' <span class=tag>' + esc(Object.keys(p.attributes).join(' · ')) + '</span>' : '';
+  // مصغّرة الصف: للحزم كولاج مصغّر من صور المنتجات داخلها
+  const memberImgs = (d.bundle || []).map(id => {
+    const m = state.products.find(x => String(x.id) === String(id));
+    return m && m.image ? '/' + m.image : null;
+  }).filter(Boolean).slice(0, 4);
+  let thumb = '<img class=thumb src=/' + esc(p.image) + ' loading=lazy>';
+  if (memberImgs.length === 1) thumb = '<img class=thumb src=' + esc(memberImgs[0]) + ' loading=lazy>';
+  else if (memberImgs.length)
+    thumb = '<div class="thumb-collage n' + memberImgs.length + '">' +
+      memberImgs.map(src => '<img src=' + src + ' loading=lazy>').join('') + '</div>';
   return '<tr data-id="' + p.id + '" class="main-row ' + (dirty ? 'dirty' : '') +
     (d.shown ? '' : ' hidden-row') + '">' +
-    '<td>' + (p.image ? '<img class=thumb src=/' + esc(p.image) + ' loading=lazy>' : '') + '</td>' +
+    '<td>' + thumb + '</td>' +
     '<td class=name-cell><span class=name-text>' + esc(d.name) + '</span>' +
       '<div class=id>' + esc(p.id) + (p.sku ? ' · ' + esc(p.sku) : '') + '</div>' + attrs + '</td>' +
     '<td class=brand>' + esc(p.brand) + '</td>' +
