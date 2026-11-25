@@ -4784,6 +4784,57 @@
         "3154",
         "3259"
       ]
+    },
+    {
+      "id": 900008,
+      "name": "مجموعة اروماتكس Aromatix",
+      "brand": "حزمة",
+      "price": 520.0,
+      "compare_at_price": null,
+      "rating": 0.0,
+      "reviews": 0,
+      "stock": null,
+      "added": "2026-11-25",
+      "images": [
+        "images/2026/11/3503-aromatix-magnatiqe-alt.jpg",
+        "images/2026/11/3030-aromatix-platine-blanc-alt.jpg",
+        "images/2026/11/2960-royal-taboo-extrait-de-alt.jpg",
+        "images/2026/11/2961-x-xandal-extrait-de-pa-alt.jpg"
+      ],
+      "description": "حزمة تضم 4 منتجات أصلية بسعر واحد",
+      "attributes": {},
+      "visible": true,
+      "bundle": [
+        "3503",
+        "3030",
+        "2960",
+        "2961"
+      ]
+    },
+    {
+      "id": 900009,
+      "name": "مجموعة الفخامة الرجولية",
+      "brand": "حزمة",
+      "price": 480.0,
+      "compare_at_price": null,
+      "rating": 0.0,
+      "reviews": 0,
+      "stock": null,
+      "added": "2026-11-25",
+      "images": [
+        "images/2026/11/2957-veneno-eau-de-parfum-alt.jpg",
+        "images/2026/11/3037-vulcan-sable-alt.jpg",
+        "images/2026/11/3330-leo-masion-asrar-alt.jpg",
+        "images/2026/11/3521-shams-royal-baron-alt.jpg"
+      ],
+      "description": "حزمة تضم 4 منتجات أصلية بسعر واحد",
+      "attributes": {},
+      "bundle": [
+        "2957",
+        "3037",
+        "3330",
+        "3521"
+      ]
     }
   ]
 }

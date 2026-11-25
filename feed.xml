@@ -2319,5 +2319,31 @@
     <g:brand>حزمة</g:brand>
     <g:google_product_category>Health &amp; Beauty &gt; Personal Care &gt; Cosmetics &gt; Perfume &amp; Cologne</g:google_product_category>
   </item>
+  <item>
+    <g:id>900008</g:id>
+    <g:title>مجموعة اروماتكس Aromatix</g:title>
+    <g:description>حزمة تضم 4 منتجات أصلية بسعر واحد</g:description>
+    <g:availability>in stock</g:availability>
+    <g:condition>new</g:condition>
+    <g:price>520.00 ILS</g:price>
+    <g:link>https://www.perfumespalace.store/#p=900008</g:link>
+    <g:image_link>https://www.perfumespalace.store/images/2026/11/3503-aromatix-magnatiqe-alt.jpg</g:image_link>
+    <g:additional_image_link>https://www.perfumespalace.store/images/2026/11/3030-aromatix-platine-blanc-alt.jpg, https://www.perfumespalace.store/images/2026/11/2960-royal-taboo-extrait-de-alt.jpg, https://www.perfumespalace.store/images/2026/11/2961-x-xandal-extrait-de-pa-alt.jpg</g:additional_image_link>
+    <g:brand>حزمة</g:brand>
+    <g:google_product_category>Health &amp; Beauty &gt; Personal Care &gt; Cosmetics &gt; Perfume &amp; Cologne</g:google_product_category>
+  </item>
+  <item>
+    <g:id>900009</g:id>
+    <g:title>مجموعة الفخامة الرجولية</g:title>
+    <g:description>حزمة تضم 4 منتجات أصلية بسعر واحد</g:description>
+    <g:availability>in stock</g:availability>
+    <g:condition>new</g:condition>
+    <g:price>480.00 ILS</g:price>
+    <g:link>https://www.perfumespalace.store/#p=900009</g:link>
+    <g:image_link>https://www.perfumespalace.store/images/2026/11/2957-veneno-eau-de-parfum-alt.jpg</g:image_link>
+    <g:additional_image_link>https://www.perfumespalace.store/images/2026/11/3037-vulcan-sable-alt.jpg, https://www.perfumespalace.store/images/2026/11/3330-leo-masion-asrar-alt.jpg, https://www.perfumespalace.store/images/2026/11/3521-shams-royal-baron-alt.jpg</g:additional_image_link>
+    <g:brand>حزمة</g:brand>
+    <g:google_product_category>Health &amp; Beauty &gt; Personal Care &gt; Cosmetics &gt; Perfume &amp; Cologne</g:google_product_category>
+  </item>
 </channel>
 </rss>

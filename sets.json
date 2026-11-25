@@ -280,6 +280,28 @@
       }
     },
     {
+      "name": "حزمة",
+      "retailer_id": "set_b4690cd11",
+      "filter": {
+        "brand": {
+          "eq": "حزمة"
+        }
+      },
+      "items": 5,
+      "ids": [
+        "900005",
+        "900006",
+        "900007",
+        "900008",
+        "900009"
+      ],
+      "metadata": {
+        "description": "حزمة — 5 منتج",
+        "external_url": "https://www.perfumespalace.store/#brand=%D8%AD%D8%B2%D9%85%D8%A9",
+        "cover_image_url": "https://www.perfumespalace.store/images/2026/11/3511-af-alt-2.jpg"
+      }
+    },
+    {
       "name": "Dumont Paris",
       "retailer_id": "set_dumont_paris",
       "filter": {
@@ -379,26 +401,6 @@
         "description": "Rasasi — 3 منتج",
         "external_url": "https://www.perfumespalace.store/#brand=Rasasi",
         "cover_image_url": "https://www.perfumespalace.store/images/2026/11/3476-hawas-alt.jpg"
-      }
-    },
-    {
-      "name": "حزمة",
-      "retailer_id": "set_b4690cd11",
-      "filter": {
-        "brand": {
-          "eq": "حزمة"
-        }
-      },
-      "items": 3,
-      "ids": [
-        "900005",
-        "900006",
-        "900007"
-      ],
-      "metadata": {
-        "description": "حزمة — 3 منتج",
-        "external_url": "https://www.perfumespalace.store/#brand=%D8%AD%D8%B2%D9%85%D8%A9",
-        "cover_image_url": "https://www.perfumespalace.store/images/2026/11/3511-af-alt-2.jpg"
       }
     },
     {
