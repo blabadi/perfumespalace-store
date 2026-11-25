@@ -759,7 +759,7 @@ html[data-sale-theme="neon"] .detail .badge.sale{
 /* ============ الحزم (Bundles) ============ */
 .card-media .collage, .bundle-main .collage{width:100%;height:100%;display:grid;gap:3px}
 .card-media .collage .cell, .bundle-main .collage .cell{overflow:hidden}
-".card-media .collage .cell, .bundle-main .collage .cell{position:relative;overflow:hidden;height:100%}
+.card-media .collage .cell, .bundle-main .collage .cell{position:relative;overflow:hidden;height:100%}
 .card-media .collage .cell img, .bundle-main .collage .cell img{width:100%;height:100%;object-fit:contain;display:block}
 .card-media .collage .cell img.fill, .bundle-main .collage .cell img.fill{position:absolute;inset:0;object-fit:cover;filter:blur(14px);transform:scale(1.25)}
 .card-media .collage .cell img.photo, .bundle-main .collage .cell img.photo{position:relative;z-index:1}"
