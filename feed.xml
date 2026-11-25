@@ -1766,8 +1766,8 @@
     <g:description>نايترو احمر بديل انفكتس مشابه ل : Paco Rabanne Invictus</g:description>
     <g:availability>in stock</g:availability>
     <g:condition>new</g:condition>
-    <g:price>160.00 ILS</g:price>
-    <g:sale_price>80.00 ILS</g:sale_price>
+    <g:price>140.00 ILS</g:price>
+    <g:sale_price>90.00 ILS</g:sale_price>
     <g:link>https://www.perfumespalace.store/#p=2678</g:link>
     <g:image_link>https://www.perfumespalace.store/images/2026/11/2678-nitro-red-alt.jpg</g:image_link>
     <g:brand>Dumont Paris</g:brand>
@@ -2374,6 +2374,19 @@
     <g:link>https://www.perfumespalace.store/#p=900011</g:link>
     <g:image_link>https://www.perfumespalace.store/images/jpg/2025/08/AVA-6321CR.jpg</g:image_link>
     <g:additional_image_link>https://www.perfumespalace.store/images/jpg/2025/02/centarus-1.jpg, https://www.perfumespalace.store/images/2025/08/s-l225.jpg</g:additional_image_link>
+    <g:brand>حزمة</g:brand>
+    <g:google_product_category>Health &amp; Beauty &gt; Personal Care &gt; Cosmetics &gt; Perfume &amp; Cologne</g:google_product_category>
+  </item>
+  <item>
+    <g:id>900012</g:id>
+    <g:title>مجموعة طلاب المدارس</g:title>
+    <g:description>حزمة تضم 3 منتجات أصلية بسعر واحد</g:description>
+    <g:availability>in stock</g:availability>
+    <g:condition>new</g:condition>
+    <g:price>250.00 ILS</g:price>
+    <g:link>https://www.perfumespalace.store/#p=900012</g:link>
+    <g:image_link>https://www.perfumespalace.store/images/2026/11/2678-nitro-red-alt.jpg</g:image_link>
+    <g:additional_image_link>https://www.perfumespalace.store/images/jpg/2025/01/KhamarahBottleandbox.jpg, https://www.perfumespalace.store/images/2026/11/2385-voux-turquoise-emir-alt.jpg</g:additional_image_link>
     <g:brand>حزمة</g:brand>
     <g:google_product_category>Health &amp; Beauty &gt; Personal Care &gt; Cosmetics &gt; Perfume &amp; Cologne</g:google_product_category>
   </item>

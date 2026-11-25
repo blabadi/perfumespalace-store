@@ -3569,8 +3569,8 @@
       "name": "نايترو ريد NITRO RED",
       "brand": "Dumont Paris",
       "category": "رجالي",
-      "price": 80.0,
-      "compare_at_price": 160.0,
+      "price": 90.0,
+      "compare_at_price": 140.0,
       "rating": 0.0,
       "reviews": 0,
       "stock": null,
@@ -4880,6 +4880,30 @@
         "3019",
         "2769",
         "3018"
+      ]
+    },
+    {
+      "id": 900012,
+      "name": "مجموعة طلاب المدارس",
+      "brand": "حزمة",
+      "price": 250.0,
+      "compare_at_price": null,
+      "rating": 0.0,
+      "reviews": 0,
+      "stock": null,
+      "added": "2026-11-25",
+      "images": [
+        "images/2026/11/2678-nitro-red-alt.jpg",
+        "images/2025/01/KhamarahBottleandbox.webp",
+        "images/2026/11/2385-voux-turquoise-emir-alt.jpg"
+      ],
+      "description": "حزمة تضم 3 منتجات أصلية بسعر واحد",
+      "attributes": {},
+      "visible": true,
+      "bundle": [
+        "2678",
+        "2656",
+        "2385"
       ]
     }
   ]
