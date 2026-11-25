@@ -2306,5 +2306,18 @@
     <g:brand>حزمة</g:brand>
     <g:google_product_category>Health &amp; Beauty &gt; Personal Care &gt; Cosmetics &gt; Perfume &amp; Cologne</g:google_product_category>
   </item>
+  <item>
+    <g:id>900007</g:id>
+    <g:title>مجموعة الحرمين</g:title>
+    <g:description>حزمة تضم 3 منتجات أصلية بسعر واحد</g:description>
+    <g:availability>in stock</g:availability>
+    <g:condition>new</g:condition>
+    <g:price>630.00 ILS</g:price>
+    <g:link>https://www.perfumespalace.store/#p=900007</g:link>
+    <g:image_link>https://www.perfumespalace.store/images/2026/11/3028-alharamin-aqua-dubai-100-alt.jpg</g:image_link>
+    <g:additional_image_link>https://www.perfumespalace.store/images/2026/11/2984-alharamin-amber-oud-gold-alt.jpg, https://www.perfumespalace.store/images/2026/11/3154-alharamin-amber-oud-carb-alt.jpg, https://www.perfumespalace.store/images/2026/11/3259-alharamin-dubai-night-75-alt.jpg</g:additional_image_link>
+    <g:brand>حزمة</g:brand>
+    <g:google_product_category>Health &amp; Beauty &gt; Personal Care &gt; Cosmetics &gt; Perfume &amp; Cologne</g:google_product_category>
+  </item>
 </channel>
 </rss>

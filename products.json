@@ -4759,6 +4759,31 @@
         "900003",
         "2677"
       ]
+    },
+    {
+      "id": 900007,
+      "name": "مجموعة الحرمين",
+      "brand": "حزمة",
+      "price": 630.0,
+      "compare_at_price": null,
+      "rating": 0.0,
+      "reviews": 0,
+      "stock": null,
+      "added": "2026-11-25",
+      "images": [
+        "images/2026/11/3028-alharamin-aqua-dubai-100-alt.jpg",
+        "images/2026/11/2984-alharamin-amber-oud-gold-alt.jpg",
+        "images/2026/11/3154-alharamin-amber-oud-carb-alt.jpg",
+        "images/2026/11/3259-alharamin-dubai-night-75-alt.jpg"
+      ],
+      "description": "حزمة تضم 3 منتجات أصلية بسعر واحد",
+      "attributes": {},
+      "bundle": [
+        "3028",
+        "2984",
+        "3154",
+        "3259"
+      ]
     }
   ]
 }

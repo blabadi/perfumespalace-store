@@ -382,6 +382,26 @@
       }
     },
     {
+      "name": "حزمة",
+      "retailer_id": "set_b4690cd11",
+      "filter": {
+        "brand": {
+          "eq": "حزمة"
+        }
+      },
+      "items": 3,
+      "ids": [
+        "900005",
+        "900006",
+        "900007"
+      ],
+      "metadata": {
+        "description": "حزمة — 3 منتج",
+        "external_url": "https://www.perfumespalace.store/#brand=%D8%AD%D8%B2%D9%85%D8%A9",
+        "cover_image_url": "https://www.perfumespalace.store/images/2026/11/3511-af-alt-2.jpg"
+      }
+    },
+    {
       "name": "BOIS 1920",
       "retailer_id": "set_bois_1920",
       "filter": {
@@ -569,25 +589,6 @@
         "description": "العز للعود — 2 منتج",
         "external_url": "https://www.perfumespalace.store/#brand=%D8%A7%D9%84%D8%B9%D8%B2+%D9%84%D9%84%D8%B9%D9%88%D8%AF",
         "cover_image_url": "https://www.perfumespalace.store/images/2026/11/3516-2-alt.jpg"
-      }
-    },
-    {
-      "name": "حزمة",
-      "retailer_id": "set_b4690cd11",
-      "filter": {
-        "brand": {
-          "eq": "حزمة"
-        }
-      },
-      "items": 2,
-      "ids": [
-        "900005",
-        "900006"
-      ],
-      "metadata": {
-        "description": "حزمة — 2 منتج",
-        "external_url": "https://www.perfumespalace.store/#brand=%D8%AD%D8%B2%D9%85%D8%A9",
-        "cover_image_url": "https://www.perfumespalace.store/images/2026/11/3511-af-alt.jpg"
       }
     }
   ]
