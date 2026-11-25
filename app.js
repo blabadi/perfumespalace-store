@@ -53,11 +53,12 @@
     const imgs = bundleMembers(p).map((m) => m.images && m.images[0]).filter(Boolean).slice(0, 6);
     const n = imgs.length;
     if (!n) return imgTag(p);
-    const cell = (src, cls) => `<div class="cell${cls ? ' ' + cls : ''}"><img class="fill" src="${esc(src)}" alt="" loading="lazy"><img class="photo" src="${esc(src)}" alt="" loading="lazy"></div>`;
+    const cell = (src) => `<div class="cell"><img src="${esc(src)}" alt="" loading="lazy"></div>`;
+    const blurCell = (src, cls) => `<div class="cell${cls ? ' ' + cls : ''}"><img class="fill" src="${esc(src)}" alt="" loading="lazy"><img class="photo" src="${esc(src)}" alt="" loading="lazy"></div>`;
     let inner;
-    if (n === 1) inner = cell(imgs[0]);
+    if (n === 1) inner = blurCell(imgs[0]);
     else if (n === 2) inner = imgs.map((s) => cell(s)).join('');
-    else if (n === 3) inner = cell(imgs[0], 'big') + imgs.slice(1).map((s) => cell(s)).join('');
+    else if (n === 3) inner = blurCell(imgs[0], 'big') + imgs.slice(1).map((s) => cell(s)).join('');
     else if (n === 5) inner = imgs.slice(0, 3).map((s) => cell(s)).join('')
       + `<div class="col2">${imgs.slice(3, 5).map((s) => cell(s)).join('')}</div>`;
     else inner = imgs.map((s) => cell(s)).join('');

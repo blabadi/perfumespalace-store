@@ -458,7 +458,7 @@ svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width:
   transition: opacity .65s ease, transform .5s cubic-bezier(.2,.7,.2,1);
 }
 .thumb-rot .thumb-frame.is-on { opacity: 1; }
-.badges { position: absolute; top: 10px; inset-inline-start: 10px; display: flex; flex-direction: column; gap: 6px; align-items: flex-start; pointer-events: none; }
+.badges { position: absolute; top: 10px; inset-inline-start: 10px; z-index: 2; display: flex; flex-direction: column; gap: 6px; align-items: flex-start; pointer-events: none; }
 .badge {
   font-size: 11.5px; font-weight: 700; padding: 4px 9px; border-radius: 6px;
   backdrop-filter: blur(6px); line-height: 1.5;
@@ -760,9 +760,9 @@ html[data-sale-theme="neon"] .detail .badge.sale{
 .card-media .collage, .bundle-main .collage{width:100%;height:100%;display:grid;gap:3px}
 .card-media .collage .cell, .bundle-main .collage .cell{overflow:hidden}
 .card-media .collage .cell, .bundle-main .collage .cell{position:relative;overflow:hidden;height:100%}
-.card-media .collage .cell img, .bundle-main .collage .cell img{width:100%;height:100%;object-fit:contain;display:block}
+.card-media .collage .cell img, .bundle-main .collage .cell img{width:100%;height:100%;object-fit:cover;display:block}
 .card-media .collage .cell img.fill, .bundle-main .collage .cell img.fill{position:absolute;inset:0;object-fit:cover;filter:blur(14px);transform:scale(1.25)}
-.card-media .collage .cell img.photo, .bundle-main .collage .cell img.photo{position:relative;z-index:1}"
+.card-media .collage .cell img.photo, .bundle-main .collage .cell img.photo{position:relative;z-index:1;object-fit:contain}"
 .collage.c2{grid-template-columns:repeat(2,minmax(0,1fr))}
 .collage.c3{grid-template-columns:1.4fr 1fr;grid-template-rows:repeat(2,minmax(0,1fr))}
 .collage.c3 .big{grid-row:1/3;display:grid}
