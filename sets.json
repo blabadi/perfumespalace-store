@@ -191,6 +191,29 @@
       }
     },
     {
+      "name": "حزمة",
+      "retailer_id": "set_b4690cd11",
+      "filter": {
+        "brand": {
+          "eq": "حزمة"
+        }
+      },
+      "items": 6,
+      "ids": [
+        "900005",
+        "900006",
+        "900007",
+        "900008",
+        "900009",
+        "900010"
+      ],
+      "metadata": {
+        "description": "حزمة — 6 منتج",
+        "external_url": "https://www.perfumespalace.store/#brand=%D8%AD%D8%B2%D9%85%D8%A9",
+        "cover_image_url": "https://www.perfumespalace.store/images/2026/11/3511-af-alt-2.jpg"
+      }
+    },
+    {
       "name": "لطافة Lattafa",
       "retailer_id": "set_lattafa",
       "filter": {
@@ -277,28 +300,6 @@
         "description": "Rue Broca — 5 منتج",
         "external_url": "https://www.perfumespalace.store/#brand=Rue+Broca",
         "cover_image_url": "https://www.perfumespalace.store/images/2026/11/3470-hooked-intensely-alt.jpg"
-      }
-    },
-    {
-      "name": "حزمة",
-      "retailer_id": "set_b4690cd11",
-      "filter": {
-        "brand": {
-          "eq": "حزمة"
-        }
-      },
-      "items": 5,
-      "ids": [
-        "900005",
-        "900006",
-        "900007",
-        "900008",
-        "900009"
-      ],
-      "metadata": {
-        "description": "حزمة — 5 منتج",
-        "external_url": "https://www.perfumespalace.store/#brand=%D8%AD%D8%B2%D9%85%D8%A9",
-        "cover_image_url": "https://www.perfumespalace.store/images/2026/11/3511-af-alt-2.jpg"
       }
     },
     {

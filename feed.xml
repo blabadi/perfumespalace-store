@@ -2349,5 +2349,19 @@
     <g:brand>حزمة</g:brand>
     <g:google_product_category>Health &amp; Beauty &gt; Personal Care &gt; Cosmetics &gt; Perfume &amp; Cologne</g:google_product_category>
   </item>
+  <item>
+    <g:id>900010</g:id>
+    <g:title>مجموعة الفصول الاربعة - French Avenue</g:title>
+    <g:description>حزمة تضم 4 منتجات أصلية بسعر واحد</g:description>
+    <g:availability>in stock</g:availability>
+    <g:condition>new</g:condition>
+    <g:price>550.00 ILS</g:price>
+    <g:sale_price>499.00 ILS</g:sale_price>
+    <g:link>https://www.perfumespalace.store/#p=900010</g:link>
+    <g:image_link>https://www.perfumespalace.store/images/2026/11/3042-arsh-extrait-alt.jpg</g:image_link>
+    <g:additional_image_link>https://www.perfumespalace.store/images/2026/11/3523-liquid-brun-limited-edit-alt.jpg, https://www.perfumespalace.store/images/2026/11/3506-french-avenue-noma-alt.jpg, https://www.perfumespalace.store/images/2026/11/2841-supermacy-collector-s-ed-alt.jpg</g:additional_image_link>
+    <g:brand>حزمة</g:brand>
+    <g:google_product_category>Health &amp; Beauty &gt; Personal Care &gt; Cosmetics &gt; Perfume &amp; Cologne</g:google_product_category>
+  </item>
 </channel>
 </rss>

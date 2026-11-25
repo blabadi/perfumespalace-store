@@ -4833,6 +4833,31 @@
         "3330",
         "3521"
       ]
+    },
+    {
+      "id": 900010,
+      "name": "مجموعة الفصول الاربعة - French Avenue",
+      "brand": "حزمة",
+      "price": 499.0,
+      "compare_at_price": 550.0,
+      "rating": 0.0,
+      "reviews": 0,
+      "stock": null,
+      "added": "2026-11-25",
+      "images": [
+        "images/2026/11/3042-arsh-extrait-alt.jpg",
+        "images/2026/11/3523-liquid-brun-limited-edit-alt.jpg",
+        "images/2026/11/3506-french-avenue-noma-alt.jpg",
+        "images/2026/11/2841-supermacy-collector-s-ed-alt.jpg"
+      ],
+      "description": "حزمة تضم 4 منتجات أصلية بسعر واحد",
+      "attributes": {},
+      "bundle": [
+        "3042",
+        "3523",
+        "3506",
+        "2841"
+      ]
     }
   ]
 }
