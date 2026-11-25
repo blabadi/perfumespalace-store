@@ -4905,6 +4905,56 @@
         "2656",
         "2385"
       ]
+    },
+    {
+      "id": 900013,
+      "name": "مجموعة الصيف و البحر",
+      "brand": "حزمة",
+      "price": 399.0,
+      "compare_at_price": null,
+      "rating": 0.0,
+      "reviews": 0,
+      "stock": null,
+      "added": "2026-11-25",
+      "images": [
+        "images/2026/11/3498-french-avenue-ravine-gin-alt.jpg",
+        "images/2026/11/3496-french-avenue-ravine-ice-alt.jpg",
+        "images/2026/11/3147-rare-reef-alt.jpg",
+        "images/2026/11/3547-imperial-ocean-alt.jpg"
+      ],
+      "description": "حزمة تضم 4 منتجات أصلية بسعر واحد",
+      "attributes": {},
+      "visible": true,
+      "bundle": [
+        "3498",
+        "3496",
+        "3147",
+        "3547"
+      ]
+    },
+    {
+      "id": 900014,
+      "name": "مجموعة LV",
+      "brand": "حزمة",
+      "price": 299.0,
+      "compare_at_price": null,
+      "rating": 0.0,
+      "reviews": 0,
+      "stock": null,
+      "added": "2026-11-25",
+      "images": [
+        "images/2026/11/3142-dxb-alt.jpg",
+        "images/2026/11/3147-rare-reef-alt.jpg",
+        "images/2026/11/900001-bujairami-hectic-100ml-alt.jpg"
+      ],
+      "description": "حزمة تضم 3 منتجات أصلية بسعر واحد",
+      "attributes": {},
+      "visible": true,
+      "bundle": [
+        "3142",
+        "3147",
+        "900001"
+      ]
     }
   ]
 }

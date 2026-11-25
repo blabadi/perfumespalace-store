@@ -2390,5 +2390,31 @@
     <g:brand>حزمة</g:brand>
     <g:google_product_category>Health &amp; Beauty &gt; Personal Care &gt; Cosmetics &gt; Perfume &amp; Cologne</g:google_product_category>
   </item>
+  <item>
+    <g:id>900013</g:id>
+    <g:title>مجموعة الصيف و البحر</g:title>
+    <g:description>حزمة تضم 4 منتجات أصلية بسعر واحد</g:description>
+    <g:availability>in stock</g:availability>
+    <g:condition>new</g:condition>
+    <g:price>399.00 ILS</g:price>
+    <g:link>https://www.perfumespalace.store/#p=900013</g:link>
+    <g:image_link>https://www.perfumespalace.store/images/2026/11/3498-french-avenue-ravine-gin-alt.jpg</g:image_link>
+    <g:additional_image_link>https://www.perfumespalace.store/images/2026/11/3496-french-avenue-ravine-ice-alt.jpg, https://www.perfumespalace.store/images/2026/11/3147-rare-reef-alt.jpg, https://www.perfumespalace.store/images/2026/11/3547-imperial-ocean-alt.jpg</g:additional_image_link>
+    <g:brand>حزمة</g:brand>
+    <g:google_product_category>Health &amp; Beauty &gt; Personal Care &gt; Cosmetics &gt; Perfume &amp; Cologne</g:google_product_category>
+  </item>
+  <item>
+    <g:id>900014</g:id>
+    <g:title>مجموعة LV</g:title>
+    <g:description>حزمة تضم 3 منتجات أصلية بسعر واحد</g:description>
+    <g:availability>in stock</g:availability>
+    <g:condition>new</g:condition>
+    <g:price>299.00 ILS</g:price>
+    <g:link>https://www.perfumespalace.store/#p=900014</g:link>
+    <g:image_link>https://www.perfumespalace.store/images/2026/11/3142-dxb-alt.jpg</g:image_link>
+    <g:additional_image_link>https://www.perfumespalace.store/images/2026/11/3147-rare-reef-alt.jpg, https://www.perfumespalace.store/images/2026/11/900001-bujairami-hectic-100ml-alt.jpg</g:additional_image_link>
+    <g:brand>حزمة</g:brand>
+    <g:google_product_category>Health &amp; Beauty &gt; Personal Care &gt; Cosmetics &gt; Perfume &amp; Cologne</g:google_product_category>
+  </item>
 </channel>
 </rss>

@@ -142,6 +142,33 @@
       }
     },
     {
+      "name": "حزمة",
+      "retailer_id": "set_b4690cd11",
+      "filter": {
+        "brand": {
+          "eq": "حزمة"
+        }
+      },
+      "items": 10,
+      "ids": [
+        "900005",
+        "900006",
+        "900007",
+        "900008",
+        "900009",
+        "900010",
+        "900011",
+        "900012",
+        "900013",
+        "900014"
+      ],
+      "metadata": {
+        "description": "حزمة — 10 منتج",
+        "external_url": "https://www.perfumespalace.store/#brand=%D8%AD%D8%B2%D9%85%D8%A9",
+        "cover_image_url": "https://www.perfumespalace.store/images/2026/11/3511-af-alt-2.jpg"
+      }
+    },
+    {
       "name": "Alharamin",
       "retailer_id": "set_alharamin",
       "filter": {
@@ -165,31 +192,6 @@
         "description": "Alharamin — 9 منتج",
         "external_url": "https://www.perfumespalace.store/#brand=Alharamin",
         "cover_image_url": "https://www.perfumespalace.store/images/2026/11/3568-al-haramin-aqua-dubai-t-alt.jpg"
-      }
-    },
-    {
-      "name": "حزمة",
-      "retailer_id": "set_b4690cd11",
-      "filter": {
-        "brand": {
-          "eq": "حزمة"
-        }
-      },
-      "items": 8,
-      "ids": [
-        "900005",
-        "900006",
-        "900007",
-        "900008",
-        "900009",
-        "900010",
-        "900011",
-        "900012"
-      ],
-      "metadata": {
-        "description": "حزمة — 8 منتج",
-        "external_url": "https://www.perfumespalace.store/#brand=%D8%AD%D8%B2%D9%85%D8%A9",
-        "cover_image_url": "https://www.perfumespalace.store/images/2026/11/3511-af-alt-2.jpg"
       }
     },
     {
