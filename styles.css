@@ -469,7 +469,7 @@ svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width:
 .badge.new { background: var(--accent); color: var(--surface); }
 /* شارة «عرض التفاصيل» داخل زر الصورة — تظهر مع التحويم أو التركيز */
 .quick {
-  position: absolute; inset-inline: 10px; bottom: 10px;
+  position: absolute; inset-inline: 10px; bottom: 10px; z-index: 3;
   padding: 9px; border-radius: 9px; font-size: 13px; font-weight: 700;
   background: var(--surface); color: var(--ink); box-shadow: var(--shadow);
   opacity: 0; transform: translateY(8px); transition: opacity .2s, transform .2s, background .2s, color .2s;
