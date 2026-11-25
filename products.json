@@ -2400,7 +2400,7 @@
       "name": "Club de nuit Iconic كلوب دي نويت ايكونيك",
       "brand": "Armaf",
       "category": "رجالي",
-      "price": 140.0,
+      "price": 130.0,
       "compare_at_price": 220.0,
       "rating": 0.0,
       "reviews": 0,
@@ -2941,7 +2941,7 @@
       "name": "كلوب دي نويت سيلاج Club de nuit Sillage",
       "brand": "Armaf",
       "category": "للجنسين",
-      "price": 110.0,
+      "price": 120.0,
       "compare_at_price": 180.0,
       "rating": 0.0,
       "reviews": 0,
@@ -2951,10 +2951,7 @@
         "images/2026/11/2826-club-alt.jpg"
       ],
       "attributes": {
-        "الحجم": [
-          "105 مل",
-          "علبة اصلية كاملة (100 مل)"
-        ],
+        "الحجم": "105 مل,علبة اصلية كاملة (100 مل)",
         "التصنيف": "بدائل"
       },
       "tags": [],
@@ -4954,6 +4951,31 @@
         "3142",
         "3147",
         "900001"
+      ]
+    },
+    {
+      "id": 900015,
+      "name": "مجموعة Club de nuit",
+      "brand": "حزمة",
+      "price": 499.0,
+      "compare_at_price": 550.0,
+      "rating": 0.0,
+      "reviews": 0,
+      "stock": null,
+      "added": "2026-11-25",
+      "images": [
+        "images/2026/11/3488-club-de-nuit-alt.jpg",
+        "images/2026/11/2826-club-alt.jpg",
+        "images/2026/11/2909-club-de-nuit-iconic-alt.jpg",
+        "images/2026/11/3237-urban-man-elixir-alt.jpg"
+      ],
+      "description": "حزمة تضم 4 منتجات أصلية بسعر واحد",
+      "attributes": {},
+      "bundle": [
+        "3488",
+        "2826",
+        "2909",
+        "3237"
       ]
     }
   ]

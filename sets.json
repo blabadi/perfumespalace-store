@@ -149,7 +149,7 @@
           "eq": "حزمة"
         }
       },
-      "items": 10,
+      "items": 11,
       "ids": [
         "900005",
         "900006",
@@ -160,10 +160,11 @@
         "900011",
         "900012",
         "900013",
-        "900014"
+        "900014",
+        "900015"
       ],
       "metadata": {
-        "description": "حزمة — 10 منتج",
+        "description": "حزمة — 11 منتج",
         "external_url": "https://www.perfumespalace.store/#brand=%D8%AD%D8%B2%D9%85%D8%A9",
         "cover_image_url": "https://www.perfumespalace.store/images/2026/11/3511-af-alt-2.jpg"
       }
