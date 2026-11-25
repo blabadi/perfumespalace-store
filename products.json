@@ -1973,7 +1973,7 @@
       "name": "Delpehnius ديلفينيوس",
       "brand": "Creed",
       "category": "تقسيمات و عينات",
-      "price": 1240.0,
+      "price": 1350.0,
       "compare_at_price": 1600.0,
       "rating": 0.0,
       "reviews": 0,
@@ -3207,7 +3207,7 @@
       "name": "Creed Centaurus كريد سينتاوروس",
       "brand": "Creed",
       "category": "تقسيمات و عينات",
-      "price": 1250.0,
+      "price": 1350.0,
       "compare_at_price": 1500.0,
       "rating": 0.0,
       "reviews": 0,
@@ -4857,6 +4857,29 @@
         "3523",
         "3506",
         "2841"
+      ]
+    },
+    {
+      "id": 900011,
+      "name": "المجموعة الملكية - Creed",
+      "brand": "حزمة",
+      "price": 3700.0,
+      "compare_at_price": 4200.0,
+      "rating": 0.0,
+      "reviews": 0,
+      "stock": null,
+      "added": "2026-11-25",
+      "images": [
+        "images/2025/08/AVA-6321CR.webp",
+        "images/2025/02/centarus-1.webp",
+        "images/2025/08/s-l225.jpg"
+      ],
+      "description": "حزمة تضم 3 منتجات أصلية بسعر واحد",
+      "attributes": {},
+      "bundle": [
+        "3019",
+        "2769",
+        "3018"
       ]
     }
   ]
