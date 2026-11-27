@@ -1420,6 +1420,23 @@
   }
 
   /* ---------- التشغيل ---------- */
+  // فحص الإصدار: لو نُشر تحديث جديد، أعد تحميل الصفحة مرة واحدة كي لا يرى الزائر نسخة قديمة.
+  async function checkVersion() {
+    try {
+      const res = await fetch('version.json', { cache: 'no-store' });
+      if (!res.ok) return;
+      const { v } = await res.json();
+      const mine = document.querySelector('meta[name="app-version"]');
+      const current = mine ? mine.content : '';
+      if (!v || !current || v === current) return;
+      if (sessionStorage.getItem('app_version_seen') === v) return;
+      sessionStorage.setItem('app_version_seen', v);
+      const url = new URL(location.href);
+      url.searchParams.set('appv', v);
+      location.replace(url.toString());
+    } catch (e) { /* الفحص اختياري */ }
+  }
+
   // ثيم حملة التخفيضات: sale-theme.json يقرر إن كان مفعّلاً. لا ملف أو خطأ = لا شيء يظهر.
   async function applySaleTheme() {
     let cfg = null;
@@ -1494,6 +1511,7 @@
   async function init() {
     const savedTheme = localStorage.getItem('northline_theme');
     if (savedTheme) document.documentElement.dataset.theme = savedTheme;
+    checkVersion();
     applySaleTheme();
     updateCartBadge();
     $('#grid').innerHTML = skeleton().repeat(8);
