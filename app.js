@@ -1423,7 +1423,8 @@
   // فحص الإصدار: لو نُشر تحديث جديد، أعد تحميل الصفحة مرة واحدة كي لا يرى الزائر نسخة قديمة.
   async function checkVersion() {
     try {
-      const res = await fetch('version.json', { cache: 'no-store' });
+      // ?t= makes every request a unique URL, so GitHub Pages' CDN cache cannot serve a stale version.json.
+      const res = await fetch('version.json?t=' + Date.now(), { cache: 'no-store' });
       if (!res.ok) return;
       const { v } = await res.json();
       const mine = document.querySelector('meta[name="app-version"]');
