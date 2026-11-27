@@ -1415,7 +1415,7 @@
       "brand": "Assaf",
       "category": "غير محدد",
       "price": 130.0,
-      "compare_at_price": 170.0,
+      "compare_at_price": 150.0,
       "rating": 0.0,
       "reviews": 0,
       "stock": null,
@@ -5052,6 +5052,31 @@
         "2960",
         "2841",
         "3154"
+      ]
+    },
+    {
+      "id": 900019,
+      "name": "الجواكر - عطور لكل المناسبات و الاوقات",
+      "brand": "حزمة",
+      "price": 519.0,
+      "compare_at_price": null,
+      "rating": 0.0,
+      "reviews": 0,
+      "stock": null,
+      "added": "2026-11-27",
+      "images": [
+        "images/2026/11/3237-urban-man-elixir-alt.jpg",
+        "images/2026/11/2909-club-de-nuit-iconic-alt.jpg",
+        "images/2026/11/3028-alharamin-aqua-dubai-100-alt.jpg",
+        "images/2026/11/3161-fran-alt.jpg"
+      ],
+      "description": "حزمة تضم 4 منتجات أصلية بسعر واحد",
+      "attributes": {},
+      "bundle": [
+        "3237",
+        "2909",
+        "3028",
+        "3161"
       ]
     }
   ]
