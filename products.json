@@ -4976,6 +4976,84 @@
         "2909",
         "3237"
       ]
+    },
+    {
+      "id": 900016,
+      "name": "بدائل عطور ديمارلي",
+      "brand": "حزمة",
+      "price": 460.0,
+      "compare_at_price": 500.0,
+      "rating": 0.0,
+      "reviews": 0,
+      "stock": null,
+      "added": "2026-11-27",
+      "images": [
+        "images/2026/11/2662-dusk-alt.jpg",
+        "images/2026/11/2962-pierce-an-equestrian-s-alt.jpg",
+        "images/2026/11/2670-aether-alt.jpg",
+        "images/2026/11/3523-liquid-brun-limited-edit-alt.jpg"
+      ],
+      "description": "حزمة تضم 4 منتجات أصلية بسعر واحد",
+      "attributes": {},
+      "bundle": [
+        "2662",
+        "2962",
+        "2670",
+        "3523"
+      ]
+    },
+    {
+      "id": 900017,
+      "name": "بدائل Bulgari le gemme",
+      "brand": "حزمة",
+      "price": 300.0,
+      "compare_at_price": 400.0,
+      "rating": 0.0,
+      "reviews": 0,
+      "stock": null,
+      "added": "2026-11-27",
+      "images": [
+        "images/2026/11/2559-vie-feu-alt.jpg",
+        "images/2026/11/2561-vie-sol-alt.jpg",
+        "images/2026/11/2560-vie-brise-alt.jpg",
+        "images/2026/11/2558-vie-eau-alt.jpg"
+      ],
+      "description": "حزمة تضم 4 منتجات أصلية بسعر واحد",
+      "attributes": {},
+      "bundle": [
+        "2559",
+        "2561",
+        "2560",
+        "2558"
+      ]
+    },
+    {
+      "id": 900018,
+      "name": "بدائل عطور كريد",
+      "brand": "حزمة",
+      "price": 699.0,
+      "compare_at_price": null,
+      "rating": 0.0,
+      "reviews": 0,
+      "stock": null,
+      "added": "2026-11-27",
+      "images": [
+        "images/2026/11/3161-fran-alt.jpg",
+        "images/2026/11/2826-club-alt.jpg",
+        "images/2026/11/2960-royal-taboo-extrait-de-alt.jpg",
+        "images/2026/11/2841-supermacy-collector-s-ed-alt.jpg",
+        "images/2026/11/3154-alharamin-amber-oud-carb-alt.jpg"
+      ],
+      "description": "حزمة تضم 5 منتجات أصلية بسعر واحد",
+      "attributes": {},
+      "visible": true,
+      "bundle": [
+        "3161",
+        "2826",
+        "2960",
+        "2841",
+        "3154"
+      ]
     }
   ]
 }
